@@ -13,4 +13,9 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Budget"
-include ':app'
+include(":app")
+include(":core-remote")
+include(":core-model")
+include(":core-datastore")
+include(":core-database")
+include(":core-data")
