@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = 33
 
     defaultConfig {
         minSdk = 23
-        targetSdk = 32
+        targetSdk = 33
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -38,6 +38,7 @@ dependencies {
 
     // core
     implementation("androidx.core:core-ktx:$core_ktx_version")
+    implementation("androidx.core:core-splashscreen:$core_splashscreen_version")
 
     // compose
     addComposeBasic()
