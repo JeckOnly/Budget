@@ -1,4 +1,5 @@
 pluginManagement {
+//    includeBuild("build-logic")
     repositories {
         gradlePluginPortal()
         google()
@@ -14,8 +15,10 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Budget"
 include(":app")
-include(":core-remote")
-include(":core-model")
-include(":core-datastore")
-include(":core-database")
-include(":core-data")
+include(":core:remote")
+include(":core:model")
+include(":core:datastore")
+include(":core:database")
+include(":core:data")
+include(":core:designsystem")
+include(":feature:example")
