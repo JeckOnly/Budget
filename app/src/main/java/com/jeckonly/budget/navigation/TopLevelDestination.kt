@@ -24,5 +24,5 @@ package com.jeckonly.budget.navigation
 data class TopLevelDestination(
     override val route: String,
     override val destination: String,
-    val iconTextId: Int
+    val iconId: Int
 ) : BgtNavigationDestination

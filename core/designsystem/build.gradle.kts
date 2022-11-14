@@ -42,6 +42,8 @@ dependencies {
 
     // compose
     addComposeBasic()
+    // compose-extension
+    implementation("androidx.constraintlayout:constraintlayout-compose:$constraintlayout_compose_version")
 
     // test
     addTestImpl()
