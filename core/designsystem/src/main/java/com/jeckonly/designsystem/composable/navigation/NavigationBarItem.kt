@@ -25,7 +25,7 @@ fun BgtNavigationBarItem(
         modifier = modifier.size(24.dp).clickable {
               onClick()
         },
-        tint = if (selected) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.primary
+        tint = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
     )
 }
 

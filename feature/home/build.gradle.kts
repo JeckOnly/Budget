@@ -53,6 +53,8 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:$navigation_compose_version")// 官方导航库
     implementation("androidx.hilt:hilt-navigation-compose:$androidx_hilt_version")
     implementation("io.coil-kt:coil-compose:$coil_compose_version")
+    // compose-accompanist
+    implementation("com.google.accompanist:accompanist-systemuicontroller:$acompanist_version")
 
     // test
     addTestImpl()

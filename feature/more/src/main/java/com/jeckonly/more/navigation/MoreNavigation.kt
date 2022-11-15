@@ -20,7 +20,7 @@ object MoreDestination : BgtNavigationDestination {
     }
 }
 
-fun NavGraphBuilder.chartGraph() {
+fun NavGraphBuilder.moreGraph() {
     composable(route = MoreDestination.route) {
         MoreRoute()
     }
