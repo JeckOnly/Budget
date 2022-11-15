@@ -1,12 +1,21 @@
 package com.jeckonly.designsystem.composable.navigation
 
+import androidx.compose.animation.core.Animatable
+import androidx.compose.foundation.Indication
+import androidx.compose.foundation.IndicationInstance
+import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -19,12 +28,28 @@ fun BgtNavigationBarItem(
     id: Int,
     modifier: Modifier = Modifier,
 ) {
+
+    val scaleAnimated = remember {
+        Animatable(1f)
+    }
+    LaunchedEffect(key1 = selected, block = {
+        if (selected) {
+            scaleAnimated.animateTo(1.3f)
+            scaleAnimated.animateTo(1f)
+        }
+    })
     Icon(
         painter = painterResource(id = id),
         contentDescription = null,
-        modifier = modifier.size(24.dp).clickable {
-              onClick()
-        },
+        modifier = modifier
+            .size(24.dp)
+            .scale(scaleAnimated.value)
+            .clickable(
+                interactionSource = remember { MutableInteractionSource() },
+                indication = null
+            ) {
+                onClick()
+            },
         tint = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
     )
 }
