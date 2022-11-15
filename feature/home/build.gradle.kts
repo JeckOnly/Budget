@@ -39,12 +39,20 @@ dependencies {
     implementation(project(":core:model"))
     implementation(project(":core:designsystem"))
     implementation(project(":core:data"))
+    implementation(project(":core:navigation"))
 
     // core
     implementation("androidx.core:core-ktx:$core_ktx_version")
 
     // compose
     addComposeBasic()
+    // compose-extension
+    implementation("androidx.activity:activity-compose:$activity_version")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version")
+    implementation("androidx.constraintlayout:constraintlayout-compose:$constraintlayout_compose_version")
+    implementation("androidx.navigation:navigation-compose:$navigation_compose_version")// 官方导航库
+    implementation("androidx.hilt:hilt-navigation-compose:$androidx_hilt_version")
+    implementation("io.coil-kt:coil-compose:$coil_compose_version")
 
     // test
     addTestImpl()

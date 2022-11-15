@@ -14,7 +14,11 @@
  * limitations under the License.
  */
 
-package com.jeckonly.budget.navigation
+package com.jeckonly.navigation
+
+import androidx.navigation.NavDestination
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavHostController
 
 /**
  * Interface for describing the Now in Android navigation destinations
@@ -35,4 +39,32 @@ interface BgtNavigationDestination {
      * destination's route from the route of the entire nested graph it belongs to.
      */
     val destination: String
+
+    /**
+     * 抽象出来的导航逻辑
+     */
+    fun navigate(navController: NavHostController)
+
+    /**
+     * 抽象出来的判断逻辑
+     */
+    fun isSelected(currentDestination: NavDestination?): Boolean
+}
+
+fun topLevelDestinationNavigate(navController: NavHostController, route: String) {
+    val currentDestination = navController.currentDestination?.route
+
+    navController.navigate(route){
+        launchSingleTop = true
+        // 避免按返回键在底部导航栏来回切换
+        currentDestination?.let {
+            popUpTo(it) {
+                inclusive = true
+            }
+        }
+    }
+}
+
+fun topLevelDestinationIsSelected(currentDestination: NavDestination?, route: String): Boolean {
+    return currentDestination?.hierarchy?.any { it.route == route } == true
 }

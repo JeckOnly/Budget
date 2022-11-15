@@ -17,20 +17,29 @@ import androidx.compose.ui.zIndex
 import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
+import androidx.navigation.NavDestination
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.jeckonly.designsystem.Mdf
 import com.jeckonly.designsystem.R
+import com.jeckonly.navigation.BgtNavigationDestination
 
 @Composable
 fun BgtNavigationBar(
     onClickHome: () -> Unit,
     onClickChart: () -> Unit,
     onClickMore: () -> Unit,
+    currentDestination: NavDestination?,
+    homeDestination: BgtNavigationDestination,
+    chartDestination: BgtNavigationDestination,
+    moreDestination: BgtNavigationDestination,
     modifier: Modifier = Modifier,
     containerColor: Color = MaterialTheme.colorScheme.surfaceVariant,
 ) {
     Surface(
         color = containerColor,
-        shape = RoundedCornerShape(topStartPercent = 25, topEndPercent = 25),
+        shape = RoundedCornerShape(topStartPercent = 30, topEndPercent = 30),
         modifier = modifier
             .fillMaxWidth()
             .height(60.dp)
@@ -44,19 +53,19 @@ fun BgtNavigationBar(
                 horizontalArrangement = Arrangement.SpaceAround,
             ) {
                 BgtNavigationBarItem(
-                    selected = false,
+                    selected = homeDestination.isSelected(currentDestination),
                     onClick = onClickHome,
                     id = R.drawable.home,
                 )
 
                 BgtNavigationBarItem(
-                    selected = false,
+                    selected = chartDestination.isSelected(currentDestination),
                     onClick = onClickChart,
                     id = R.drawable.line_chart,
                 )
 
                 BgtNavigationBarItem(
-                    selected = false,
+                    selected = moreDestination.isSelected(currentDestination),
                     onClick = onClickMore,
                     id = R.drawable.more,
                 )
@@ -71,8 +80,15 @@ fun BgtBottomBar(
     onClickChart: () -> Unit,
     onClickMore: () -> Unit,
     onClickPlus: () -> Unit,
+    navController: NavHostController,
+    homeDestination: BgtNavigationDestination,
+    chartDestination: BgtNavigationDestination,
+    moreDestination: BgtNavigationDestination,
     modifier: Modifier = Modifier
 ) {
+    val currentDestination: NavDestination? = navController
+        .currentBackStackEntryAsState().value?.destination
+
     ConstraintLayout(
         modifier = modifier
             .background(Color.Transparent)
@@ -84,6 +100,10 @@ fun BgtBottomBar(
             onClickHome = onClickHome,
             onClickChart = onClickChart,
             onClickMore = onClickMore,
+            currentDestination = currentDestination,
+            homeDestination = homeDestination,
+            chartDestination = chartDestination,
+            moreDestination = moreDestination,
             modifier = Mdf.constrainAs(navigationBar) {
                 start.linkTo(parent.start)
                 end.linkTo(parent.end)
@@ -106,24 +126,24 @@ fun BgtBottomBar(
 }
 
 
-@Preview(showBackground = true, backgroundColor = 0xffffff)
-@Composable
-fun PreviewBgtBottomBar() {
-    Box(
-        modifier = Mdf
-            .fillMaxWidth()
-            .height(500.dp)
-            .background(color = Color.White),
-        contentAlignment = Alignment.BottomCenter
-    ) {
-        BgtBottomBar(
-            {},
-            {},
-            {},
-            {}
-        )
-    }
-}
+//@Preview(showBackground = true, backgroundColor = 0xffffff)
+//@Composable
+//fun PreviewBgtBottomBar() {
+//    Box(
+//        modifier = Mdf
+//            .fillMaxWidth()
+//            .height(500.dp)
+//            .background(color = Color.White),
+//        contentAlignment = Alignment.BottomCenter
+//    ) {
+//        BgtBottomBar(
+//            {},
+//            {},
+//            {},
+//            {}
+//        )
+//    }
+//}
 
 
 

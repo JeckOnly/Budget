@@ -22,7 +22,7 @@ fun PlusButton(
         modifier = modifier
             .clickable { onClick() }
             .size(68.dp),
-        shape = RoundedCornerShape(25),
+        shape = RoundedCornerShape(30),
         color = MaterialTheme.colorScheme.primary,
         contentColor = contentColorFor(backgroundColor = MaterialTheme.colorScheme.primary),
         shadowElevation = 12.dp

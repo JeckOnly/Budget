@@ -35,6 +35,7 @@ dependencies {
 
     // modules
     implementation(project(":core:model"))
+    implementation(project(":core:navigation"))
 
     // core
     implementation("androidx.core:core-ktx:$core_ktx_version")
@@ -44,6 +45,7 @@ dependencies {
     addComposeBasic()
     // compose-extension
     implementation("androidx.constraintlayout:constraintlayout-compose:$constraintlayout_compose_version")
+    implementation("androidx.navigation:navigation-compose:$navigation_compose_version")// 官方导航库
 
     // test
     addTestImpl()
