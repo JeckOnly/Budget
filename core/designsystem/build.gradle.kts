@@ -47,6 +47,9 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout-compose:$constraintlayout_compose_version")
     implementation("androidx.navigation:navigation-compose:$navigation_compose_version")// 官方导航库
 
+    // Timber
+    implementation("com.jakewharton.timber:timber:$timber_version")
+
     // test
     addTestImpl()
 }

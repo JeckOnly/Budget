@@ -61,10 +61,11 @@ dependencies {
     // modules
     implementation(project(":core:designsystem"))
     implementation(project(":core:navigation"))
-//    implementation(project(":feature:example"))
+    // implementation(project(":feature:example"))
     implementation(project(":feature:home"))
     implementation(project(":feature:chart"))
     implementation(project(":feature:more"))
+    implementation(project(":util"))
 
     // core
     implementation("androidx.core:core-ktx:$core_ktx_version")
@@ -100,6 +101,9 @@ dependencies {
 
     // WorkManager: Kotlin + coroutines
     implementation("androidx.work:work-runtime-ktx:$work_version")
+
+    // Timber
+    implementation("com.jakewharton.timber:timber:$timber_version")
 
     // 内存泄漏检测
     // debugImplementation("com.squareup.leakcanary:leakcanary-android:2.9.1")

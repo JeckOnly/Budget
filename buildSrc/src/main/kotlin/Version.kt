@@ -21,3 +21,5 @@ const val okhttp_version = "5.0.0-alpha.3"
 const val sandwich_version = "1.3.0"
 const val material3_version = "1.0.0"
 const val annotation_version = "1.5.0"
+const val timber_version = "5.0.1"
+//    implementation 'com.jakewharton.timber:timber:5.0.1'

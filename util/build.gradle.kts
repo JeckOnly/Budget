@@ -28,5 +28,8 @@ dependencies {
     // test
     addTestImpl()
 
+    // Timber
+    implementation("com.jakewharton.timber:timber:$timber_version")
+
     implementation("androidx.annotation:annotation:$annotation_version")
 }

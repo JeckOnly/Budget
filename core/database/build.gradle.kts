@@ -43,6 +43,9 @@ dependencies {
     //Dagger - Hilt
     addHiltImpl()
 
+    // Timber
+    implementation("com.jakewharton.timber:timber:$timber_version")
+
     // Room
     implementation("androidx.room:room-runtime:$room_version")
     kapt("androidx.room:room-compiler:$room_version")

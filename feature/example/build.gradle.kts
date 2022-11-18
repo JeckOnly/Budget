@@ -59,4 +59,7 @@ dependencies {
 
     //Dagger - Hilt
     addHiltImpl()
+
+    // Timber
+    implementation("com.jakewharton.timber:timber:$timber_version")
 }

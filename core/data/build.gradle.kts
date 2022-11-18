@@ -51,6 +51,9 @@ dependencies {
     // When(using Kotlin.)
     kapt("androidx.hilt:hilt-compiler:$androidx_hilt_version")
 
+    // Timber
+    implementation("com.jakewharton.timber:timber:$timber_version")
+
     // WorkManager: Kotlin(+ coroutines)
     implementation("androidx.work:work-runtime-ktx:$work_version")
 }
