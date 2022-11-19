@@ -8,10 +8,11 @@ import androidx.room.PrimaryKey
 
 /**
  * 子表的外键需要开启“索引”，否则Room会发出Warning。
- * ForeignKey可以设置是否deferred(推迟)，默认为false，如果设置为出，则在出现不一致冲突时不会立即报错，而会在一个
+ *
+ * ForeignKey可以设置是否deferred(推迟)，默认为false，如果设置为true，则在出现不一致冲突时不会立即报错，而会在一个
  * transaction(事务)结束之后才报错。在本例中由于没有“显式”定义事务，所以这个字段是否为true表现一样——在冲突发生时报错。
  */
-@Entity(tableName = "report_card",
+@Entity(tableName = "record_table",
     foreignKeys = [ForeignKey(
         entity = Type::class,
         childColumns = ["type_name"],

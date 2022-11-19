@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import com.jeckonly.core_model.entity.helper.ExpenseOrIncome
 
 
-@Entity(tableName = "type")
+@Entity(tableName = "type_table")
 data class Type(
     @PrimaryKey @ColumnInfo(name = "type_name") val name: String,
     @ColumnInfo(name = "icon_id") val iconId: Int,
