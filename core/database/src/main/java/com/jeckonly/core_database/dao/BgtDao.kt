@@ -35,7 +35,7 @@ interface BgtDao {
      * @return 所有类型
      */
     @Query("SELECT * FROM type_table")
-    suspend fun getAllType(): Flow<List<Type>>
+    fun getAllType(): Flow<List<Type>>
 
     /**
      * 理论上来说，[Record]的主键是[androidx.room.PrimaryKey.autoGenerate]，不会有冲突.
