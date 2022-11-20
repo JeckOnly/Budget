@@ -4,9 +4,9 @@
     package="com.jeckonly.budget">
 
     <application
+        android:name=".BgtApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
-        android:name=".BgtApplication"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -16,13 +16,19 @@
         tools:targetApi="32">
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.App.Starting">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="com.jeckonly.app_addrecord.AddRecordActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Budget" />
     </application>
 
 </manifest>

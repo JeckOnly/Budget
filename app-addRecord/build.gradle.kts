@@ -38,6 +38,7 @@ dependencies {
     implementation(project(":core:designsystem"))
     implementation(project(":core:navigation"))
     // implementation(project(":feature:example"))
+    implementation(project(":feature:chooseType"))
 
     // core
     implementation("androidx.core:core-ktx:$core_ktx_version")

@@ -62,6 +62,7 @@ dependencies {
     implementation(project(":core:designsystem"))
     implementation(project(":core:navigation"))
     // implementation(project(":feature:example"))
+    implementation(project(":app-addRecord"))
     implementation(project(":feature:home"))
     implementation(project(":feature:chart"))
     implementation(project(":feature:more"))
