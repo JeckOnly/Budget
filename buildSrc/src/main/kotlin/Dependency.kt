@@ -27,3 +27,7 @@ fun DependencyHandlerScope.addComposeBasic() {
     "debugImplementation"("androidx.compose.ui:ui-tooling:$compose_version")
     "debugImplementation"("androidx.compose.ui:ui-test-manifest:$compose_version")
 }
+
+fun DependencyHandlerScope.addComposeCompiler() {
+    "implementation"("androidx.compose.compiler:compiler:$compose_version")
+}
