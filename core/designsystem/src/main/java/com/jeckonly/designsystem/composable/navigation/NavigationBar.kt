@@ -4,26 +4,20 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBarDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.zIndex
-import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavDestination
-import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.jeckonly.designsystem.Mdf
 import com.jeckonly.designsystem.R
-import com.jeckonly.navigation.BgtNavigationDestination
+import com.jeckonly.navigation.BgtBottomNavigationDestination
 
 @Composable
 fun BgtNavigationBar(
@@ -31,9 +25,9 @@ fun BgtNavigationBar(
     onClickChart: () -> Unit,
     onClickMore: () -> Unit,
     currentDestination: NavDestination?,
-    homeDestination: BgtNavigationDestination,
-    chartDestination: BgtNavigationDestination,
-    moreDestination: BgtNavigationDestination,
+    homeDestination: BgtBottomNavigationDestination,
+    chartDestination: BgtBottomNavigationDestination,
+    moreDestination: BgtBottomNavigationDestination,
     modifier: Modifier = Modifier,
     containerColor: Color = MaterialTheme.colorScheme.surfaceVariant,
 ) {
@@ -81,9 +75,9 @@ fun BgtBottomBar(
     onClickMore: () -> Unit,
     onClickPlus: () -> Unit,
     navController: NavHostController,
-    homeDestination: BgtNavigationDestination,
-    chartDestination: BgtNavigationDestination,
-    moreDestination: BgtNavigationDestination,
+    homeDestination: BgtBottomNavigationDestination,
+    chartDestination: BgtBottomNavigationDestination,
+    moreDestination: BgtBottomNavigationDestination,
     modifier: Modifier = Modifier
 ) {
     val currentDestination: NavDestination? = navController
@@ -124,26 +118,5 @@ fun BgtBottomBar(
         )
     }
 }
-
-
-//@Preview(showBackground = true, backgroundColor = 0xffffff)
-//@Composable
-//fun PreviewBgtBottomBar() {
-//    Box(
-//        modifier = Mdf
-//            .fillMaxWidth()
-//            .height(500.dp)
-//            .background(color = Color.White),
-//        contentAlignment = Alignment.BottomCenter
-//    ) {
-//        BgtBottomBar(
-//            {},
-//            {},
-//            {},
-//            {}
-//        )
-//    }
-//}
-
 
 

@@ -24,7 +24,7 @@ import androidx.navigation.NavHostController
  * Interface for describing the Now in Android navigation destinations
  */
 
-interface BgtNavigationDestination {
+interface BgtTopLevelNavigationDestination {
     /**
      * Defines a specific route this destination belongs to.
      * Route is a String that defines the path to your composable.
@@ -43,26 +43,20 @@ interface BgtNavigationDestination {
     /**
      * 抽象出来的导航逻辑
      */
-    fun navigate(navController: NavHostController)
+    fun navigate(navController: NavHostController) {
+        navController.navigate(route)
+    }
 
     /**
      * 抽象出来的判断逻辑
      */
-    fun isSelected(currentDestination: NavDestination?): Boolean
+    fun isSelected(currentDestination: NavDestination?): Boolean {
+        return topLevelDestinationIsSelected(currentDestination, route)
+    }
 }
 
 fun topLevelDestinationNavigate(navController: NavHostController, route: String) {
-    val currentDestination = navController.currentDestination?.route
-
-    navController.navigate(route){
-        launchSingleTop = true
-        // 避免按返回键在底部导航栏来回切换
-        currentDestination?.let {
-            popUpTo(it) {
-                inclusive = true
-            }
-        }
-    }
+    navController.navigate(route)
 }
 
 fun topLevelDestinationIsSelected(currentDestination: NavDestination?, route: String): Boolean {
