@@ -1,14 +1,9 @@
 package com.jeckonly.designsystem.composable.navigation
 
 import androidx.compose.animation.core.Animatable
-import androidx.compose.foundation.Indication
-import androidx.compose.foundation.IndicationInstance
-import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -30,12 +25,12 @@ fun BgtNavigationBarItem(
 ) {
 
     val scaleAnimated = remember {
-        Animatable(1f)
+        Animatable(1.2f)
     }
     LaunchedEffect(key1 = selected, block = {
         if (selected) {
-            scaleAnimated.animateTo(1.3f)
-            scaleAnimated.animateTo(1f)
+            scaleAnimated.animateTo(1.4f)
+            scaleAnimated.animateTo(1.2f)
         }
     })
     Icon(
