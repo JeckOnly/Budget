@@ -23,13 +23,13 @@ android {
         jvmTarget = "1.8"
     }
 
-    // compose basic
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = compose_version
-    }
+    //    compose basic
+    //    buildFeatures {
+    //        compose = true
+    //    }
+    //    composeOptions {
+    //        kotlinCompilerExtensionVersion = compose_version
+    //    }
 }
 
 dependencies {
@@ -38,7 +38,7 @@ dependencies {
     addTestImpl()
 
     // compose compiler
-    addComposeCompiler()
+    // addComposeCompiler()
 
     // Room，因为要用到@Entity注释
     implementation("androidx.room:room-runtime:$room_version")
