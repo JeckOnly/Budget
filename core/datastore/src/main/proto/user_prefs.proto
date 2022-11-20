@@ -5,9 +5,8 @@ option java_multiple_files = true;
 
 message UserPreferences {
   /**
-   * 默认值为false，表示没开始下载或没下载完，不区分
-   * 设为true，表示已下载完成
+   * 默认值为false，表示还没初始化
    */
-  bool finishDownload = 1;
+  bool databaseTypeHasInit = 1;
 
 }
