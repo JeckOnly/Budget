@@ -29,6 +29,6 @@ fun DependencyHandlerScope.addComposeBasic() {
 }
 
 fun DependencyHandlerScope.addComposeCompiler() {
-    // "implementation"("androidx.compose.compiler:compiler:$compose_version")
-    // "implementation"("androidx.compose.runtime:runtime:1.0.0")
+     // "implementation"("androidx.compose.compiler:compiler:$compose_version")
+     "implementation"("androidx.compose.runtime:runtime:$compose_version")
 }

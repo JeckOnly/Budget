@@ -56,7 +56,6 @@ dependencies {
     // compose-accompanist
     implementation("com.google.accompanist:accompanist-systemuicontroller:$acompanist_version")
     implementation("com.google.accompanist:accompanist-pager:$acompanist_version")// compose view pager
-    implementation("com.google.accompanist:accompanist-pager-indicators:$acompanist_version")// If using indicators, also depend on
 
     // test
     addTestImpl()
