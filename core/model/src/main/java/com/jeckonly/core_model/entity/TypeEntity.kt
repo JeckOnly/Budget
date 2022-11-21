@@ -7,7 +7,7 @@ import com.jeckonly.core_model.entity.helper.ExpenseOrIncome
 
 
 @Entity(tableName = "type_table")
-data class Type(
+data class TypeEntity(
     @PrimaryKey @ColumnInfo(name = "type_name") val name: String,
     @ColumnInfo(name = "icon_id") val iconId: Int,
     @ColumnInfo(name = "order") val order: Int,

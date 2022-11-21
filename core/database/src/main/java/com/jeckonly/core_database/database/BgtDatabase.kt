@@ -4,12 +4,12 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.jeckonly.core_database.dao.BgtDao
-import com.jeckonly.core_model.entity.Record
-import com.jeckonly.core_model.entity.Type
+import com.jeckonly.core_model.entity.RecordEntity
+import com.jeckonly.core_model.entity.TypeEntity
 import com.jeckonly.core_model.entity.converter.ExpenseOrIncomeConverter
 
 @Database(
-    entities = [Type::class, Record::class],
+    entities = [TypeEntity::class, RecordEntity::class],
     version = 1,
     exportSchema = false
 )

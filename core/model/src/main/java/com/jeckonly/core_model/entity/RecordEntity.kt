@@ -14,13 +14,13 @@ import androidx.room.PrimaryKey
  */
 @Entity(tableName = "record_table",
     foreignKeys = [ForeignKey(
-        entity = Type::class,
+        entity = TypeEntity::class,
         childColumns = ["type_name"],
         parentColumns = ["type_name"],
         onDelete = ForeignKey.CASCADE,// 删除类型的时候，级联删除记录
         onUpdate = ForeignKey.CASCADE// 更改类型的时候，级联更改
     )])
-data class Record(
+data class RecordEntity(
     @PrimaryKey(autoGenerate = true)@ColumnInfo(name = "record_id") val id: Int = 0,
     @ColumnInfo(name = "time_stamp") val timeStamp: Long,
     @ColumnInfo(name = "number") val number: Double,

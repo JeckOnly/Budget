@@ -1,62 +1,67 @@
 package com.jeckonly.core_database.dao
 
 import androidx.room.*
-import com.jeckonly.core_model.entity.Record
-import com.jeckonly.core_model.entity.Type
+import com.jeckonly.core_model.entity.RecordEntity
+import com.jeckonly.core_model.entity.TypeEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface BgtDao {
 
+    // Type
+
     /**
      * 如果有冲突，拒绝本次插入。
      *
-     * @return rowId
+     * @return list rowId
      */
     @Insert(onConflict = OnConflictStrategy.ABORT)
-    suspend fun insertType(type: Type): Long
+    suspend fun insertTypes(vararg typeEntities: TypeEntity): List<Long>
 
     /**
-     * NOTE 级联删除对应[Record]
+     * NOTE 级联删除对应[RecordEntity]
      *
      * @return 返回成功删除的行数
      */
     @Delete
-    suspend fun deleteType(type: Type): Int
+    suspend fun deleteType(typeEntity: TypeEntity): Int
 
     /**
-     * NOTE 级联更新对应[Record]
+     * NOTE 级联更新对应[RecordEntity]
      * @return 返回成功更新的行数
      */
     @Update
-    suspend fun updateType(type: Type): Int
+    suspend fun updateType(typeEntity: TypeEntity): Int
 
     /**
      * @return 所有类型
      */
     @Query("SELECT * FROM type_table")
-    fun getAllType(): Flow<List<Type>>
+    fun getAllType(): Flow<List<TypeEntity>>
+
+
+    // Record
 
     /**
-     * 理论上来说，[Record]的主键是[androidx.room.PrimaryKey.autoGenerate]，不会有冲突.
+     * 理论上来说，[RecordEntity]的主键是[androidx.room.PrimaryKey.autoGenerate]，不会有冲突.
      *
-     * NOTE 如果[Record.typeName]没有对应的[Type]， 即外键找不到对应的项————报错。
+     * NOTE 如果[RecordEntity.typeName]没有对应的[TypeEntity]， 即外键找不到对应的项————报错。
      */
     @Insert(onConflict = OnConflictStrategy.ABORT)
-    suspend fun insertRecord(record: Record): Long
+    suspend fun insertRecord(recordEntity: RecordEntity): Long
 
     /**
      * @return 返回成功删除的行数
      */
     @Delete
-    suspend fun deleteRecord(type: Type): Int
+    suspend fun deleteRecord(recordEntity: RecordEntity): Int
 
     /**
-     * NOTE 级联更新对应[Record]
+     * NOTE 级联更新对应[RecordEntity]
      * @return 返回成功更新的行数
      */
     @Update
-    suspend fun updateRecord(record: Record): Int
+    suspend fun updateRecord(recordEntity: RecordEntity): Int
 
     // TODO 对应Entity的查找dto
 }
