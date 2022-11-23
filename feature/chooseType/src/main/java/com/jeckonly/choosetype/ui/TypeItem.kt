@@ -28,7 +28,12 @@ import com.jeckonly.designsystem.R
 private const val ICON_SIZE = 43
 
 @Composable
-fun TypeItem(typeUI: ChooseTypeTypeUI, onClick: () -> Unit, modifier: Modifier = Modifier) {
+fun TypeItem(
+    typeUI: ChooseTypeTypeUI,
+    nowChooseTypeTypeUI: ChooseTypeTypeUI?,
+    onClick: (ChooseTypeTypeUI) -> Unit,
+    modifier: Modifier = Modifier
+) {
 
     val interactionSource = remember {
         MutableInteractionSource()
@@ -39,6 +44,19 @@ fun TypeItem(typeUI: ChooseTypeTypeUI, onClick: () -> Unit, modifier: Modifier =
     val scaleAnimated = remember {
         Animatable(1f)
     }
+    val backgroundColor =
+        if (typeUI != nowChooseTypeTypeUI)
+            MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.5f)
+        else
+            MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.5f)
+
+    val iconTint = contentColorFor(
+        backgroundColor = if (typeUI != nowChooseTypeTypeUI)
+            MaterialTheme.colorScheme.secondaryContainer
+        else
+            MaterialTheme.colorScheme.tertiaryContainer
+    )
+
     LaunchedEffect(key1 = animateStartHelper, block = {
         if (animateStartHelper > 0) {
             scaleAnimated.animateTo(0.7f)
@@ -55,11 +73,11 @@ fun TypeItem(typeUI: ChooseTypeTypeUI, onClick: () -> Unit, modifier: Modifier =
                         onClick = {
                             // 通过不断改变state的true或false来开启动画
                             animateStartHelper++
-                            onClick()
+                            onClick(typeUI)
                         }
                     )
                     .background(
-                        color = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.5f),
+                        color = backgroundColor,
                         shape = CircleShape
                     )
                     .padding(8.dp),
@@ -80,9 +98,7 @@ fun TypeItem(typeUI: ChooseTypeTypeUI, onClick: () -> Unit, modifier: Modifier =
         Text(
             text = typeUI.typeName,
             style = MaterialTheme.typography.bodyMedium,
-            color = contentColorFor(
-                backgroundColor = MaterialTheme.colorScheme.surface
-            ),
+            color = iconTint,
             modifier = Mdf.padding(top = 8.dp)
         )
     }
@@ -98,6 +114,7 @@ fun PreviewTypeItem() {
             order = 0,
             expenseOrIncome = ExpenseOrIncome.Expense
         ),
+        nowChooseTypeTypeUI = null,
         onClick = {
 
         }

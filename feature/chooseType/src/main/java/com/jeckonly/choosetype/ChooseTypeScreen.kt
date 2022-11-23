@@ -1,22 +1,20 @@
 package com.jeckonly.choosetype
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.rememberPagerState
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.jeckonly.choosetype.ui.ChooseTypeKeyBoard
 import com.jeckonly.choosetype.ui.TabHeader
 import com.jeckonly.choosetype.ui.TypePager
 import com.jeckonly.choosetype.ui.state.ChooseTypeUiState
+import com.jeckonly.core_model.ui.ChooseTypeTypeUI
 
 
 private const val HEADER_HEIGHT = 55
@@ -54,7 +52,10 @@ fun ChooseTypeScreen(
     modifier: Modifier = Modifier
 ) {
     val pagerState = rememberPagerState(0)
-
+    // 表示当前选择的类型
+    var nowChooseType: ChooseTypeTypeUI? by remember {
+        mutableStateOf(null)
+    }
     Column(modifier = modifier.fillMaxSize()) {
         TabHeader(
             pagerState = pagerState,
@@ -65,7 +66,24 @@ fun ChooseTypeScreen(
         TypePager(
             chooseTypeUiState = chooseTypeUiState,
             pagerState = pagerState,
-            modifier = Modifier.fillMaxSize()
+            nowChooseTypeTypeUI = nowChooseType,
+            onClick = { chooseTypeTypeUI ->
+                // 点击类型item的回调
+                nowChooseType = chooseTypeTypeUI
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(if (nowChooseType == null) 1f else 0.55f)
         )
+        AnimatedVisibility(
+            visible = nowChooseType != null, modifier = Modifier
+                .fillMaxWidth()
+                .weight(0.45f)
+        ) {
+            ChooseTypeKeyBoard(
+                modifier = Modifier
+                    .fillMaxSize()
+            )
+        }
     }
 }

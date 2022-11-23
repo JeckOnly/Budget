@@ -29,6 +29,8 @@ import com.jeckonly.designsystem.Mdf
 fun TypePager(
     chooseTypeUiState: ChooseTypeUiState,
     pagerState: PagerState,
+    nowChooseTypeTypeUI: ChooseTypeTypeUI?,
+    onClick: (ChooseTypeTypeUI) -> Unit,
     modifier: Modifier = Modifier
 ) {
     HorizontalPager(count = 2, modifier = modifier, state = pagerState) { page ->
@@ -47,6 +49,8 @@ fun TypePager(
                     TypePage(
                         expenseOrIncome = ExpenseOrIncome.Expense,
                         chooseTypeUiState = chooseTypeUiState,
+                        nowChooseTypeTypeUI = nowChooseTypeTypeUI,
+                        onClick = onClick,
                         modifier = Modifier.fillMaxSize()
                     )
                 }
@@ -54,6 +58,8 @@ fun TypePager(
                     TypePage(
                         expenseOrIncome = ExpenseOrIncome.Income,
                         chooseTypeUiState = chooseTypeUiState,
+                        nowChooseTypeTypeUI = nowChooseTypeTypeUI,
+                        onClick = onClick,
                         modifier = Modifier.fillMaxSize()
                     )
                 }
@@ -66,6 +72,8 @@ fun TypePager(
 fun TypePage(
     expenseOrIncome: ExpenseOrIncome,
     chooseTypeUiState: ChooseTypeUiState,
+    nowChooseTypeTypeUI: ChooseTypeTypeUI?,
+    onClick: (ChooseTypeTypeUI) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val lazyGridState = rememberLazyGridState()
@@ -81,11 +89,15 @@ fun TypePage(
                 // key默认为位置（position）
                 items(
                     items = if (expenseOrIncome is ExpenseOrIncome.Expense) chooseTypeUiState.expenseTypeList else chooseTypeUiState.incomeTypeList,
-                ) { item: ChooseTypeTypeUI ->  
-                    TypeItem(typeUI = item, onClick = {
-                         // TODO onClick
-                    }, modifier = Mdf.padding(horizontal = 7.dp, vertical = 10.dp))
+                ) { item: ChooseTypeTypeUI ->
+                    TypeItem(
+                        typeUI = item,
+                        nowChooseTypeTypeUI = nowChooseTypeTypeUI,
+                        onClick = onClick,
+                        modifier = Mdf.padding(horizontal = 7.dp, vertical = 10.dp)
+                    )
                 }
+                // TODO 设置按钮
             })
     }
 }
