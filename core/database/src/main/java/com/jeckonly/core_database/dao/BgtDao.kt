@@ -12,7 +12,7 @@ interface BgtDao {
     // Type
 
     /**
-     * 如果有冲突，拒绝本次插入。
+     * 如果有冲突，拒绝本次插入事务（整个列表都不成功）。
      *
      * @return list rowId
      */
