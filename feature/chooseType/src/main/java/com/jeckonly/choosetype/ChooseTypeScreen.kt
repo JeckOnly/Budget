@@ -63,7 +63,7 @@ fun ChooseTypeScreen(
                 .height(HEADER_HEIGHT.dp)
         )
         TypePager(
-            loading = chooseTypeUiState.isLoading,
+            chooseTypeUiState = chooseTypeUiState,
             pagerState = pagerState,
             modifier = Modifier.fillMaxSize()
         )

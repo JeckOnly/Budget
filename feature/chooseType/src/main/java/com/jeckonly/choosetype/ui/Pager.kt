@@ -2,35 +2,60 @@ package com.jeckonly.choosetype.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
+import com.jeckonly.choosetype.ui.state.ChooseTypeUiState
 import com.jeckonly.core_model.entity.helper.ExpenseOrIncome
+import com.jeckonly.core_model.ui.ChooseTypeTypeUI
 import com.jeckonly.designsystem.Mdf
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun TypePager(loading: Boolean, pagerState: PagerState, modifier: Modifier = Modifier) {
+fun TypePager(
+    chooseTypeUiState: ChooseTypeUiState,
+    pagerState: PagerState,
+    modifier: Modifier = Modifier
+) {
     HorizontalPager(count = 2, modifier = modifier, state = pagerState) { page ->
-        if (loading) {
-            Box(modifier = Mdf.fillMaxSize().background(color = MaterialTheme.colorScheme.surface), contentAlignment = Alignment.Center) {
+        if (chooseTypeUiState.isLoading) {
+            Box(
+                modifier = Mdf
+                    .fillMaxSize()
+                    .background(color = MaterialTheme.colorScheme.surface),
+                contentAlignment = Alignment.Center
+            ) {
                 CircularProgressIndicator(color = MaterialTheme.colorScheme.tertiary)
             }
         } else {
             when (page) {
                 0 -> {
-                    TypePage(expenseOrIncome = ExpenseOrIncome.Expense, modifier = Modifier.fillMaxSize())
+                    TypePage(
+                        expenseOrIncome = ExpenseOrIncome.Expense,
+                        chooseTypeUiState = chooseTypeUiState,
+                        modifier = Modifier.fillMaxSize()
+                    )
                 }
                 1 -> {
-                    TypePage(expenseOrIncome = ExpenseOrIncome.Income, modifier = Modifier.fillMaxSize())
+                    TypePage(
+                        expenseOrIncome = ExpenseOrIncome.Income,
+                        chooseTypeUiState = chooseTypeUiState,
+                        modifier = Modifier.fillMaxSize()
+                    )
                 }
             }
         }
@@ -38,8 +63,29 @@ fun TypePager(loading: Boolean, pagerState: PagerState, modifier: Modifier = Mod
 }
 
 @Composable
-fun TypePage(expenseOrIncome: ExpenseOrIncome, modifier: Modifier = Modifier) {
-    Surface(modifier = modifier, color = if(expenseOrIncome is ExpenseOrIncome.Expense) Color.Blue else Color.Red) {
-        // TODO
+fun TypePage(
+    expenseOrIncome: ExpenseOrIncome,
+    chooseTypeUiState: ChooseTypeUiState,
+    modifier: Modifier = Modifier
+) {
+    val lazyGridState = rememberLazyGridState()
+    Surface(
+        modifier = modifier,
+        color = MaterialTheme.colorScheme.surface
+    ) {
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(4),
+            state = lazyGridState,
+            contentPadding = PaddingValues(start = 15.dp, end = 15.dp),
+            content = {
+                // key默认为位置（position）
+                items(
+                    items = if (expenseOrIncome is ExpenseOrIncome.Expense) chooseTypeUiState.expenseTypeList else chooseTypeUiState.incomeTypeList,
+                ) { item: ChooseTypeTypeUI ->  
+                    TypeItem(typeUI = item, onClick = {
+                         // TODO onClick
+                    }, modifier = Mdf.padding(horizontal = 7.dp, vertical = 10.dp))
+                }
+            })
     }
 }
