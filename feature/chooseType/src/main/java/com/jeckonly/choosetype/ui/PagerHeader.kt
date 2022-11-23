@@ -14,6 +14,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.PagerScope
 import com.google.accompanist.pager.PagerState
 import com.jeckonly.core_model.entity.helper.ExpenseOrIncome
 import com.jeckonly.designsystem.Mdf
@@ -85,17 +87,27 @@ fun Tab(
                 )
         ) {
             Box(
-                modifier = Mdf.background(
-                    color = contentColorFor(
-                        backgroundColor = MaterialTheme.colorScheme.onSecondaryContainer
-                    ),
-                    shape = RoundedCornerShape(30)
-                ).align(Alignment.Center).fillMaxSize()
+                modifier = Mdf
+                    .background(
+                        color = contentColorFor(
+                            backgroundColor = MaterialTheme.colorScheme.onSecondaryContainer
+                        ),
+                        shape = RoundedCornerShape(30)
+                    )
+                    .align(Alignment.Center)
+                    .fillMaxSize()
             )
         }
     }
 }
 
+
+/**
+ * 参考[PagerScope.calculateCurrentOffsetForPage]方法。
+ * 这个函数不具有拓展性，本质上：([currentPage] - [page]) + [currentPageOffset] 得出的是：
+ * 对于给定的[page]，当前位置偏离它多少倍的[HorizontalPager]宽度。
+ * 在本例中经过修改可以用来描绘下划线的宽度比值。
+ */
 fun calculateScaleXForTabIndicatorByPage(
     page: Int,
     currentPage: Int,
