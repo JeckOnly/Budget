@@ -3,6 +3,7 @@ package com.jeckonly.core_database.dao
 import androidx.room.*
 import com.jeckonly.core_model.entity.RecordEntity
 import com.jeckonly.core_model.entity.TypeEntity
+import com.jeckonly.core_model.entity.helper.ExpenseOrIncome
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -16,7 +17,7 @@ interface BgtDao {
      * @return list rowId
      */
     @Insert(onConflict = OnConflictStrategy.ABORT)
-    suspend fun insertTypes(vararg typeEntities: TypeEntity): List<Long>
+    suspend fun insertTypes(typeEntities: List<TypeEntity>): List<Long>
 
     /**
      * NOTE 级联删除对应[RecordEntity]
@@ -34,10 +35,10 @@ interface BgtDao {
     suspend fun updateType(typeEntity: TypeEntity): Int
 
     /**
-     * @return 所有类型
+     * @return 所有类型是[expenseOrIncome_]的类型, 且应该显示。
      */
-    @Query("SELECT * FROM type_table")
-    fun getAllType(): Flow<List<TypeEntity>>
+    @Query("SELECT * FROM type_table where expense_or_income = :expenseOrIncome_ and should_show")
+    fun getAllTypeByExpenseOrIncomeAndShouldShown(expenseOrIncome_: ExpenseOrIncome): Flow<List<TypeEntity>>
 
 
     // Record
