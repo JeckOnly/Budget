@@ -8,9 +8,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.core.view.WindowCompat
 import com.jeckonly.app_addrecord.navigation.AddRecordApp
+import dagger.hilt.android.AndroidEntryPoint
 
 const val SLIDE_DURATION = 250L
 
+@AndroidEntryPoint
 class AddRecordActivity: ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         // 沉浸式状态栏
