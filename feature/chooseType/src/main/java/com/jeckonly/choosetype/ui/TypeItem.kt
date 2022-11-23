@@ -25,7 +25,7 @@ import com.jeckonly.core_model.ui.ChooseTypeTypeUI
 import com.jeckonly.designsystem.Mdf
 import com.jeckonly.designsystem.R
 
-private const val ICON_SIZE = 35
+private const val ICON_SIZE = 43
 
 @Composable
 fun TypeItem(typeUI: ChooseTypeTypeUI, onClick: () -> Unit, modifier: Modifier = Modifier) {
@@ -62,7 +62,7 @@ fun TypeItem(typeUI: ChooseTypeTypeUI, onClick: () -> Unit, modifier: Modifier =
                         color = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.5f),
                         shape = CircleShape
                     )
-                    .padding(10.dp),
+                    .padding(8.dp),
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
@@ -93,7 +93,7 @@ fun TypeItem(typeUI: ChooseTypeTypeUI, onClick: () -> Unit, modifier: Modifier =
 fun PreviewTypeItem() {
     TypeItem(
         typeUI = ChooseTypeTypeUI(
-            iconId = R.drawable.eat,
+            iconId = R.drawable.category_i_money_stroke,
             typeName = "餐饮",
             order = 0,
             expenseOrIncome = ExpenseOrIncome.Expense

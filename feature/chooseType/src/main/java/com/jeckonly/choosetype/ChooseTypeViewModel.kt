@@ -64,8 +64,8 @@ class ChooseTypeViewModel @Inject constructor(
     ) { hasInit, expenseTypeUIList, incomeTypeUIList ->
         ChooseTypeUiState(
             isLoading = !hasInit,
-            expenseTypeList = expenseTypeUIList,
-            incomeTypeList = incomeTypeUIList
+            expenseTypeList = expenseTypeUIList.sortedBy { it.order },
+            incomeTypeList = incomeTypeUIList.sortedBy { it.order }
         )
     }.stateIn(
         scope = viewModelScope,
@@ -198,7 +198,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
 
     TypeEntity(
         name = app.getString(R.string.at_home),
-        iconId = R.drawable.home,
+        iconId = R.drawable.category_e_home_stroke,
         order = 12,
         expenseOrIncome = ExpenseOrIncome.Expense,
         isCustomise = false,
@@ -405,7 +405,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
     ),
 
     TypeEntity(
-        name = app.getString(R.string.gift_money),
+        name = app.getString(R.string.money_gift_2),
         iconId = R.drawable.category_i_money_stroke,
         order = 2,
         expenseOrIncome = ExpenseOrIncome.Income,
