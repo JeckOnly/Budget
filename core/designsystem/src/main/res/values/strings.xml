@@ -35,6 +35,10 @@
     <string name="pet">宠物</string>
     <string name="donate">捐赠</string>
     <string name="setting">设置</string>
+    <string name="salary">工资</string>
+    <string name="part_time">兼职</string>
+    <string name="other">其他</string>
+    <string name="money_management">理财</string>
     <string name="expense">支出</string>
     <string name="income">收入</string>
 </resources>
