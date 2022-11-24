@@ -42,4 +42,6 @@
     <string name="money_management">理财</string>
     <string name="expense">支出</string>
     <string name="income">收入</string>
+    <string name="today">今天</string>
+    <string name="done">完成</string>
 </resources>

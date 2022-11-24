@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jeckonly.choosetype.ui.state.ChooseTypeUiState
+import com.jeckonly.choosetype.ui.state.KeyboardState
 import com.jeckonly.core_data.common.repo.interface_.DatabaseRepo
 import com.jeckonly.core_data.common.repo.interface_.UserPrefsRepo
 import com.jeckonly.core_model.entity.TypeEntity
@@ -72,6 +73,13 @@ class ChooseTypeViewModel @Inject constructor(
         started = SharingStarted.WhileSubscribed(5_000),
         initialValue = ChooseTypeUiState()
     )
+
+    /**
+     * keyboard state
+     */
+    val keyboardState: KeyboardState by lazy {
+        KeyboardState(app = app)
+    }
 
     init {
         viewModelScope.launch {

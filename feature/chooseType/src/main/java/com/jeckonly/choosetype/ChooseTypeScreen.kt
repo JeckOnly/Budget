@@ -1,10 +1,14 @@
 package com.jeckonly.choosetype
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.slideIn
+import androidx.compose.animation.slideOut
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -14,6 +18,7 @@ import com.jeckonly.choosetype.ui.ChooseTypeKeyBoard
 import com.jeckonly.choosetype.ui.TabHeader
 import com.jeckonly.choosetype.ui.TypePager
 import com.jeckonly.choosetype.ui.state.ChooseTypeUiState
+import com.jeckonly.choosetype.ui.state.KeyboardState
 import com.jeckonly.core_model.ui.ChooseTypeTypeUI
 
 
@@ -41,6 +46,7 @@ fun ChooseTypeRoute(
 
     ChooseTypeScreen(
         chooseTypeUiState = chooseTypeUiState.value,
+        keyboardState = viewModel.keyboardState,
         modifier = modifier
     )
 }
@@ -49,6 +55,7 @@ fun ChooseTypeRoute(
 @Composable
 fun ChooseTypeScreen(
     chooseTypeUiState: ChooseTypeUiState,
+    keyboardState: KeyboardState,
     modifier: Modifier = Modifier
 ) {
     val pagerState = rememberPagerState(0)
@@ -78,9 +85,16 @@ fun ChooseTypeScreen(
         AnimatedVisibility(
             visible = nowChooseType != null, modifier = Modifier
                 .fillMaxWidth()
-                .weight(0.45f)
+                .weight(0.45f),
+            enter = slideIn { fullSize: IntSize ->
+                IntOffset(0, fullSize.height)
+            },
+            exit = slideOut { fullSize: IntSize ->
+                IntOffset(0, fullSize.height)
+            }
         ) {
             ChooseTypeKeyBoard(
+                keyboardState = keyboardState,
                 modifier = Modifier
                     .fillMaxSize()
             )
