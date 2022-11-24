@@ -1,6 +1,8 @@
 package com.jeckonly.budget
 
 import android.os.Bundle
+import android.transition.Fade
+import android.view.Window
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -15,6 +17,13 @@ class MainActivity : ComponentActivity() {
         installSplashScreen()
         // 沉浸式状态栏
         WindowCompat.setDecorFitsSystemWindows(window, false)
+        with(window) {
+            requestFeature(Window.FEATURE_CONTENT_TRANSITIONS)
+            allowEnterTransitionOverlap = true
+            val fadeAnimation = Fade()
+            enterTransition = fadeAnimation
+            exitTransition = fadeAnimation
+        }
         super.onCreate(savedInstanceState)
         setContent {
             BgtApp()
