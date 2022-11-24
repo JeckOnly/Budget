@@ -229,7 +229,7 @@ class KeyboardState(private val app: Application) {
             }
             if (pointIndex == -1) throw IllegalStateException("没有小数点")
 
-            if (number.value.length - pointIndex >= NUMBER_COUNT_AFTER_POINT) {
+            if (number.value.length - 1 - pointIndex >= NUMBER_COUNT_AFTER_POINT) {
                 // 已达到小数点后数字长度上限
             } else {
                 // 添加数字
