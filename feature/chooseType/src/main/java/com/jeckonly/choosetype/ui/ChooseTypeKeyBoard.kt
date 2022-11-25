@@ -36,21 +36,39 @@ fun ChooseTypeKeyBoard(keyboardState: KeyboardState, onCLickDown:() -> Unit, mod
                     .padding(top = 8.dp)
                     .size(20.dp)
                     .clickable(
-                        interactionSource = remember{ MutableInteractionSource() },
+                        interactionSource = remember { MutableInteractionSource() },
                         indication = null,
                         onClick = onCLickDown
                     )
                     .align(Alignment.CenterHorizontally),
                 tint = contentColor
             )
-            Text(
-                text = keyboardState.showText,
-                style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Normal),
-                color = contentColor,
-                modifier = Mdf
-                    .align(Alignment.End)
-                    .padding(bottom = 15.dp, end = 20.dp)
-            )
+            Box(modifier = Mdf.fillMaxWidth()) {
+                Icon(
+                    painter = painterResource(id = R.drawable.remark),
+                    contentDescription = null,
+                    modifier = Mdf
+                        .padding(start = 20.dp, bottom = 15.dp)
+                        .size(20.dp)
+                        .clickable(
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = null,
+                            onClick = {
+                                // TODO 写备注
+                            }
+                        )
+                        .align(Alignment.CenterStart),
+                    tint = contentColor
+                )
+                Text(
+                    text = keyboardState.showText,
+                    style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Normal),
+                    color = contentColor,
+                    modifier = Mdf
+                        .align(alignment = Alignment.CenterEnd)
+                        .padding(bottom = 15.dp, end = 20.dp)
+                )
+            }
             Divider(
                 modifier = Mdf.fillMaxWidth(),
                 thickness = (0.2).dp,
