@@ -44,4 +44,8 @@
     <string name="income">收入</string>
     <string name="today">今天</string>
     <string name="done">完成</string>
+    <string name="remark">备注</string>
+    <string name="click_write_remark">点击写备注</string>
+    <string name="cancel">取消</string>
+    <string name="sure">确定</string>
 </resources>
