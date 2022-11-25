@@ -49,7 +49,7 @@ fun ChooseTypeKeyBoard(keyboardState: KeyboardState, onCLickDown:() -> Unit, mod
                 color = contentColor,
                 modifier = Mdf
                     .align(Alignment.End)
-                    .padding(top = 15.dp, bottom = 15.dp, end = 20.dp)
+                    .padding(bottom = 15.dp, end = 20.dp)
             )
             Divider(
                 modifier = Mdf.fillMaxWidth(),
