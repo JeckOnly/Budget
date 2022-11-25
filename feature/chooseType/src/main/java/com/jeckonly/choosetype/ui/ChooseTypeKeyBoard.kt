@@ -3,9 +3,12 @@ package com.jeckonly.choosetype.ui
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
@@ -19,16 +22,30 @@ import com.jeckonly.designsystem.Mdf
 import com.jeckonly.designsystem.R
 
 @Composable
-fun ChooseTypeKeyBoard(keyboardState: KeyboardState, modifier: Modifier = Modifier) {
-    val backgroundColor = MaterialTheme.colorScheme.surfaceVariant
+fun ChooseTypeKeyBoard(keyboardState: KeyboardState, onCLickDown:() -> Unit, modifier: Modifier = Modifier) {
+    val backgroundColor = MaterialTheme.colorScheme.surface
     val contentColor = contentColorFor(backgroundColor = backgroundColor)
     Surface(
-        modifier = modifier, color = backgroundColor, shadowElevation = 12.dp
+        modifier = modifier, color = backgroundColor, shadowElevation = 12.dp, shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp)
     ) {
         Column(modifier = Mdf.fillMaxSize()) {
+            Icon(
+                painter = painterResource(id = R.drawable.arrow_down),
+                contentDescription = null,
+                modifier = Mdf
+                    .padding(top = 8.dp)
+                    .size(20.dp)
+                    .clickable(
+                        interactionSource = remember{ MutableInteractionSource() },
+                        indication = null,
+                        onClick = onCLickDown
+                    )
+                    .align(Alignment.CenterHorizontally),
+                tint = contentColor
+            )
             Text(
                 text = keyboardState.showText,
-                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Normal),
+                style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Normal),
                 color = contentColor,
                 modifier = Mdf
                     .align(Alignment.End)
@@ -36,7 +53,7 @@ fun ChooseTypeKeyBoard(keyboardState: KeyboardState, modifier: Modifier = Modifi
             )
             Divider(
                 modifier = Mdf.fillMaxWidth(),
-                thickness = 0.1.dp,
+                thickness = (0.2).dp,
                 color = MaterialTheme.colorScheme.outlineVariant
             )
             Row(

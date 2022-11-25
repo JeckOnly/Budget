@@ -1,6 +1,7 @@
 package com.jeckonly.choosetype
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.TweenSpec
 import androidx.compose.animation.slideIn
 import androidx.compose.animation.slideOut
 import androidx.compose.foundation.layout.*
@@ -80,21 +81,26 @@ fun ChooseTypeScreen(
             },
             modifier = Modifier
                 .fillMaxWidth()
-                .weight(if (nowChooseType == null) 1f else 0.55f)
+                .weight(if (nowChooseType == null) 1f else 0.5f)
         )
         AnimatedVisibility(
-            visible = nowChooseType != null, modifier = Modifier
+            visible = nowChooseType != null,
+            modifier = Modifier
                 .fillMaxWidth()
-                .weight(0.45f),
-            enter = slideIn { fullSize: IntSize ->
+                .weight(0.5f)
+            ,
+            enter = slideIn(animationSpec = TweenSpec(durationMillis = 50)) { fullSize: IntSize ->
                 IntOffset(0, fullSize.height)
             },
-            exit = slideOut { fullSize: IntSize ->
+            exit = slideOut(animationSpec = TweenSpec(durationMillis = 50)) { fullSize: IntSize ->
                 IntOffset(0, fullSize.height)
             }
         ) {
             ChooseTypeKeyBoard(
                 keyboardState = keyboardState,
+                onCLickDown = {
+                    nowChooseType = null
+                },
                 modifier = Modifier
                     .fillMaxSize()
             )

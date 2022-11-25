@@ -86,7 +86,8 @@ class KeyboardState(private val app: Application) {
         } else {
             finish.text.value = doneText
         }
-        number1.value + (operator?.text ?: "") + number2.value
+        val temp: String = number1.value + (operator?.text ?: "") + number2.value
+        if (temp != "") temp else "0"
     }
 
     fun onEvent(buttonType: ButtonType) {
