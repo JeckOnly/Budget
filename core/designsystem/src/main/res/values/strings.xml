@@ -48,4 +48,5 @@
     <string name="click_write_remark">点击写备注</string>
     <string name="cancel">取消</string>
     <string name="sure">确定</string>
+    <string name="choose_date">选择日期</string>
 </resources>

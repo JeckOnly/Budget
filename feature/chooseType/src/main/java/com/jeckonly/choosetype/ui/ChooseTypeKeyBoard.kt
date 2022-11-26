@@ -24,6 +24,8 @@ import androidx.compose.ui.unit.dp
 import com.jeckonly.choosetype.ui.state.KeyboardState
 import com.jeckonly.designsystem.Mdf
 import com.jeckonly.designsystem.R
+import com.jeckonly.designsystem.composable.datepicker.DatePicker
+import com.jeckonly.designsystem.composable.datepicker.rememberDatePickerState
 
 @Composable
 fun ChooseTypeKeyBoard(
@@ -34,6 +36,7 @@ fun ChooseTypeKeyBoard(
     var showRemarkDialog: Boolean by remember {
         mutableStateOf(false)
     }
+    val datePickerState = rememberDatePickerState()
 
     Surface(
         modifier = modifier,
@@ -143,8 +146,10 @@ fun ChooseTypeKeyBoard(
                 // 日历
                 KeyboardBox(modifier = Mdf
                     .weight(0.25f)
-                    .fillMaxHeight(),
-                    onClick = { keyboardState.onEvent(keyboardState.dateButtonType) }) {
+                    .fillMaxHeight(), onClick = {
+                    // show date picker
+                    datePickerState.show()
+                }) {
                     Row {
                         Icon(
                             painter = painterResource(id = keyboardState.dateButtonType.iconId),
@@ -296,6 +301,8 @@ fun ChooseTypeKeyBoard(
             }
         }
     }
+
+    // remark dialog
     AnimatedVisibility(
         visible = showRemarkDialog, enter = fadeIn(), exit = fadeOut(
             animationSpec = TweenSpec(50)
@@ -307,6 +314,11 @@ fun ChooseTypeKeyBoard(
         }, onClickCancel = {
             showRemarkDialog = false
         }, onDismissRequest = { showRemarkDialog = false })
+    }
+
+    // date picker
+    DatePicker(dialogState = datePickerState){
+        keyboardState.onDatePicked(it)
     }
 }
 

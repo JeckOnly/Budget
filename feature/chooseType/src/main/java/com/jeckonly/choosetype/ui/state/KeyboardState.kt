@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.compose.runtime.*
 import com.jeckonly.designsystem.R
 import java.text.DecimalFormat
+import java.time.LocalDate
 import kotlin.math.roundToInt
 
 
@@ -195,9 +196,13 @@ class KeyboardState(private val app: Application) {
                 }
             }
             is ButtonType.DateButtonType -> {
-                // TODO打开日期选择器
+                // 不会进入这里
             }
         }
+    }
+
+    fun onDatePicked(localDate: LocalDate) {
+       // TODO
     }
 
     private fun doOnPointButtonType(
