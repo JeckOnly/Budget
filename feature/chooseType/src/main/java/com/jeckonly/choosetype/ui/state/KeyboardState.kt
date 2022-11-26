@@ -13,10 +13,6 @@ private const val NUMBER_COUNT_AFTER_POINT = 2
 @Stable
 class KeyboardState(private val app: Application) {
 
-    /**
-     * 数值总额
-     */
-    private var currentSum: Double = 0.0
 
     /**
      * 时间戳
@@ -89,6 +85,11 @@ class KeyboardState(private val app: Application) {
         val temp: String = number1.value + (operator?.text ?: "") + number2.value
         if (temp != "") temp else "0"
     }
+
+    /**
+     * 备注
+     */
+    val remark: MutableState<String> = mutableStateOf("")
 
     fun onEvent(buttonType: ButtonType) {
         when (buttonType) {
@@ -280,6 +281,16 @@ class KeyboardState(private val app: Application) {
             number2.value = ""
             operator = buttonType
         }
+    }
+
+    fun cleanState() {
+        timeStamp = 0
+        number1.value = ""
+        operator = null
+        number2.value = ""
+        hasAddPoint1 = false
+        hasAddPoint2 = false
+        remark.value = ""
     }
 }
 

@@ -20,6 +20,9 @@ private const val REMARK_MAX_LENGTH = 60
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RemarkDialog(
+    initialTextFieldValue: String,
+    onClickSure: (String) -> Unit,
+    onClickCancel: () -> Unit,
     onDismissRequest: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -27,7 +30,7 @@ fun RemarkDialog(
     val contentColor = contentColorFor(backgroundColor = backgroundColor)
     val textStyle = MaterialTheme.typography.bodyLarge
     var remarkValue: String by remember {
-        mutableStateOf("")
+        mutableStateOf(initialTextFieldValue)
     }
     val context = LocalContext.current
     Dialog(
@@ -75,13 +78,11 @@ fun RemarkDialog(
                         text = context.getString(R.string.cancel),
                         style = textStyle,
                         color = contentColor,
-                        modifier = Mdf.noIndicationClickable {
-                            onDismissRequest()
-                        }
+                        modifier = Mdf.noIndicationClickable(onClick = onClickCancel)
                     )
                     Button(
                         onClick = {
-                            // TODO 确定备注
+                            onClickSure(remarkValue)
                         },
                         shape = RoundedCornerShape(10.dp)
                     ) {

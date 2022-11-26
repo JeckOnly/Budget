@@ -48,13 +48,13 @@ fun TypeItem(
         if (typeUI != nowChooseTypeTypeUI)
             MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.5f)
         else
-            MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.5f)
+            MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)
 
     val iconTint = contentColorFor(
         backgroundColor = if (typeUI != nowChooseTypeTypeUI)
             MaterialTheme.colorScheme.secondaryContainer
         else
-            MaterialTheme.colorScheme.tertiaryContainer
+            MaterialTheme.colorScheme.primaryContainer
     )
 
     LaunchedEffect(key1 = animateStartHelper, block = {
@@ -88,9 +88,7 @@ fun TypeItem(
                     contentDescription = typeUI.typeName,
                     modifier = Mdf
                         .size(ICON_SIZE.dp),
-                    tint = contentColorFor(
-                        backgroundColor = MaterialTheme.colorScheme.secondaryContainer
-                    )
+                    tint = iconTint
                 )
             }
         }
@@ -98,7 +96,7 @@ fun TypeItem(
         Text(
             text = typeUI.typeName,
             style = MaterialTheme.typography.bodyMedium,
-            color = iconTint,
+            color = contentColorFor(backgroundColor = MaterialTheme.colorScheme.surface),
             modifier = Mdf.padding(top = 8.dp)
         )
     }

@@ -9,6 +9,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -26,9 +27,7 @@ import com.jeckonly.designsystem.R
 
 @Composable
 fun ChooseTypeKeyBoard(
-    keyboardState: KeyboardState,
-    onCLickDown: () -> Unit,
-    modifier: Modifier = Modifier
+    keyboardState: KeyboardState, onCLickDown: () -> Unit, modifier: Modifier = Modifier
 ) {
     val backgroundColor = MaterialTheme.colorScheme.surface
     val contentColor = contentColorFor(backgroundColor = backgroundColor)
@@ -58,22 +57,40 @@ fun ChooseTypeKeyBoard(
                 tint = contentColor
             )
             Box(modifier = Mdf.fillMaxWidth()) {
-                Icon(
-                    painter = painterResource(id = R.drawable.remark),
-                    contentDescription = null,
+                Box(
                     modifier = Mdf
+                        .align(Alignment.CenterStart)
                         .padding(start = 20.dp, bottom = 15.dp)
-                        .size(20.dp)
-                        .clickable(
-                            interactionSource = remember { MutableInteractionSource() },
-                            indication = null,
-                            onClick = {
-                                showRemarkDialog = true
-                            }
-                        )
-                        .align(Alignment.CenterStart),
-                    tint = contentColor
-                )
+                ) {
+                    Icon(painter = painterResource(id = R.drawable.remark),
+                        contentDescription = null,
+                        modifier = Mdf
+                            .size(20.dp)
+                            .clickable(interactionSource = remember { MutableInteractionSource() },
+                                indication = null,
+                                onClick = {
+                                    showRemarkDialog = true
+                                })
+                            .align(Alignment.Center),
+                        tint = contentColor)
+                    if (keyboardState.remark.value != "") {
+                        Box(
+                            modifier = Mdf
+                                .align(Alignment.TopEnd)
+                                .offset(x = 10.dp, y = 10.dp)
+                        ) {
+                            Box(
+                                modifier = Mdf
+                                    .background(
+                                        color = MaterialTheme.colorScheme.primary,
+                                        shape = CircleShape
+                                    )
+                                    .size(15.dp)
+                                    .offset(x = 10.dp, y = 10.dp)
+                            )
+                        }
+                    }
+                }
                 Text(
                     text = keyboardState.showText,
                     style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Normal),
@@ -268,21 +285,28 @@ fun ChooseTypeKeyBoard(
                 KeyboardBox(modifier = Mdf
                     .weight(0.25f)
                     .fillMaxHeight()
-                    .background(color = MaterialTheme.colorScheme.tertiaryContainer),
+                    .background(color = MaterialTheme.colorScheme.primaryContainer),
                     onClick = { keyboardState.onEvent(keyboardState.finish) }) {
                     Text(
                         text = keyboardState.finish.text.value,
                         style = MaterialTheme.typography.bodyLarge,
-                        color = contentColorFor(backgroundColor = MaterialTheme.colorScheme.tertiaryContainer),
+                        color = contentColorFor(backgroundColor = MaterialTheme.colorScheme.primaryContainer),
                     )
                 }
             }
         }
     }
-    AnimatedVisibility(visible = showRemarkDialog, enter = fadeIn(), exit = fadeOut(
-        animationSpec = TweenSpec(50)
-    )) {
-        RemarkDialog(onDismissRequest = { showRemarkDialog = false })
+    AnimatedVisibility(
+        visible = showRemarkDialog, enter = fadeIn(), exit = fadeOut(
+            animationSpec = TweenSpec(50)
+        )
+    ) {
+        RemarkDialog(initialTextFieldValue = keyboardState.remark.value, onClickSure = { remark ->
+            keyboardState.remark.value = remark
+            showRemarkDialog = false
+        }, onClickCancel = {
+            showRemarkDialog = false
+        }, onDismissRequest = { showRemarkDialog = false })
     }
 }
 

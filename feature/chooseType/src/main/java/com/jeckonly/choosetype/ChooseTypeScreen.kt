@@ -100,6 +100,7 @@ fun ChooseTypeScreen(
                 keyboardState = keyboardState,
                 onCLickDown = {
                     nowChooseType = null
+                    keyboardState.cleanState()
                 },
                 modifier = Modifier
                     .fillMaxSize()
