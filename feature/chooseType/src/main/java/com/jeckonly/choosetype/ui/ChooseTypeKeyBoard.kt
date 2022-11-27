@@ -26,6 +26,7 @@ import com.jeckonly.designsystem.Mdf
 import com.jeckonly.designsystem.R
 import com.jeckonly.designsystem.composable.datepicker.DatePicker
 import com.jeckonly.designsystem.composable.datepicker.rememberDatePickerState
+import java.time.LocalDate
 
 @Composable
 fun ChooseTypeKeyBoard(
@@ -150,18 +151,26 @@ fun ChooseTypeKeyBoard(
                     // show date picker
                     datePickerState.show()
                 }) {
-                    Row {
-                        Icon(
-                            painter = painterResource(id = keyboardState.dateButtonType.iconId),
-                            contentDescription = null,
-                            modifier = Mdf.size(20.dp),
-                            tint = contentColor
-                        )
+                    if (keyboardState.calendarString == "") {
+                        Row {
+                            Icon(
+                                painter = painterResource(id = keyboardState.dateButtonType.iconId),
+                                contentDescription = null,
+                                modifier = Mdf.size(20.dp),
+                                tint = contentColor
+                            )
+                            Text(
+                                text = keyboardState.dateButtonType.text,
+                                style = MaterialTheme.typography.bodyLarge,
+                                color = contentColor,
+                                modifier = Mdf.padding(start = 10.dp)
+                            )
+                        }
+                    } else {
                         Text(
-                            text = keyboardState.dateButtonType.text,
+                            text = keyboardState.calendarString,
                             style = MaterialTheme.typography.bodyLarge,
-                            color = contentColor,
-                            modifier = Mdf.padding(start = 10.dp)
+                            color = contentColor
                         )
                     }
                 }
@@ -317,7 +326,7 @@ fun ChooseTypeKeyBoard(
     }
 
     // date picker
-    DatePicker(dialogState = datePickerState){
+    DatePicker(dialogState = datePickerState, initialDate = keyboardState.chooseLocalDate?: LocalDate.now()){
         keyboardState.onDatePicked(it)
     }
 }

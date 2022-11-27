@@ -27,6 +27,7 @@ class KeyboardState(private val app: Application) {
 
     private val doneText = app.getString(R.string.done)
 
+    // Button type
     val numberButton0 = ButtonType.NumberButton("0")
     val numberButton1 = ButtonType.NumberButton("1")
     val numberButton2 = ButtonType.NumberButton("2")
@@ -91,6 +92,21 @@ class KeyboardState(private val app: Application) {
      * 备注
      */
     val remark: MutableState<String> = mutableStateOf("")
+
+    /**
+     * 用户选择的日期
+     */
+    var chooseLocalDate: LocalDate? by mutableStateOf(null)
+        private set
+
+    /**
+     * 日历Button应展示的字符串
+     */
+    val calendarString: String by derivedStateOf {
+        if (chooseLocalDate == null) ""
+        else if (chooseLocalDate == LocalDate.now()) ""
+        else "${chooseLocalDate!!.year}/${chooseLocalDate!!.monthValue}/${chooseLocalDate!!.dayOfMonth}"
+    }
 
     fun onEvent(buttonType: ButtonType) {
         when (buttonType) {
@@ -202,7 +218,7 @@ class KeyboardState(private val app: Application) {
     }
 
     fun onDatePicked(localDate: LocalDate) {
-       // TODO
+        chooseLocalDate = localDate
     }
 
     private fun doOnPointButtonType(
@@ -296,6 +312,7 @@ class KeyboardState(private val app: Application) {
         hasAddPoint1 = false
         hasAddPoint2 = false
         remark.value = ""
+        chooseLocalDate = null
     }
 }
 

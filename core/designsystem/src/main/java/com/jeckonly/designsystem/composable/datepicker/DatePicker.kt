@@ -18,7 +18,7 @@ import java.time.LocalDate
  * @param onDateChange only be called when the positive button is pressed
  */
 @Composable
-fun DatePicker(dialogState:  MaterialDialogState, onDateChange: (LocalDate) -> Unit = {}) {
+fun DatePicker(dialogState:  MaterialDialogState, initialDate: LocalDate = LocalDate.now(), onDateChange: (LocalDate) -> Unit = {}) {
     val context = LocalContext.current
     MaterialDialog(dialogState = dialogState,
         backgroundColor = MaterialTheme.colorScheme.surface,
@@ -39,6 +39,7 @@ fun DatePicker(dialogState:  MaterialDialogState, onDateChange: (LocalDate) -> U
             )
         }) {
         datepicker(
+            initialDate = initialDate,
             title = context.getString(R.string.choose_date),
             colors = DatePickerDefaults.colors(
                 headerBackgroundColor = MaterialTheme.colorScheme.secondaryContainer,
