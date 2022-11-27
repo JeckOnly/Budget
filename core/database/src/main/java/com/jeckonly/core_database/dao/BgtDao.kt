@@ -58,7 +58,6 @@ interface BgtDao {
     suspend fun deleteRecord(recordEntity: RecordEntity): Int
 
     /**
-     * NOTE 级联更新对应[RecordEntity]
      * @return 返回成功更新的行数
      */
     @Update
