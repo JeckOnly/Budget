@@ -170,7 +170,8 @@ fun ChooseTypeKeyBoard(
                         Text(
                             text = keyboardState.calendarString,
                             style = MaterialTheme.typography.bodyLarge,
-                            color = contentColor
+                            color = contentColor,
+                            maxLines = 1,
                         )
                     }
                 }
