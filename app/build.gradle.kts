@@ -10,7 +10,7 @@ android {
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.jeckonly.pokemons"
+        applicationId = "com.jeckonly.budget"
         minSdk = 23
         targetSdk = 33
         versionCode = 2
