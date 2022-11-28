@@ -25,7 +25,7 @@ import com.jeckonly.core_model.ui.ChooseTypeTypeUI
 import com.jeckonly.designsystem.Mdf
 import com.jeckonly.designsystem.R
 
-private const val ICON_SIZE = 43
+private const val ICON_SIZE = 40
 
 @Composable
 fun TypeItem(
@@ -80,7 +80,7 @@ fun TypeItem(
                         color = backgroundColor,
                         shape = CircleShape
                     )
-                    .padding(8.dp),
+                    .padding(5.dp),
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
@@ -95,7 +95,7 @@ fun TypeItem(
 
         Text(
             text = typeUI.typeName,
-            style = MaterialTheme.typography.bodyMedium,
+            style = MaterialTheme.typography.bodySmall,
             color = contentColorFor(backgroundColor = MaterialTheme.colorScheme.surface),
             modifier = Mdf.padding(top = 8.dp)
         )

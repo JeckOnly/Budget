@@ -26,6 +26,8 @@ import com.jeckonly.choosetype.ui.state.KeyboardState
 import com.jeckonly.core_model.ui.ChooseTypeTypeUI
 import com.jeckonly.designsystem.Mdf
 import com.jeckonly.designsystem.R
+import com.jeckonly.designsystem.composable.AutoResizeText
+import com.jeckonly.designsystem.composable.FontSizeRange
 import com.jeckonly.designsystem.composable.datepicker.DatePicker
 import com.jeckonly.designsystem.composable.datepicker.rememberDatePickerState
 import java.time.LocalDate
@@ -158,7 +160,7 @@ fun ChooseTypeKeyBoard(
                     datePickerState.show()
                 }) {
                     if (keyboardState.calendarString == "") {
-                        Row {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(
                                 painter = painterResource(id = keyboardState.dateButtonType.iconId),
                                 contentDescription = null,
@@ -173,11 +175,11 @@ fun ChooseTypeKeyBoard(
                             )
                         }
                     } else {
-                        Text(
+                        AutoResizeText(
                             text = keyboardState.calendarString,
-                            style = MaterialTheme.typography.bodyLarge,
                             color = contentColor,
                             maxLines = 1,
+                            fontSizeRange = FontSizeRange(max = MaterialTheme.typography.bodyLarge.fontSize)
                         )
                     }
                 }

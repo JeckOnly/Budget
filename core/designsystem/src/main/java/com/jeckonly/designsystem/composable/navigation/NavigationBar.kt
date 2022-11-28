@@ -2,7 +2,6 @@ package com.jeckonly.designsystem.composable.navigation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -29,11 +28,11 @@ fun BgtNavigationBar(
     chartDestination: BgtBottomNavigationDestination,
     moreDestination: BgtBottomNavigationDestination,
     modifier: Modifier = Modifier,
-    containerColor: Color = MaterialTheme.colorScheme.surfaceVariant,
+    containerColor: Color = MaterialTheme.colorScheme.surface,
 ) {
     Surface(
         color = containerColor,
-        shape = RoundedCornerShape(topStartPercent = 30, topEndPercent = 30),
+        tonalElevation = 3.dp,
         modifier = modifier
             .fillMaxWidth()
             .height(60.dp)

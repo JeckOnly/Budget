@@ -27,13 +27,13 @@ fun DatePicker(dialogState:  MaterialDialogState, initialDate: LocalDate = Local
         buttons = {
             positiveButton(
                 text = context.getString(R.string.sure),
-                textStyle = MaterialTheme.typography.bodyLarge.copy(color = contentColorFor(
+                textStyle = MaterialTheme.typography.bodyMedium.copy(color = contentColorFor(
                     backgroundColor = MaterialTheme.colorScheme.surface
                 ))
             )
             negativeButton(
                 text = context.getString(R.string.cancel),
-                textStyle = MaterialTheme.typography.bodyLarge.copy(color = contentColorFor(
+                textStyle = MaterialTheme.typography.bodyMedium.copy(color = contentColorFor(
                     backgroundColor = MaterialTheme.colorScheme.surface
                 ))
             )

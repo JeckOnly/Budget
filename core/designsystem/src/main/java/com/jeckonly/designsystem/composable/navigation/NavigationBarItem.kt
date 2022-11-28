@@ -45,7 +45,7 @@ fun BgtNavigationBarItem(
             ) {
                 onClick()
             },
-        tint = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
+        tint = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface
     )
 }
 
