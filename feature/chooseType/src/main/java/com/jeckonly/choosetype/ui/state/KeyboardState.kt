@@ -193,7 +193,6 @@ class KeyboardState(private val app: Application, private val doWhenFinish: (Cho
                     return
                 }
                 if (number1.value != "" && operator == null) {
-                    // TODO 判断值是否为0，不为0就写入记录
                     if (buttonType.chooseTypeTypeUI == null || buttonType.context == null) return
                     val numberTemp = number1.value.toDouble()
                     if (numberTemp == 0.0) return
