@@ -1,5 +1,6 @@
 package com.jeckonly.choosetype
 
+import android.app.Activity
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -17,6 +18,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -78,7 +80,16 @@ class ChooseTypeViewModel @Inject constructor(
      * keyboard state
      */
     val keyboardState: KeyboardState by lazy {
-        KeyboardState(app = app)
+        KeyboardState(app = app) { chooseTypeFinishState, context ->
+            viewModelScope.launch {
+                databaseRepo.insertRecord(chooseTypeFinishState.toRecordEntity(), onSuccess = {
+                    Timber.d("成功插入")
+                    (context as Activity).finishAfterTransition()
+                }, onFail = {
+                    Timber.d("插入失败" + it.message)
+                })
+            }
+        }
     }
 
     init {

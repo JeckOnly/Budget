@@ -17,11 +17,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.jeckonly.choosetype.ui.state.KeyboardState
+import com.jeckonly.core_model.ui.ChooseTypeTypeUI
 import com.jeckonly.designsystem.Mdf
 import com.jeckonly.designsystem.R
 import com.jeckonly.designsystem.composable.datepicker.DatePicker
@@ -30,7 +32,10 @@ import java.time.LocalDate
 
 @Composable
 fun ChooseTypeKeyBoard(
-    keyboardState: KeyboardState, onCLickDown: () -> Unit, modifier: Modifier = Modifier
+    nowChooseType: ChooseTypeTypeUI?,
+    keyboardState: KeyboardState,
+    onCLickDown: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val backgroundColor = MaterialTheme.colorScheme.surface
     val contentColor = contentColorFor(backgroundColor = backgroundColor)
@@ -38,6 +43,7 @@ fun ChooseTypeKeyBoard(
         mutableStateOf(false)
     }
     val datePickerState = rememberDatePickerState()
+    val context = LocalContext.current
 
     Surface(
         modifier = modifier,
@@ -301,9 +307,14 @@ fun ChooseTypeKeyBoard(
                     .weight(0.25f)
                     .fillMaxHeight()
                     .background(color = MaterialTheme.colorScheme.primaryContainer),
-                    onClick = { keyboardState.onEvent(keyboardState.finish) }) {
+                    onClick = {
+                        keyboardState.onEvent(keyboardState.finish.apply {
+                            this.chooseTypeTypeUI = nowChooseType
+                            this.context = context
+                        })
+                    }) {
                     Text(
-                        text = keyboardState.finish.text.value,
+                        text = keyboardState.finishButtonText.value,
                         style = MaterialTheme.typography.bodyLarge,
                         color = contentColorFor(backgroundColor = MaterialTheme.colorScheme.primaryContainer),
                     )

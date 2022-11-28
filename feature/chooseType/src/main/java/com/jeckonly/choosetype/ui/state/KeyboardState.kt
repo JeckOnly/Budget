@@ -1,7 +1,9 @@
 package com.jeckonly.choosetype.ui.state
 
 import android.app.Application
+import android.content.Context
 import androidx.compose.runtime.*
+import com.jeckonly.core_model.ui.ChooseTypeTypeUI
 import com.jeckonly.designsystem.R
 import java.text.DecimalFormat
 import java.time.LocalDate
@@ -12,7 +14,7 @@ private const val NUMBER_COUNT_BEFORE_POINT = 8
 private const val NUMBER_COUNT_AFTER_POINT = 2
 
 @Stable
-class KeyboardState(private val app: Application) {
+class KeyboardState(private val app: Application, private val doWhenFinish: (ChooseTypeFinishState, Context) -> Unit) {
 
 
     /**
@@ -46,7 +48,7 @@ class KeyboardState(private val app: Application) {
 
     val delete = ButtonType.Delete(R.drawable.keyboard_delete)
 
-    val finish = ButtonType.Finish(mutableStateOf(doneText))
+    val finish = ButtonType.Finish()
 
     val dateButtonType = ButtonType.DateButtonType(R.drawable.calendar, app.getString(R.string.today))
 
@@ -76,13 +78,18 @@ class KeyboardState(private val app: Application) {
     private var hasAddPoint2: Boolean = false
 
     /**
+     * 完成按钮上显示的字符串
+     */
+    val finishButtonText: MutableState<String> = mutableStateOf(doneText)
+
+    /**
      * 展示的字符串
      */
     val showText: String by derivedStateOf {
         if (number1.value != "" && operator != null && number2.value != "") {
-            finish.text.value = "="
+            finishButtonText.value = "="
         } else {
-            finish.text.value = doneText
+            finishButtonText.value = doneText
         }
         val temp: String = number1.value + (operator?.text ?: "") + number2.value
         if (temp != "") temp else "0"
@@ -187,6 +194,34 @@ class KeyboardState(private val app: Application) {
                 }
                 if (number1.value != "" && operator == null) {
                     // TODO 判断值是否为0，不为0就写入记录
+                    if (buttonType.chooseTypeTypeUI == null || buttonType.context == null) return
+                    val numberTemp = number1.value.toDouble()
+                    if (numberTemp == 0.0) return
+
+                    var year = 0
+                    var month = 0
+                    var dayOfMonth = 0
+                    if (chooseLocalDate == null) {
+                        val localDateNow = LocalDate.now()
+                        year = localDateNow.year
+                        month = localDateNow.monthValue
+                        dayOfMonth = localDateNow.dayOfMonth
+                    } else {
+                        year = chooseLocalDate!!.year
+                        month = chooseLocalDate!!.monthValue
+                        dayOfMonth = chooseLocalDate!!.dayOfMonth
+                    }
+                    doWhenFinish(
+                        ChooseTypeFinishState(
+                            year = year,
+                            month = month,
+                            dayOfMonth = dayOfMonth,
+                            number = numberTemp,
+                            typeName = buttonType.chooseTypeTypeUI!!.typeName,
+                            remark = remark.value
+                        ),
+                        buttonType.context!!
+                    )
                     return
                 }
                 if (number1.value != "" && operator != null && number2.value == "") {
@@ -313,6 +348,7 @@ class KeyboardState(private val app: Application) {
         hasAddPoint2 = false
         remark.value = ""
         chooseLocalDate = null
+        finish.cleanState()
     }
 }
 
@@ -330,20 +366,32 @@ sealed interface ButtonType {
     /**
      * @property number 0 <= number <= 9
      */
+    @Stable
     class NumberButton(val number: String) : ButtonType
 
+    @Stable
     class Point(val text: String = ".") : ButtonType
 
+    @Stable
     class Delete(val iconId: Int) : ButtonType
 
-    class Finish(val text: MutableState<String>) : ButtonType
+    @Stable
+    class Finish(var chooseTypeTypeUI: ChooseTypeTypeUI? = null, var context: Context? = null) : ButtonType {
+        fun cleanState() {
+            chooseTypeTypeUI = null
+            context = null
+        }
+    }
 
+    @Stable
     class DateButtonType(val iconId: Int, val text: String) : ButtonType
 
     sealed class OperatorButtonType(val text: String) : ButtonType {
 
+        @Stable
         class Plus : OperatorButtonType("+")
 
+        @Stable
         class Minus : OperatorButtonType("-")
     }
 }

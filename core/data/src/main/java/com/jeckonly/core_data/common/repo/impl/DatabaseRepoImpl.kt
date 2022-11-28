@@ -2,6 +2,7 @@ package com.jeckonly.core_data.common.repo.impl
 
 import com.jeckonly.core_data.common.repo.interface_.DatabaseRepo
 import com.jeckonly.core_database.dao.BgtDao
+import com.jeckonly.core_model.entity.RecordEntity
 import com.jeckonly.core_model.entity.TypeEntity
 import com.jeckonly.core_model.entity.helper.ExpenseOrIncome
 import com.jeckonly.core_model.mapper.toChooseTypeTypeUI
@@ -37,6 +38,19 @@ class DatabaseRepoImpl @Inject constructor(
             it.map { typeEntity ->
                 typeEntity.toChooseTypeTypeUI()
             }
+        }
+    }
+
+    override suspend fun insertRecord(
+        recordEntity: RecordEntity,
+        onSuccess: suspend () -> Unit,
+        onFail: suspend (Exception) -> Unit
+    ) {
+        try {
+            dao.insertRecord(recordEntity)
+            onSuccess()
+        } catch (e: Exception) {
+            onFail(e)
         }
     }
 }

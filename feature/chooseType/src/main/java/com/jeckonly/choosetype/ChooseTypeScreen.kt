@@ -97,6 +97,7 @@ fun ChooseTypeScreen(
             }
         ) {
             ChooseTypeKeyBoard(
+                nowChooseType = nowChooseType,
                 keyboardState = keyboardState,
                 onCLickDown = {
                     nowChooseType = null
