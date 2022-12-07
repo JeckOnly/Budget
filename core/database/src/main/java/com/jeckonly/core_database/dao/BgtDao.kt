@@ -40,6 +40,12 @@ interface BgtDao {
     @Query("SELECT * FROM type_table where expense_or_income = :expenseOrIncome_ and should_show")
     fun getAllTypeByExpenseOrIncomeAndShouldShown(expenseOrIncome_: ExpenseOrIncome): Flow<List<TypeEntity>>
 
+    /**
+     * 根据名字查找类型
+     */
+    @Query("select * from type_table where type_name == :typeName_")
+    fun getTypeByName(typeName_: String): TypeEntity
+
 
     // Record
 

@@ -7,6 +7,7 @@ import com.jeckonly.core_model.entity.TypeEntity
 import com.jeckonly.core_model.entity.helper.ExpenseOrIncome
 import com.jeckonly.core_model.mapper.toChooseTypeTypeUI
 import com.jeckonly.core_model.ui.ChooseTypeTypeUI
+import com.jeckonly.core_model.ui.HomeRecordItemUI
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -56,6 +57,25 @@ class DatabaseRepoImpl @Inject constructor(
 
     override suspend fun getAllRecordByYearAndMonth(year: Int, month: Int): List<RecordEntity>{
         return dao.getAllRecordByYearAndMonth(year, month)
+    }
+
+    override suspend fun getAllHomeRecordItemUIByYearAndMonth(
+        year: Int,
+        month: Int
+    ): List<HomeRecordItemUI> {
+        return getAllRecordByYearAndMonth(year, month).map {
+            val type = dao.getTypeByName(it.typeName)
+            HomeRecordItemUI(
+                year = it.year,
+                month = it.month,
+                dayOfMonth = it.dayOfMonth,
+                number = it.number,
+                expenseOrIncome = type.expenseOrIncome,
+                iconId = type.iconId,
+                typeName = type.name,
+                remark = it.remark
+            )
+        }
     }
 
     override suspend fun getTotalExpenseByYearAndMonth(year: Int, month: Int): Double {

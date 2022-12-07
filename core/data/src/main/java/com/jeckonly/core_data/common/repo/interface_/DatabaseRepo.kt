@@ -3,6 +3,7 @@ package com.jeckonly.core_data.common.repo.interface_
 import com.jeckonly.core_model.entity.RecordEntity
 import com.jeckonly.core_model.entity.TypeEntity
 import com.jeckonly.core_model.ui.ChooseTypeTypeUI
+import com.jeckonly.core_model.ui.HomeRecordItemUI
 import kotlinx.coroutines.flow.Flow
 
 interface DatabaseRepo {
@@ -16,6 +17,8 @@ interface DatabaseRepo {
     suspend fun insertRecord(recordEntity: RecordEntity, onSuccess: suspend () -> Unit, onFail: suspend(Exception) -> Unit)
 
     suspend fun getAllRecordByYearAndMonth(year: Int, month: Int): List<RecordEntity>
+
+    suspend fun getAllHomeRecordItemUIByYearAndMonth(year: Int, month: Int): List<HomeRecordItemUI>
 
     suspend fun getTotalExpenseByYearAndMonth(year: Int, month: Int): Double
 
