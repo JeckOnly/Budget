@@ -14,4 +14,10 @@ interface DatabaseRepo {
     fun getAllIncomeTypeAndShouldShown(): Flow<List<ChooseTypeTypeUI>>
 
     suspend fun insertRecord(recordEntity: RecordEntity, onSuccess: suspend () -> Unit, onFail: suspend(Exception) -> Unit)
+
+    suspend fun getAllRecordByYearAndMonth(year: Int, month: Int): List<RecordEntity>
+
+    suspend fun getTotalExpenseByYearAndMonth(year: Int, month: Int): Double
+
+    suspend fun getTotalIncomeByYearAndMonth(year: Int, month: Int): Double
 }

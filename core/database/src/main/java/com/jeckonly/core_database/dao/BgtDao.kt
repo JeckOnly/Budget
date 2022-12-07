@@ -63,30 +63,17 @@ interface BgtDao {
     @Update
     suspend fun updateRecord(recordEntity: RecordEntity): Int
 
-    // TODO 对应Entity的查找dto
-}
+    /**
+     * @return 返回指定月的所有记录，按照日期降序排列
+     */
+    @Query("select * from record_table where year == :year_ and month == :month_ order by day_month desc")
+    suspend fun getAllRecordByYearAndMonth(year_: Int, month_: Int): List<RecordEntity>
 
-//@Dao
-//interface PokemonInfoEntityDao {
-//
-//    @Insert(onConflict = OnConflictStrategy.REPLACE)
-//    suspend fun insertPokemonList(pokemonList: List<PokemonInfoEntity>)
-//
-//    @Query("SELECT * FROM PokemonInfoEntity WHERE page = :page_")
-//    suspend fun getPokemonListOnePage(page_: Int): List<PokemonInfoEntity>
-//
-//    @Query("SELECT * FROM PokemonInfoEntity WHERE page <= :page_")
-//    suspend fun getAllPokemonListLessThanPage(page_: Int): List<PokemonInfoEntity>
-//
-//    /**
-//     * 根据id精确匹配
-//     */
-//    @Query("SELECT * FROM PokemonInfoEntity WHERE id == :id_")
-//    suspend fun getPokemonById(id_: Int): List<PokemonInfoEntity>
-//
-//    /**
-//     * 根据字符串模糊匹配名字
-//     */
-//    @Query("SELECT * FROM PokemonInfoEntity WHERE name LIKE '%' || :search || '%'")
-//    suspend fun getPokemonByLikeName(search: String): List<PokemonInfoEntity>
-//}
+    /**
+     * @return 指定月的收入或支出的总金额
+     */
+    @Query("select sum(number) from record_table " +
+            "inner join type_table on record_table.type_name == type_table.type_name and type_table.expense_or_income == :expenseOrIncome_ " +
+            "where year == :year_ and month == :month_")
+    suspend fun getTotalNumberByYearAndMonth(year_: Int, month_: Int, expenseOrIncome_: ExpenseOrIncome): Double?
+}

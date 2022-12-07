@@ -53,6 +53,18 @@ class DatabaseRepoImpl @Inject constructor(
             onFail(e)
         }
     }
+
+    override suspend fun getAllRecordByYearAndMonth(year: Int, month: Int): List<RecordEntity>{
+        return dao.getAllRecordByYearAndMonth(year, month)
+    }
+
+    override suspend fun getTotalExpenseByYearAndMonth(year: Int, month: Int): Double {
+        return dao.getTotalNumberByYearAndMonth(year_ = year, month_ = month, expenseOrIncome_ = ExpenseOrIncome.Expense)?:0.00
+    }
+
+    override suspend fun getTotalIncomeByYearAndMonth(year: Int, month: Int): Double {
+        return dao.getTotalNumberByYearAndMonth(year_ = year, month_ = month, expenseOrIncome_ = ExpenseOrIncome.Income)?:0.00
+    }
 }
 
 

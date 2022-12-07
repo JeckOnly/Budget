@@ -17,6 +17,9 @@ android {
     }
 
     compileOptions {
+        // Flag to enable support for the new language APIs
+        isCoreLibraryDesugaringEnabled = true
+
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -64,4 +67,6 @@ dependencies {
 
     // Timber
     implementation("com.jakewharton.timber:timber:$timber_version")
+
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:$desugar_jdk_libs_version")
 }
