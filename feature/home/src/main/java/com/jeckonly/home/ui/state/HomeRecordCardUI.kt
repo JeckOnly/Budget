@@ -1,4 +1,4 @@
-package com.jeckonly.home.ui
+package com.jeckonly.home.ui.state
 
 import androidx.compose.runtime.Stable
 import com.jeckonly.core_model.ui.HomeRecordItemUI
