@@ -100,7 +100,7 @@ fun HomeScreenHeader(
             whenClickBack = whenClickBack,
             whenClickAhead = whenClickAhead,
             modifier = Mdf
-                .fillMaxWidth(0.8f)
+                .fillMaxWidth(0.85f)
                 .wrapContentHeight()
                 .constrainAs(card) {
                     start.linkTo(background.start)
