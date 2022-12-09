@@ -7,12 +7,12 @@ import com.jeckonly.core_data.common.repo.interface_.DatabaseRepo
 import com.jeckonly.core_data.common.repo.interface_.UserPrefsRepo
 import com.jeckonly.core_model.entity.helper.ExpenseOrIncome
 import com.jeckonly.core_model.ui.HomeRecordItemUI
-import com.jeckonly.home.ui.HomeRecordCardUI
+import com.jeckonly.home.ui.state.HomeHeaderUI
+import com.jeckonly.home.ui.state.HomeRecordCardUI
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.plus
-import timber.log.Timber
 import java.text.DecimalFormat
 import java.time.LocalDate
 import java.time.format.TextStyle
@@ -47,49 +47,21 @@ class HomeViewModel @Inject constructor(
         initialValue = emptyList()
     )
 
-    /**
-     * 这个月所有的支出
-     */
-    val totalExpenseThisMonth: StateFlow<String> = _localDate.map {
-        decimalFormat.format(databaseRepo.getTotalExpenseByYearAndMonth(it.year, it.monthValue))
+    val homeHeaderUIState: StateFlow<HomeHeaderUI> = _localDate.map {
+        val totalExpense = databaseRepo.getTotalExpenseByYearAndMonth(it.year, it.monthValue)
+        val totalIncome = databaseRepo.getTotalIncomeByYearAndMonth(it.year, it.monthValue)
+        val totalBalance = totalIncome - totalExpense
+        val monthYearText = "${it.month.getDisplayName(TextStyle.FULL_STANDALONE, Locale.getDefault())} ${it.year}"
+        HomeHeaderUI(
+            monthYearText = monthYearText,
+            totalExpense = decimalFormat.format(totalExpense),
+            totalIncome = decimalFormat.format(totalIncome),
+            totalBalance = decimalFormat.format(totalBalance)
+        )
     }.stateIn(
-        scope = viewModelScope,
+        scope = viewModelScope.plus(Dispatchers.Default),
         started = SharingStarted.WhileSubscribed(5_000),
-        initialValue = ""
-    )
-
-    /**
-     * 这个月所有的收入
-     */
-    val totalIncomeThisMonth: StateFlow<String> = _localDate.map {
-        decimalFormat.format(databaseRepo.getTotalIncomeByYearAndMonth(it.year, it.monthValue))
-    }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(5_000),
-        initialValue = ""
-    )
-
-    /**
-     * 这个月的平衡
-     */
-    val totalBalanceThisMonth: StateFlow<String> = combine(totalExpenseThisMonth, totalIncomeThisMonth) {totalExpense, totalIncome ->
-        decimalFormat.format(totalIncome.toDouble() - totalExpense.toDouble())
-    }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(5_000),
-        initialValue = ""
-    )
-
-    /**
-     * 展示的UI: 月份 年
-     */
-    val dateText: StateFlow<String> = _localDate.map {
-        Timber.tag("Jeck").d("getDisplayName")
-        "${it.month.getDisplayName(TextStyle.FULL_STANDALONE, Locale.getDefault())} ${it.year}"
-    }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(5_000),
-        initialValue = ""
+        initialValue = HomeHeaderUI()
     )
 
 

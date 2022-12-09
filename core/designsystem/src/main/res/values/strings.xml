@@ -42,6 +42,7 @@
     <string name="money_management">理财</string>
     <string name="expense">支出</string>
     <string name="income">收入</string>
+    <string name="balance">平衡</string>
     <string name="today">今天</string>
     <string name="done">完成</string>
     <string name="remark">备注</string>
@@ -49,4 +50,6 @@
     <string name="cancel">取消</string>
     <string name="sure">确定</string>
     <string name="choose_date">选择日期</string>
+    <string name="overview" translatable="false">OVERVIEW</string>
+    <string name="overview_hint" translatable="false">Here is a list of your transactions</string>
 </resources>
