@@ -43,6 +43,7 @@ dependencies {
     implementation(project(":core:designsystem"))
     implementation(project(":core:data"))
     implementation(project(":core:navigation"))
+    implementation(project(":util"))
 
     // core
     implementation("androidx.core:core-ktx:$core_ktx_version")

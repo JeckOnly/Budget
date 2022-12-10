@@ -1,6 +1,7 @@
 package com.jeckonly.home
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -18,6 +19,7 @@ import com.jeckonly.designsystem.Mdf
 import com.jeckonly.designsystem.R
 import com.jeckonly.designsystem.composable.background.ColorAndTextBackground
 import com.jeckonly.designsystem.composable.background.CurvedBottomByCubicShape
+import com.jeckonly.home.ui.HomeCard
 import com.jeckonly.home.ui.HomeHeader
 import com.jeckonly.home.ui.state.HomeHeaderUI
 import com.jeckonly.home.ui.state.HomeRecordCardUI
@@ -60,12 +62,27 @@ fun HomeScreen(
     addMonth: () -> Unit,
     minusMonth: () -> Unit,
 ) {
-    Column(modifier = Mdf.fillMaxSize()) {
+    Column(modifier = Mdf.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
         HomeScreenHeader(
             homeHeaderUI = homeHeaderUI,
             whenClickBack = minusMonth,
             whenClickAhead = addMonth,
-            modifier = Mdf.fillMaxWidth().wrapContentHeight()
+            modifier = Mdf
+                .fillMaxWidth()
+                .wrapContentHeight()
+        )
+        Spacer(modifier = Modifier.height(20.dp))
+        LazyColumn(
+            modifier = Mdf.fillMaxWidth(0.85f),
+            content = {
+                items(count = records.size) { index: Int ->
+                    HomeCard(homeRecordCardUI = records[index], modifier = Mdf.fillMaxWidth())
+                    Spacer(modifier = Modifier.height(20.dp))
+                    if (index == records.size - 1) {
+                        Spacer(modifier = Mdf.height(60.dp))
+                    }
+                }
+            }
         )
     }
 }

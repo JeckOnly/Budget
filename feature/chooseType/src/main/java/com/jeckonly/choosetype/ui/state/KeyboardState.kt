@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.compose.runtime.*
 import com.jeckonly.core_model.ui.ChooseTypeTypeUI
 import com.jeckonly.designsystem.R
+import com.jeckonly.util.FormatNumberUtil
 import java.text.DecimalFormat
 import java.time.LocalDate
 import kotlin.math.roundToInt
@@ -22,10 +23,6 @@ class KeyboardState(private val app: Application, private val doWhenFinish: (Cho
      */
     private var timeStamp: Long = 0
 
-    /**
-     * 格式化数字，使6.00显示为6
-     */
-    private val decimalFormat = DecimalFormat("#.##")
 
     private val doneText = app.getString(R.string.done)
 
@@ -240,7 +237,7 @@ class KeyboardState(private val app: Application, private val doWhenFinish: (Cho
                         hasAddPoint1 = false
                         hasAddPoint2 = false
                     }
-                    number1.value = decimalFormat.format(oldSum)
+                    number1.value = FormatNumberUtil.format(oldSum)
                     number2.value = ""
                     operator = null
                 }
@@ -332,7 +329,7 @@ class KeyboardState(private val app: Application, private val doWhenFinish: (Cho
                 hasAddPoint1 = false
                 hasAddPoint2 = false
             }
-            number1.value = decimalFormat.format(oldSum)
+            number1.value = FormatNumberUtil.format(oldSum)
             number2.value = ""
             operator = buttonType
         }

@@ -28,6 +28,7 @@ dependencies {
 
     // test
     addTestImpl()
+    implementation(project(":util"))
 
     // Room，因为要用到@Entity注释
     implementation("androidx.room:room-runtime:$room_version")

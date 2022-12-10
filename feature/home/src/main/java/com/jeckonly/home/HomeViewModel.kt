@@ -9,11 +9,11 @@ import com.jeckonly.core_model.entity.helper.ExpenseOrIncome
 import com.jeckonly.core_model.ui.HomeRecordItemUI
 import com.jeckonly.home.ui.state.HomeHeaderUI
 import com.jeckonly.home.ui.state.HomeRecordCardUI
+import com.jeckonly.util.FormatNumberUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.plus
-import java.text.DecimalFormat
 import java.time.LocalDate
 import java.time.format.TextStyle
 import java.util.*
@@ -26,10 +26,6 @@ class HomeViewModel @Inject constructor(
     private val databaseRepo: DatabaseRepo
 ) : ViewModel() {
 
-    /**
-     * 格式化数字，使6.00显示为6
-     */
-    private val decimalFormat = DecimalFormat("#.##")
 
     /**
      * 用户选择的N年N月，默认是当前年当前月
@@ -54,9 +50,9 @@ class HomeViewModel @Inject constructor(
         val monthYearText = "${it.month.getDisplayName(TextStyle.FULL_STANDALONE, Locale.getDefault())} ${it.year}"
         HomeHeaderUI(
             monthYearText = monthYearText,
-            totalExpense = decimalFormat.format(totalExpense),
-            totalIncome = decimalFormat.format(totalIncome),
-            totalBalance = decimalFormat.format(totalBalance)
+            totalExpense = FormatNumberUtil.format(totalExpense),
+            totalIncome = FormatNumberUtil.format(totalIncome),
+            totalBalance = FormatNumberUtil.format(totalBalance)
         )
     }.stateIn(
         scope = viewModelScope.plus(Dispatchers.Default),

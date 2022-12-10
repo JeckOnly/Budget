@@ -1,6 +1,7 @@
 package com.jeckonly.core_model.ui
 
 import com.jeckonly.core_model.entity.helper.ExpenseOrIncome
+import com.jeckonly.util.FormatNumberUtil
 
 data class HomeRecordItemUI(
     val year: Int,
@@ -12,7 +13,7 @@ data class HomeRecordItemUI(
     val typeName: String,
     val remark: String,
 ) {
-    val showText: String
-        get() = if (remark == "") typeName else remark
+    val showText: String = if (remark == "") typeName else remark
+    val showNumber: String = FormatNumberUtil.format(number)
 }
 

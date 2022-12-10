@@ -25,7 +25,7 @@ fun HomeHeader(
     whenClickAhead: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val backgroundColor = MaterialTheme.colorScheme.surfaceVariant
+    val backgroundColor = MaterialTheme.colorScheme.secondaryContainer
     val contentColor = contentColorFor(backgroundColor = backgroundColor)
     Surface(color = backgroundColor, shape = RoundedCornerShape(10.dp), modifier = modifier) {
         Column(
