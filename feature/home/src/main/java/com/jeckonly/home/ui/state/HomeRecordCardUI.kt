@@ -19,7 +19,7 @@ data class HomeRecordCardUI(
             TextStyle.SHORT,
             Locale.getDefault()
         ).uppercase()
-    val showBalance: String = FormatNumberUtil.format(totalBalance)
+    val showBalance: String = if (totalBalance <= 0) FormatNumberUtil.format(totalBalance) else "+${FormatNumberUtil.format(totalBalance)}"
 }
 
 fun main() {

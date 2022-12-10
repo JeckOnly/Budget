@@ -37,7 +37,7 @@ fun BgtNavigationBarItem(
         painter = painterResource(id = id),
         contentDescription = null,
         modifier = modifier
-            .size(24.dp)
+            .size(20.dp)
             .scale(scaleAnimated.value)
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },

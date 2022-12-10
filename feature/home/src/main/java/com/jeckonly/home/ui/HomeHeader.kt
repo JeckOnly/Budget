@@ -25,9 +25,9 @@ fun HomeHeader(
     whenClickAhead: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val backgroundColor = MaterialTheme.colorScheme.secondaryContainer
+    val backgroundColor = MaterialTheme.colorScheme.surface
     val contentColor = contentColorFor(backgroundColor = backgroundColor)
-    Surface(color = backgroundColor, shape = RoundedCornerShape(10.dp), modifier = modifier) {
+    Surface(color = backgroundColor, shape = RoundedCornerShape(10.dp), modifier = modifier, tonalElevation = 1.dp) {
         Column(
             modifier = Mdf
                 .padding(20.dp), horizontalAlignment = Alignment.CenterHorizontally

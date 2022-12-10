@@ -31,7 +31,7 @@ fun HomeCardRecordItem(
     homeRecordItemUI: HomeRecordItemUI,
     modifier: Modifier = Modifier
 ) {
-    val backgroundColor = MaterialTheme.colorScheme.secondaryContainer
+    val backgroundColor = MaterialTheme.colorScheme.surface
     val contentColor = contentColorFor(backgroundColor = backgroundColor)
     val numberText by remember(homeRecordItemUI) {
         when (homeRecordItemUI.expenseOrIncome) {
@@ -44,7 +44,7 @@ fun HomeCardRecordItem(
         }
     }
 
-    Surface(color = backgroundColor, contentColor = contentColor, modifier = modifier) {
+    Surface(color = backgroundColor, contentColor = contentColor, modifier = modifier, tonalElevation = 1.dp) {
         ConstraintLayout(
             modifier = Mdf
                 .fillMaxWidth()
@@ -106,13 +106,14 @@ fun HomeCardRecordItem(
 
 @Composable
 fun HomeCard(homeRecordCardUI: HomeRecordCardUI, modifier: Modifier = Modifier) {
-    val backgroundColor = MaterialTheme.colorScheme.secondaryContainer
+    val backgroundColor = MaterialTheme.colorScheme.surface
     val contentColor = contentColorFor(backgroundColor = backgroundColor)
     Surface(
         color = backgroundColor,
         shape = RoundedCornerShape(10.dp),
         contentColor = contentColor,
         modifier = modifier,
+        tonalElevation = 1.dp
     ) {
         Column {
             Row(

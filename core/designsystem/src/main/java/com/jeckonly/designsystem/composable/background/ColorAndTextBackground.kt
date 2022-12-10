@@ -84,7 +84,7 @@ fun ColorAndTextBackground(
     Surface(modifier = modifier, shape = shape, color = color) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Mdf.padding(top = 55.dp, start = 20.dp, end = 20.dp, bottom = 120.dp)
+            modifier = Mdf.padding(top = 30.dp, start = 20.dp, end = 20.dp, bottom = 120.dp)
         ) {
             Text(
                 text = title,

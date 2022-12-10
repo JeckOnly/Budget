@@ -35,7 +35,7 @@ fun BgtNavigationBar(
         tonalElevation = 3.dp,
         modifier = modifier
             .fillMaxWidth()
-            .height(60.dp)
+            .height(50.dp)
     ) {
         Box(
             modifier = Mdf.fillMaxSize(),
