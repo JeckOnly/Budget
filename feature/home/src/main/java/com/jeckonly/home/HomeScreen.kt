@@ -11,11 +11,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.jeckonly.designsystem.Mdf
 import com.jeckonly.designsystem.R
@@ -48,7 +51,22 @@ fun HomeRoute(
     val records: List<HomeRecordCardUI> by viewModel.recordsThisMonth.collectAsState()
     val homeHeaderUI: HomeHeaderUI by viewModel.homeHeaderUIState.collectAsState()
 
+    val lifecycleOwner = LocalLifecycleOwner.current
+    DisposableEffect(key1 = lifecycleOwner, effect = {
+        val observer = LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_RESUME) {
+                viewModel.onActivityResume()
+            }
+        }
 
+        // Add the observer to the lifecycle
+        lifecycleOwner.lifecycle.addObserver(observer)
+
+        // When the effect leaves the Composition, remove the observer
+        onDispose {
+            lifecycleOwner.lifecycle.removeObserver(observer)
+        }
+    })
     HomeScreen(
         records,
         homeHeaderUI,
@@ -75,7 +93,9 @@ fun HomeScreen(
         )
         Spacer(modifier = Modifier.height(20.dp))
         LazyColumn(
-            modifier = Mdf.fillMaxWidth(0.85f).clip(RoundedCornerShape(10.dp)),
+            modifier = Mdf
+                .fillMaxWidth(0.85f)
+                .clip(RoundedCornerShape(10.dp)),
             content = {
                 items(count = records.size) { index: Int ->
                     HomeCard(homeRecordCardUI = records[index], modifier = Mdf.fillMaxWidth())

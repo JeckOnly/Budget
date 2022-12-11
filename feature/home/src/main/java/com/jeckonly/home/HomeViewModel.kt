@@ -32,11 +32,18 @@ class HomeViewModel @Inject constructor(
      */
     private val _localDate: MutableStateFlow<LocalDate> = MutableStateFlow(LocalDate.now())
 
+    private var onResumeCount = 0
+
     /**
      * 这个月所有的记录
-      */
+     */
     val recordsThisMonth: StateFlow<List<HomeRecordCardUI>> = _localDate.map {
-        getHomeRecordCardUIs(databaseRepo.getAllHomeRecordItemUIByYearAndMonth(it.year, it.monthValue))
+        getHomeRecordCardUIs(
+            databaseRepo.getAllHomeRecordItemUIByYearAndMonth(
+                it.year,
+                it.monthValue
+            )
+        )
     }.stateIn(
         scope = viewModelScope.plus(Dispatchers.Default),
         started = SharingStarted.WhileSubscribed(5_000),
@@ -47,7 +54,8 @@ class HomeViewModel @Inject constructor(
         val totalExpense = databaseRepo.getTotalExpenseByYearAndMonth(it.year, it.monthValue)
         val totalIncome = databaseRepo.getTotalIncomeByYearAndMonth(it.year, it.monthValue)
         val totalBalance = totalIncome - totalExpense
-        val monthYearText = "${it.month.getDisplayName(TextStyle.FULL_STANDALONE, Locale.getDefault())} ${it.year}"
+        val monthYearText =
+            "${it.month.getDisplayName(TextStyle.FULL_STANDALONE, Locale.getDefault())} ${it.year}"
         HomeHeaderUI(
             monthYearText = monthYearText,
             totalExpense = FormatNumberUtil.format(totalExpense),
@@ -72,6 +80,20 @@ class HomeViewModel @Inject constructor(
             it.plusMonths(monthsToAdd)
         }
     }
+
+    fun onActivityResume() {
+        if (onResumeCount > 0) {
+            // 不是第一次进入，而是在其他activity回来
+            _localDate.update {
+                if (it.dayOfMonth >= 15) LocalDate.of(it.year, it.monthValue, 14) else LocalDate.of(
+                    it.year,
+                    it.monthValue,
+                    16
+                )
+            }
+        }
+        onResumeCount += 1
+    }
 }
 
 fun getHomeRecordCardUIs(homeRecordItemUIs: List<HomeRecordItemUI>): List<HomeRecordCardUI> {
@@ -84,11 +106,12 @@ fun getHomeRecordCardUIs(homeRecordItemUIs: List<HomeRecordItemUI>): List<HomeRe
     // 临时变量，以第一个元素初始化第一个分组
     var mutableHomeRecordItemUIs: MutableList<HomeRecordItemUI> = mutableListOf()
     var nowTotalBalance: Double = 0.0
-    var nowLocalDate: LocalDate = LocalDate.of(firstItem.year, firstItem.month, firstItem.dayOfMonth)
+    var nowLocalDate: LocalDate =
+        LocalDate.of(firstItem.year, firstItem.month, firstItem.dayOfMonth)
 
     fun doInSameGroup(homeRecordItemUI: HomeRecordItemUI) {
         mutableHomeRecordItemUIs.add(homeRecordItemUI)
-        when(homeRecordItemUI.expenseOrIncome) {
+        when (homeRecordItemUI.expenseOrIncome) {
             is ExpenseOrIncome.Expense -> {
                 nowTotalBalance -= homeRecordItemUI.number
             }
@@ -116,7 +139,11 @@ fun getHomeRecordCardUIs(homeRecordItemUIs: List<HomeRecordItemUI>): List<HomeRe
             // 创建新变量
             mutableHomeRecordItemUIs = mutableListOf()
             nowTotalBalance = 0.0
-            nowLocalDate = LocalDate.of(homeRecordItemUI.year, homeRecordItemUI.month, homeRecordItemUI.dayOfMonth)
+            nowLocalDate = LocalDate.of(
+                homeRecordItemUI.year,
+                homeRecordItemUI.month,
+                homeRecordItemUI.dayOfMonth
+            )
 
             // 在当前分组操作
             doInSameGroup(homeRecordItemUI)
