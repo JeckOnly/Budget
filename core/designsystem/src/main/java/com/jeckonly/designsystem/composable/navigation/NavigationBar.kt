@@ -54,7 +54,7 @@ fun BgtNavigationBar(
                 BgtNavigationBarItem(
                     selected = chartDestination.isSelected(currentDestination),
                     onClick = onClickChart,
-                    id = R.drawable.line_chart,
+                    id = R.drawable.circle_chart,
                 )
 
                 BgtNavigationBarItem(
