@@ -59,6 +59,7 @@ dependencies {
     implementation("io.coil-kt:coil-compose:$coil_compose_version")
     // compose-accompanist
     implementation("com.google.accompanist:accompanist-systemuicontroller:$acompanist_version")
+    implementation("com.google.accompanist:accompanist-navigation-animation:$acompanist_navigation_version")
 
     // test
     addTestImpl()

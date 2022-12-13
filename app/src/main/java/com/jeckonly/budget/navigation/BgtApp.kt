@@ -3,6 +3,7 @@ package com.jeckonly.budget.navigation
 import android.app.Activity
 import android.app.ActivityOptions
 import android.content.Intent
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -12,7 +13,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.LocalContext
-import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.jeckonly.app_addrecord.AddRecordActivity
 import com.jeckonly.chart.navigation.ChartDestination
 import com.jeckonly.designsystem.Mdf
@@ -21,6 +22,7 @@ import com.jeckonly.designsystem.theme.BudgetTheme
 import com.jeckonly.home.navigation.HomeDestination
 import com.jeckonly.more.navigation.MoreDestination
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun BgtApp() {
 
@@ -35,7 +37,7 @@ fun BgtApp() {
                 .statusBarsPadding()
                 .navigationBarsPadding()
         ) {
-            val navController = rememberNavController()
+            val navController = rememberAnimatedNavController()
 
             Box(modifier = Mdf.fillMaxSize()) {
                 BgtNavGraph(navController = navController, modifier = Mdf.fillMaxSize())

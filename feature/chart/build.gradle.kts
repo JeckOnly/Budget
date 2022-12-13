@@ -17,6 +17,9 @@ android {
     }
 
     compileOptions {
+        // Flag to enable support for the new language APIs
+        isCoreLibraryDesugaringEnabled = true
+
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -40,6 +43,7 @@ dependencies {
     implementation(project(":core:designsystem"))
     implementation(project(":core:data"))
     implementation(project(":core:navigation"))
+    implementation(project(":util"))
 
     // core
     implementation("androidx.core:core-ktx:$core_ktx_version")
@@ -55,6 +59,7 @@ dependencies {
     implementation("io.coil-kt:coil-compose:$coil_compose_version")
     // compose-accompanist
     implementation("com.google.accompanist:accompanist-systemuicontroller:$acompanist_version")
+    implementation("com.google.accompanist:accompanist-navigation-animation:$acompanist_navigation_version")
 
     // test
     addTestImpl()
