@@ -1,4 +1,4 @@
-package com.jeckonly.home.ui
+package com.jeckonly.chart.ui
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -9,24 +9,31 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.jeckonly.chart.ui.state.ChartScreenState
+import com.jeckonly.core_model.entity.helper.ExpenseOrIncome
 import com.jeckonly.designsystem.Mdf
 import com.jeckonly.designsystem.R
 import com.jeckonly.designsystem.composable.header.HeaderItem
 import com.jeckonly.designsystem.noIndicationClickable
-import com.jeckonly.home.ui.state.HomeHeaderUI
 
 @Composable
-fun HomeHeader(
-    homeHeaderUI: HomeHeaderUI,
+fun ChartHeader(
+    chartScreenState: ChartScreenState,
     whenClickBack: () -> Unit,
     whenClickAhead: () -> Unit,
+    updateExpenseOrIncome: (ExpenseOrIncome) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val backgroundColor = MaterialTheme.colorScheme.surface
     val contentColor = contentColorFor(backgroundColor = backgroundColor)
-    Surface(color = backgroundColor, shape = RoundedCornerShape(10.dp), modifier = modifier, tonalElevation = 1.dp) {
+    val selectedContentColor = MaterialTheme.colorScheme.primary
+    Surface(
+        color = backgroundColor,
+        shape = RoundedCornerShape(10.dp),
+        modifier = modifier,
+        tonalElevation = 1.dp
+    ) {
         Column(
             modifier = Mdf
                 .padding(20.dp), horizontalAlignment = Alignment.CenterHorizontally
@@ -38,12 +45,11 @@ fun HomeHeader(
                     modifier = Mdf
                         .rotate(90f)
                         .align(Alignment.CenterStart)
-                        .noIndicationClickable(onClick = whenClickBack)
-                    ,
+                        .noIndicationClickable(onClick = whenClickBack),
                     tint = contentColor
                 )
                 Text(
-                    text = homeHeaderUI.monthYearText,
+                    text = chartScreenState.chartHeaderUI.monthYearText,
                     style = MaterialTheme.typography.bodySmall,
                     modifier = Mdf.align(Alignment.Center),
                     color = contentColor
@@ -54,8 +60,7 @@ fun HomeHeader(
                     modifier = Mdf
                         .rotate(-90f)
                         .align(Alignment.CenterEnd)
-                        .noIndicationClickable(onClick = whenClickAhead)
-                    ,
+                        .noIndicationClickable(onClick = whenClickAhead),
                     tint = contentColor
                 )
             }
@@ -66,56 +71,34 @@ fun HomeHeader(
                 color = MaterialTheme.colorScheme.outlineVariant
             )
             Spacer(modifier = Mdf.height(20.dp))
-            Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Mdf.fillMaxWidth(0.9f)) {
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Mdf.fillMaxWidth(0.9f)
+            ) {
                 HeaderItem(
-                    textColor = contentColor,
+                    textColor = if (chartScreenState.expenseOrIncome == ExpenseOrIncome.Income) selectedContentColor else contentColor,
                     itemName = stringResource(id = R.string.income),
-                    itemValue = homeHeaderUI.totalIncome
+                    itemValue = chartScreenState.chartHeaderUI.totalIncome,
+                    modifier = Mdf.noIndicationClickable {
+                        updateExpenseOrIncome(ExpenseOrIncome.Income)
+                    }
                 )
                 HeaderItem(
-                    textColor = contentColor,
+                    textColor = if (chartScreenState.expenseOrIncome == ExpenseOrIncome.Expense) selectedContentColor else contentColor,
                     itemName = stringResource(id = R.string.expense),
-                    itemValue = homeHeaderUI.totalExpense
+                    itemValue = chartScreenState.chartHeaderUI.totalExpense,
+                    modifier = Mdf.noIndicationClickable {
+                        updateExpenseOrIncome(ExpenseOrIncome.Expense)
+                    }
                 )
                 HeaderItem(
                     textColor = contentColor,
                     itemName = stringResource(id = R.string.balance),
-                    itemValue = homeHeaderUI.totalBalance
+                    itemValue = chartScreenState.chartHeaderUI.totalBalance
                 )
             }
         }
     }
 }
 
-
-@Preview(showBackground = true, backgroundColor = 0xffffff)
-@Composable
-fun PreviewHeaderItem() {
-    HeaderItem(
-        textColor = MaterialTheme.colorScheme.onSurface,
-        itemName = "Income",
-        itemValue = "3.800"
-    )
-}
-
-
-@Preview(showBackground = true, backgroundColor = 0xffffff, showSystemUi = true)
-@Composable
-fun PreviewHomeHeader() {
-    Box(modifier = Mdf.fillMaxWidth(), contentAlignment = Alignment.Center) {
-        HomeHeader(
-            HomeHeaderUI(
-                monthYearText = "January 2020",
-                totalExpense = "3.8",
-                totalIncome = "2.8",
-                totalBalance = "1"
-            ),
-            whenClickBack = {},
-            whenClickAhead = {},
-            modifier = Mdf
-                .fillMaxWidth(0.8f)
-                .wrapContentHeight()
-        )
-    }
-}
 

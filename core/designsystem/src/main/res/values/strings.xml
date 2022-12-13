@@ -52,4 +52,6 @@
     <string name="choose_date">选择日期</string>
     <string name="overview" translatable="false">OVERVIEW</string>
     <string name="overview_hint" translatable="false">Here is a list of your transactions</string>
+    <string name="distribution" translatable="false">DISTRIBUTION</string>
+    <string name="distribution_hint" translatable="false">Here is your financial report</string>
 </resources>
