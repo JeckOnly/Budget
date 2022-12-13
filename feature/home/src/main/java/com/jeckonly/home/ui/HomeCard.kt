@@ -1,6 +1,7 @@
 package com.jeckonly.home.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -11,6 +12,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,6 +31,7 @@ private const val ICON_SIZE = 30
 @Composable
 fun HomeCardRecordItem(
     homeRecordItemUI: HomeRecordItemUI,
+    onClick: (HomeRecordItemUI) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val backgroundColor = MaterialTheme.colorScheme.surface
@@ -44,7 +47,9 @@ fun HomeCardRecordItem(
         }
     }
 
-    Surface(color = backgroundColor, contentColor = contentColor, modifier = modifier, tonalElevation = 1.dp) {
+    Surface(color = backgroundColor, contentColor = contentColor, modifier = modifier.clickable {
+        onClick(homeRecordItemUI)
+    }, tonalElevation = 1.dp) {
         ConstraintLayout(
             modifier = Mdf
                 .fillMaxWidth()
@@ -108,6 +113,7 @@ fun HomeCardRecordItem(
 fun HomeCard(homeRecordCardUI: HomeRecordCardUI, modifier: Modifier = Modifier) {
     val backgroundColor = MaterialTheme.colorScheme.surface
     val contentColor = contentColorFor(backgroundColor = backgroundColor)
+    val context = LocalContext.current
     Surface(
         color = backgroundColor,
         shape = RoundedCornerShape(10.dp),
@@ -144,7 +150,10 @@ fun HomeCard(homeRecordCardUI: HomeRecordCardUI, modifier: Modifier = Modifier) 
                 )
                 HomeCardRecordItem(
                     homeRecordItemUI = homeRecordItemUI,
-                    modifier = Mdf.fillMaxWidth()
+                    modifier = Mdf.fillMaxWidth(),
+                    onClick = {
+
+                    }
                 )
             }
         }
@@ -165,7 +174,10 @@ fun PreviewHomeCardRecordItem() {
             typeName = "交通",
             remark = ""
         ),
-        modifier = Mdf.fillMaxWidth()
+        modifier = Mdf.fillMaxWidth(),
+        onClick = {
+
+        }
     )
 }
 
