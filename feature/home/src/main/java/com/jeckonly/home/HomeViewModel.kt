@@ -51,8 +51,8 @@ class HomeViewModel @Inject constructor(
     )
 
     val homeHeaderUIState: StateFlow<HomeHeaderUI> = _localDate.map {
-        val totalExpense = databaseRepo.getTotalExpenseByYearAndMonth(it.year, it.monthValue)
-        val totalIncome = databaseRepo.getTotalIncomeByYearAndMonth(it.year, it.monthValue)
+        val totalExpense = databaseRepo.getTotalNUmberByYearAndMonthAndExpenseOrIncome(it.year, it.monthValue, ExpenseOrIncome.Expense)
+        val totalIncome = databaseRepo.getTotalNUmberByYearAndMonthAndExpenseOrIncome(it.year, it.monthValue, ExpenseOrIncome.Income)
         val totalBalance = totalIncome - totalExpense
         val monthYearText =
             "${it.month.getDisplayName(TextStyle.FULL_STANDALONE, Locale.getDefault())} ${it.year}"

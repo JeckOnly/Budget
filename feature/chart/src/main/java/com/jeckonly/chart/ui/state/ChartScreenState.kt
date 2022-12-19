@@ -6,5 +6,6 @@ import com.jeckonly.core_model.entity.helper.ExpenseOrIncome
 @Stable
 data class ChartScreenState(
     val expenseOrIncome: ExpenseOrIncome,
-    val chartHeaderUI: ChartHeaderUI
+    val chartHeaderUI: ChartHeaderUI,
+    val chartData: ChartData,
 )

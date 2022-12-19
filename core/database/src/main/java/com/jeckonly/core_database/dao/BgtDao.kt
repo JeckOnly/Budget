@@ -1,6 +1,7 @@
 package com.jeckonly.core_database.dao
 
 import androidx.room.*
+import com.jeckonly.core_model.entity.NameNumberIconId
 import com.jeckonly.core_model.entity.RecordEntity
 import com.jeckonly.core_model.entity.TypeEntity
 import com.jeckonly.core_model.entity.helper.ExpenseOrIncome
@@ -82,4 +83,12 @@ interface BgtDao {
             "inner join type_table on record_table.type_name == type_table.type_name and type_table.expense_or_income == :expenseOrIncome_ " +
             "where year == :year_ and month == :month_")
     suspend fun getTotalNumberByYearAndMonth(year_: Int, month_: Int, expenseOrIncome_: ExpenseOrIncome): Double?
+
+    /**
+     * @return
+     */
+    @Query("select record_table.type_name as type_name, sum(number) as number, type_table.icon_id as icon_id from record_table " +
+            "inner join type_table on record_table.type_name == type_table.type_name and type_table.expense_or_income == :expenseOrIncome_ " +
+            "where year == :year_ and month == :month_ group by record_table.type_name order by number desc")
+    suspend fun getTypeAndTotalNumberByYearAndMonth(year_: Int, month_: Int, expenseOrIncome_: ExpenseOrIncome): List<NameNumberIconId>
 }

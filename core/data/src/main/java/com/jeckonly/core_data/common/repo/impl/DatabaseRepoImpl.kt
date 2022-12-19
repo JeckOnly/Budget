@@ -2,6 +2,7 @@ package com.jeckonly.core_data.common.repo.impl
 
 import com.jeckonly.core_data.common.repo.interface_.DatabaseRepo
 import com.jeckonly.core_database.dao.BgtDao
+import com.jeckonly.core_model.entity.NameNumberIconId
 import com.jeckonly.core_model.entity.RecordEntity
 import com.jeckonly.core_model.entity.TypeEntity
 import com.jeckonly.core_model.entity.helper.ExpenseOrIncome
@@ -78,12 +79,20 @@ class DatabaseRepoImpl @Inject constructor(
         }
     }
 
-    override suspend fun getTotalExpenseByYearAndMonth(year: Int, month: Int): Double {
-        return dao.getTotalNumberByYearAndMonth(year_ = year, month_ = month, expenseOrIncome_ = ExpenseOrIncome.Expense)?:0.00
+    override suspend fun getTotalNUmberByYearAndMonthAndExpenseOrIncome(
+        year: Int,
+        month: Int,
+        expenseOrIncome: ExpenseOrIncome
+    ): Double {
+        return dao.getTotalNumberByYearAndMonth(year_ = year, month_ = month, expenseOrIncome_ = expenseOrIncome)?:0.00
     }
 
-    override suspend fun getTotalIncomeByYearAndMonth(year: Int, month: Int): Double {
-        return dao.getTotalNumberByYearAndMonth(year_ = year, month_ = month, expenseOrIncome_ = ExpenseOrIncome.Income)?:0.00
+    override suspend fun getTypeAndTotalNumberByYearAndMonthAndExpenseOrIncome(
+        year: Int,
+        month: Int,
+        expenseOrIncome: ExpenseOrIncome
+    ): List<NameNumberIconId> {
+        return dao.getTypeAndTotalNumberByYearAndMonth(year, month, expenseOrIncome)
     }
 }
 

@@ -54,4 +54,6 @@
     <string name="overview_hint" translatable="false">Here is a list of your transactions</string>
     <string name="distribution" translatable="false">DISTRIBUTION</string>
     <string name="distribution_hint" translatable="false">Here is your financial report</string>
+    <string name="type_others">其他</string>
+    <string name="no_chart_data">这个月还没有数据哦</string>
 </resources>

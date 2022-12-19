@@ -65,3 +65,15 @@ val md_theme_dark_scrim = Color(0xFF000000)
 
 
 val seed = Color(0xFF006973)
+
+val percent1_income = Color(0xFF004e64)
+val percent2_income = Color(0xFF38a3a5)
+val percent3_income = Color(0xFF57cc99)
+val percent4_income = Color(0xFFcdc1ff)
+val percent5_income = Color(0xFF00b4d8)
+
+val percent1_expense = Color(0xFFa41623)
+val percent2_expense = Color(0xFFf85e00)
+val percent3_expense = Color(0xFFffb563)
+val percent4_expense = Color(0xFFff4d6d)
+val percent5_expense = Color(0xFF918450)

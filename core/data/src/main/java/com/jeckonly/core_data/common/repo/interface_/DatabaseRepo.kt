@@ -1,7 +1,9 @@
 package com.jeckonly.core_data.common.repo.interface_
 
+import com.jeckonly.core_model.entity.NameNumberIconId
 import com.jeckonly.core_model.entity.RecordEntity
 import com.jeckonly.core_model.entity.TypeEntity
+import com.jeckonly.core_model.entity.helper.ExpenseOrIncome
 import com.jeckonly.core_model.ui.ChooseTypeTypeUI
 import com.jeckonly.core_model.ui.HomeRecordItemUI
 import kotlinx.coroutines.flow.Flow
@@ -20,7 +22,12 @@ interface DatabaseRepo {
 
     suspend fun getAllHomeRecordItemUIByYearAndMonth(year: Int, month: Int): List<HomeRecordItemUI>
 
-    suspend fun getTotalExpenseByYearAndMonth(year: Int, month: Int): Double
+    suspend fun getTotalNUmberByYearAndMonthAndExpenseOrIncome(year: Int, month: Int, expenseOrIncome: ExpenseOrIncome): Double
 
-    suspend fun getTotalIncomeByYearAndMonth(year: Int, month: Int): Double
+    suspend fun getTypeAndTotalNumberByYearAndMonthAndExpenseOrIncome(
+        year: Int,
+        month: Int,
+        expenseOrIncome: ExpenseOrIncome
+    ): List<NameNumberIconId>
+
 }
