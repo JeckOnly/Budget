@@ -12,5 +12,4 @@ data class TypeEntity(
     @ColumnInfo(name = "icon_id") val iconId: Int,
     @ColumnInfo(name = "order") val order: Int,
     @ColumnInfo(name = "expense_or_income") val expenseOrIncome: ExpenseOrIncome,
-    @ColumnInfo(name = "is_customise") val isCustomise: Boolean,
 )
