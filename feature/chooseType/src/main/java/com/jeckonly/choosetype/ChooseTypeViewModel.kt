@@ -113,7 +113,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 0,
         expenseOrIncome = ExpenseOrIncome.Expense,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 
     TypeEntity(
@@ -122,7 +122,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 1,
         expenseOrIncome = ExpenseOrIncome.Expense,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 
     TypeEntity(
@@ -131,7 +131,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 2,
         expenseOrIncome = ExpenseOrIncome.Expense,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 
     TypeEntity(
@@ -140,7 +140,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 3,
         expenseOrIncome = ExpenseOrIncome.Expense,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 
     TypeEntity(
@@ -149,7 +149,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 4,
         expenseOrIncome = ExpenseOrIncome.Expense,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 
     TypeEntity(
@@ -158,7 +158,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 5,
         expenseOrIncome = ExpenseOrIncome.Expense,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 
     TypeEntity(
@@ -167,7 +167,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 6,
         expenseOrIncome = ExpenseOrIncome.Expense,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 
     TypeEntity(
@@ -176,7 +176,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 7,
         expenseOrIncome = ExpenseOrIncome.Expense,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 
     TypeEntity(
@@ -185,7 +185,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 8,
         expenseOrIncome = ExpenseOrIncome.Expense,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 
     TypeEntity(
@@ -194,7 +194,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 9,
         expenseOrIncome = ExpenseOrIncome.Expense,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 
     TypeEntity(
@@ -203,7 +203,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 10,
         expenseOrIncome = ExpenseOrIncome.Expense,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 
     TypeEntity(
@@ -212,7 +212,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 11,
         expenseOrIncome = ExpenseOrIncome.Expense,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 
     TypeEntity(
@@ -221,7 +221,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 12,
         expenseOrIncome = ExpenseOrIncome.Expense,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 
     TypeEntity(
@@ -230,7 +230,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 13,
         expenseOrIncome = ExpenseOrIncome.Expense,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 
     TypeEntity(
@@ -239,7 +239,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 14,
         expenseOrIncome = ExpenseOrIncome.Expense,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 
     TypeEntity(
@@ -248,7 +248,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 15,
         expenseOrIncome = ExpenseOrIncome.Expense,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 
     TypeEntity(
@@ -257,7 +257,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 16,
         expenseOrIncome = ExpenseOrIncome.Expense,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 
     TypeEntity(
@@ -266,7 +266,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 17,
         expenseOrIncome = ExpenseOrIncome.Expense,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 
     TypeEntity(
@@ -275,7 +275,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 18,
         expenseOrIncome = ExpenseOrIncome.Expense,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 
     TypeEntity(
@@ -284,7 +284,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 19,
         expenseOrIncome = ExpenseOrIncome.Expense,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 
     TypeEntity(
@@ -293,7 +293,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 20,
         expenseOrIncome = ExpenseOrIncome.Expense,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 
     TypeEntity(
@@ -302,7 +302,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 21,
         expenseOrIncome = ExpenseOrIncome.Expense,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 
     TypeEntity(
@@ -311,7 +311,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 22,
         expenseOrIncome = ExpenseOrIncome.Expense,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 
     TypeEntity(
@@ -320,7 +320,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 23,
         expenseOrIncome = ExpenseOrIncome.Expense,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 
     TypeEntity(
@@ -329,7 +329,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 24,
         expenseOrIncome = ExpenseOrIncome.Expense,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 
     TypeEntity(
@@ -338,7 +338,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 25,
         expenseOrIncome = ExpenseOrIncome.Expense,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 
     TypeEntity(
@@ -347,7 +347,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 26,
         expenseOrIncome = ExpenseOrIncome.Expense,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 
     TypeEntity(
@@ -356,7 +356,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 27,
         expenseOrIncome = ExpenseOrIncome.Expense,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 
     TypeEntity(
@@ -365,7 +365,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 28,
         expenseOrIncome = ExpenseOrIncome.Expense,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 
     TypeEntity(
@@ -374,7 +374,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 29,
         expenseOrIncome = ExpenseOrIncome.Expense,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 
     TypeEntity(
@@ -383,7 +383,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 30,
         expenseOrIncome = ExpenseOrIncome.Expense,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 
     TypeEntity(
@@ -392,7 +392,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 31,
         expenseOrIncome = ExpenseOrIncome.Expense,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 
     TypeEntity(
@@ -401,7 +401,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 32,
         expenseOrIncome = ExpenseOrIncome.Expense,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 
     // ----
@@ -411,7 +411,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 0,
         expenseOrIncome = ExpenseOrIncome.Income,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 
     TypeEntity(
@@ -420,7 +420,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 1,
         expenseOrIncome = ExpenseOrIncome.Income,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 
     TypeEntity(
@@ -429,7 +429,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 2,
         expenseOrIncome = ExpenseOrIncome.Income,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 
     TypeEntity(
@@ -438,7 +438,7 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 3,
         expenseOrIncome = ExpenseOrIncome.Income,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 
     TypeEntity(
@@ -447,6 +447,6 @@ fun getInitTypeEntity(app: Application) = listOf<TypeEntity>(
         order = 4,
         expenseOrIncome = ExpenseOrIncome.Income,
         isCustomise = false,
-        shouldShow = true
+         
     ),
 )
