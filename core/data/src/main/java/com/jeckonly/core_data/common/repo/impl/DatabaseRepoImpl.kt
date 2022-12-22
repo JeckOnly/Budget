@@ -27,16 +27,16 @@ class DatabaseRepoImpl @Inject constructor(
         }
     }
 
-    override fun getAllExpenseTypeAndShouldShown(): Flow<List<ChooseTypeTypeUI>> {
-        return dao.getAllTypeByExpenseOrIncomeAndShouldShown(ExpenseOrIncome.Expense).map {
+    override fun getAllExpenseType(): Flow<List<ChooseTypeTypeUI>> {
+        return dao.getAllTypeByExpenseOrIncome(ExpenseOrIncome.Expense).map {
             it.map { typeEntity ->
                 typeEntity.toChooseTypeTypeUI()
             }
         }
     }
 
-    override fun getAllIncomeTypeAndShouldShown(): Flow<List<ChooseTypeTypeUI>> {
-        return dao.getAllTypeByExpenseOrIncomeAndShouldShown(ExpenseOrIncome.Income).map {
+    override fun getAllIncomeType(): Flow<List<ChooseTypeTypeUI>> {
+        return dao.getAllTypeByExpenseOrIncome(ExpenseOrIncome.Income).map {
             it.map { typeEntity ->
                 typeEntity.toChooseTypeTypeUI()
             }
@@ -65,7 +65,7 @@ class DatabaseRepoImpl @Inject constructor(
         month: Int
     ): List<HomeRecordItemUI> {
         return getAllRecordByYearAndMonth(year, month).map {
-            val type = dao.getTypeByName(it.typeName)
+            val type = dao.getTypeById(it.typeId)
             HomeRecordItemUI(
                 year = it.year,
                 month = it.month,

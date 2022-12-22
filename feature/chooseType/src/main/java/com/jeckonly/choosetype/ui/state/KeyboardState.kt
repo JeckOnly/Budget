@@ -18,12 +18,6 @@ private const val NUMBER_COUNT_AFTER_POINT = 2
 class KeyboardState(private val app: Application, private val doWhenFinish: (ChooseTypeFinishState, Context) -> Unit) {
 
 
-    /**
-     * 时间戳
-     */
-    private var timeStamp: Long = 0
-
-
     private val doneText = app.getString(R.string.done)
 
     // Button type
@@ -213,7 +207,7 @@ class KeyboardState(private val app: Application, private val doWhenFinish: (Cho
                             month = month,
                             dayOfMonth = dayOfMonth,
                             number = numberTemp,
-                            typeName = buttonType.chooseTypeTypeUI!!.typeName,
+                            typeId = buttonType.chooseTypeTypeUI!!.typeId,
                             remark = remark.value
                         ),
                         buttonType.context!!
@@ -336,7 +330,6 @@ class KeyboardState(private val app: Application, private val doWhenFinish: (Cho
     }
 
     fun cleanState() {
-        timeStamp = 0
         number1.value = ""
         operator = null
         number2.value = ""

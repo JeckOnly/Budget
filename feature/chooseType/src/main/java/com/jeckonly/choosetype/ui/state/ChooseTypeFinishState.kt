@@ -7,7 +7,7 @@ data class ChooseTypeFinishState(
     val month: Int,
     val dayOfMonth: Int,
     val number: Double,
-    val typeName: String,
+    val typeId: Int,
     val remark: String,
 ) {
     fun toRecordEntity(): RecordEntity {
@@ -16,7 +16,7 @@ data class ChooseTypeFinishState(
             month = this.month,
             dayOfMonth = this.dayOfMonth,
             number = this.number,
-            typeName = this.typeName,
+            typeId = typeId,
             remark = this.remark
         )
     }

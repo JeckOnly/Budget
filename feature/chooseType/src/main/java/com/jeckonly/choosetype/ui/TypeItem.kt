@@ -107,6 +107,7 @@ fun TypeItem(
 fun PreviewTypeItem() {
     TypeItem(
         typeUI = ChooseTypeTypeUI(
+            typeId = 0,
             iconId = R.drawable.category_i_money_stroke,
             typeName = "餐饮",
             order = 0,

@@ -42,7 +42,7 @@ class ChooseTypeViewModel @Inject constructor(
      * 类型为支出的列表
      */
     private val expenseTypeFlow: StateFlow<List<ChooseTypeTypeUI>> =
-        databaseRepo.getAllExpenseTypeAndShouldShown().stateIn(
+        databaseRepo.getAllExpenseType().stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5_000),
             initialValue = emptyList()
@@ -52,7 +52,7 @@ class ChooseTypeViewModel @Inject constructor(
      * 类型为收入的列表
      */
     private val incomeTypeFlow: StateFlow<List<ChooseTypeTypeUI>> =
-        databaseRepo.getAllIncomeTypeAndShouldShown().stateIn(
+        databaseRepo.getAllIncomeType().stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5_000),
             initialValue = emptyList()
