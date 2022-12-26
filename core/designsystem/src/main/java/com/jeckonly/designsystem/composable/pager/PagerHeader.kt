@@ -1,4 +1,4 @@
-package com.jeckonly.choosetype.ui
+package com.jeckonly.designsystem.composable.pager
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*

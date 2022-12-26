@@ -49,6 +49,8 @@ dependencies {
     // compose-extension
     implementation("androidx.constraintlayout:constraintlayout-compose:$constraintlayout_compose_version")
     implementation("androidx.navigation:navigation-compose:$navigation_compose_version")// 官方导航库
+    // compose-accompanist
+    implementation("com.google.accompanist:accompanist-pager:$acompanist_version")// compose view pager
 
     // Timber
     implementation("com.jakewharton.timber:timber:$timber_version")

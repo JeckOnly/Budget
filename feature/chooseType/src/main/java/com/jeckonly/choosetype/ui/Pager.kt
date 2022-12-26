@@ -21,16 +21,18 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
 import com.jeckonly.choosetype.ui.state.ChooseTypeUiState
 import com.jeckonly.core_model.entity.helper.ExpenseOrIncome
-import com.jeckonly.core_model.ui.ChooseTypeTypeUI
+import com.jeckonly.core_model.ui.TypeUI
 import com.jeckonly.designsystem.Mdf
+import com.jeckonly.designsystem.R
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun TypePager(
+fun ChooseTypePager(
     chooseTypeUiState: ChooseTypeUiState,
     pagerState: PagerState,
-    nowChooseTypeTypeUI: ChooseTypeTypeUI?,
-    onClick: (ChooseTypeTypeUI) -> Unit,
+    nowTypeUI: TypeUI?,
+    onClick: (TypeUI) -> Unit,
+    onCLickSetting: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     HorizontalPager(count = 2, modifier = modifier, state = pagerState) { page ->
@@ -46,20 +48,22 @@ fun TypePager(
         } else {
             when (page) {
                 0 -> {
-                    TypePage(
+                    ChooseTypePage(
                         expenseOrIncome = ExpenseOrIncome.Expense,
                         chooseTypeUiState = chooseTypeUiState,
-                        nowChooseTypeTypeUI = nowChooseTypeTypeUI,
+                        nowTypeUI = nowTypeUI,
                         onClick = onClick,
+                        onCLickSetting = onCLickSetting,
                         modifier = Modifier.fillMaxSize()
                     )
                 }
                 1 -> {
-                    TypePage(
+                    ChooseTypePage(
                         expenseOrIncome = ExpenseOrIncome.Income,
                         chooseTypeUiState = chooseTypeUiState,
-                        nowChooseTypeTypeUI = nowChooseTypeTypeUI,
+                        nowTypeUI = nowTypeUI,
                         onClick = onClick,
+                        onCLickSetting = onCLickSetting,
                         modifier = Modifier.fillMaxSize()
                     )
                 }
@@ -69,11 +73,12 @@ fun TypePager(
 }
 
 @Composable
-fun TypePage(
+fun ChooseTypePage(
     expenseOrIncome: ExpenseOrIncome,
     chooseTypeUiState: ChooseTypeUiState,
-    nowChooseTypeTypeUI: ChooseTypeTypeUI?,
-    onClick: (ChooseTypeTypeUI) -> Unit,
+    nowTypeUI: TypeUI?,
+    onClick: (TypeUI) -> Unit,
+    onCLickSetting: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val lazyGridState = rememberLazyGridState()
@@ -89,15 +94,21 @@ fun TypePage(
                 // key默认为位置（position）
                 items(
                     items = if (expenseOrIncome is ExpenseOrIncome.Expense) chooseTypeUiState.expenseTypeList else chooseTypeUiState.incomeTypeList,
-                ) { item: ChooseTypeTypeUI ->
-                    TypeItem(
+                ) { item: TypeUI ->
+                    ChooseTypeItem(
                         typeUI = item,
-                        nowChooseTypeTypeUI = nowChooseTypeTypeUI,
+                        nowTypeUI = nowTypeUI,
                         onClick = onClick,
                         modifier = Mdf.padding(horizontal = 7.dp, vertical = 10.dp)
                     )
                 }
-                // TODO 设置按钮
+                item {
+                    UpdateTypeItem(
+                        iconId = R.drawable.tallytype_set_stroke,
+                        onClick = onCLickSetting,
+                        modifier = Mdf.padding(horizontal = 7.dp, vertical = 10.dp)
+                    )
+                }
             })
     }
 }

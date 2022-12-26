@@ -21,17 +21,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.jeckonly.core_model.entity.helper.ExpenseOrIncome
-import com.jeckonly.core_model.ui.ChooseTypeTypeUI
+import com.jeckonly.core_model.ui.TypeUI
 import com.jeckonly.designsystem.Mdf
 import com.jeckonly.designsystem.R
 
 private const val ICON_SIZE = 40
 
 @Composable
-fun TypeItem(
-    typeUI: ChooseTypeTypeUI,
-    nowChooseTypeTypeUI: ChooseTypeTypeUI?,
-    onClick: (ChooseTypeTypeUI) -> Unit,
+fun ChooseTypeItem(
+    typeUI: TypeUI,
+    nowTypeUI: TypeUI?,
+    onClick: (TypeUI) -> Unit,
     modifier: Modifier = Modifier
 ) {
 
@@ -45,13 +45,13 @@ fun TypeItem(
         Animatable(1f)
     }
     val backgroundColor =
-        if (typeUI != nowChooseTypeTypeUI)
+        if (typeUI != nowTypeUI)
             MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.5f)
         else
             MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)
 
     val iconTint = contentColorFor(
-        backgroundColor = if (typeUI != nowChooseTypeTypeUI)
+        backgroundColor = if (typeUI != nowTypeUI)
             MaterialTheme.colorScheme.secondaryContainer
         else
             MaterialTheme.colorScheme.primaryContainer
@@ -105,15 +105,15 @@ fun TypeItem(
 @Preview(showBackground = true, backgroundColor = 0xffffff)
 @Composable
 fun PreviewTypeItem() {
-    TypeItem(
-        typeUI = ChooseTypeTypeUI(
+    ChooseTypeItem(
+        typeUI = TypeUI(
             typeId = 0,
             iconId = R.drawable.category_i_money_stroke,
             typeName = "餐饮",
             order = 0,
             expenseOrIncome = ExpenseOrIncome.Expense
         ),
-        nowChooseTypeTypeUI = null,
+        nowTypeUI = null,
         onClick = {
 
         }

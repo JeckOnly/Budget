@@ -4,17 +4,18 @@ import com.jeckonly.core_model.entity.NameNumberIconId
 import com.jeckonly.core_model.entity.RecordEntity
 import com.jeckonly.core_model.entity.TypeEntity
 import com.jeckonly.core_model.entity.helper.ExpenseOrIncome
-import com.jeckonly.core_model.ui.ChooseTypeTypeUI
+import com.jeckonly.core_model.entity.update.TypeOrderUpdate
 import com.jeckonly.core_model.ui.HomeRecordItemUI
+import com.jeckonly.core_model.ui.TypeUI
 import kotlinx.coroutines.flow.Flow
 
 interface DatabaseRepo {
 
     suspend fun initTypeInDatabase(list: List<TypeEntity>, onSuccess: suspend () -> Unit, onFail: suspend () -> Unit)
 
-    fun getAllExpenseType(): Flow<List<ChooseTypeTypeUI>>
+    fun getAllExpenseType(): Flow<List<TypeUI>>
 
-    fun getAllIncomeType(): Flow<List<ChooseTypeTypeUI>>
+    fun getAllIncomeType(): Flow<List<TypeUI>>
 
     suspend fun insertRecord(recordEntity: RecordEntity, onSuccess: suspend () -> Unit, onFail: suspend(Exception) -> Unit)
 
@@ -30,4 +31,9 @@ interface DatabaseRepo {
         expenseOrIncome: ExpenseOrIncome
     ): List<NameNumberIconId>
 
+    suspend fun updateTypeOrder(typeOrderUpdates: List<TypeOrderUpdate>)
+
+    suspend fun checkTypeHasRecordOrNot(typeId: Int): Boolean
+
+    suspend fun deleteTypeById(typeId: Int)
 }

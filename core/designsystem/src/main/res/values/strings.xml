@@ -56,4 +56,6 @@
     <string name="distribution_hint" translatable="false">Here is your financial report</string>
     <string name="type_others">其他</string>
     <string name="no_chart_data">这个月还没有数据哦</string>
+    <string name="warn">警告</string>
+    <string name="delete_hint">删除类型将删除所有和这个类型有关的记录，确定删除吗？</string>
 </resources>

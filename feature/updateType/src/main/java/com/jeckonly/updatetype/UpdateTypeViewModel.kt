@@ -1,16 +1,16 @@
-package com.jeckonly.choosetype
+package com.jeckonly.updatetype
 
-import android.app.Activity
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jeckonly.choosetype.ui.state.ChooseTypeUiState
-import com.jeckonly.choosetype.ui.state.KeyboardState
 import com.jeckonly.core_data.common.repo.interface_.DatabaseRepo
 import com.jeckonly.core_data.common.repo.interface_.UserPrefsRepo
+import com.jeckonly.core_model.entity.update.TypeOrderUpdate
 import com.jeckonly.core_model.ui.TypeUI
 import com.jeckonly.designsystem.init.getInitTypeEntity
+import com.jeckonly.updatetype.ui.state.UpdateTypeUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
@@ -20,7 +20,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class ChooseTypeViewModel @Inject constructor(
+class UpdateTypeViewModel @Inject constructor(
     private val app: Application,
     private val userPrefsRepo: UserPrefsRepo,
     private val databaseRepo: DatabaseRepo
@@ -60,10 +60,10 @@ class ChooseTypeViewModel @Inject constructor(
     /**
      * 界面的UI state
      */
-    val chooseTypeUiStateFlow: StateFlow<ChooseTypeUiState> = combine(
+    val updateTypeUiStateFlow: StateFlow<UpdateTypeUiState> = combine(
         databaseInitStateFlow, expenseTypeFlow, incomeTypeFlow
     ) { hasInit, expenseTypeUIList, incomeTypeUIList ->
-        ChooseTypeUiState(
+        UpdateTypeUiState(
             isLoading = !hasInit,
             expenseTypeList = expenseTypeUIList.sortedBy { it.order },
             incomeTypeList = incomeTypeUIList.sortedBy { it.order }
@@ -71,24 +71,9 @@ class ChooseTypeViewModel @Inject constructor(
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000),
-        initialValue = ChooseTypeUiState()
+        initialValue = UpdateTypeUiState()
     )
 
-    /**
-     * keyboard state
-     */
-    val keyboardState: KeyboardState by lazy {
-        KeyboardState(app = app) { chooseTypeFinishState, context ->
-            viewModelScope.launch {
-                databaseRepo.insertRecord(chooseTypeFinishState.toRecordEntity(), onSuccess = {
-                    Timber.d("成功插入")
-                    (context as Activity).finishAfterTransition()
-                }, onFail = {
-                    Timber.d("插入失败" + it.message)
-                })
-            }
-        }
-    }
 
     init {
         viewModelScope.launch {
@@ -101,4 +86,44 @@ class ChooseTypeViewModel @Inject constructor(
             }
         }
     }
+
+    fun onDragEnd(newList: List<TypeUI>, startIndex: Int, endIndex: Int) {
+        viewModelScope.launch(context = Dispatchers.Default) {
+            Timber.d("startIndex: ${startIndex}, endIndex: $endIndex")
+            if (startIndex == endIndex) return@launch
+
+            val itemNeedUpdate: MutableList<TypeOrderUpdate> = mutableListOf()
+            for (i in newList.indices) {
+                itemNeedUpdate.add(
+                    TypeOrderUpdate(
+                        typeId = newList[i].typeId,
+                        order = i
+                    )
+                )
+            }
+            databaseRepo.updateTypeOrder(itemNeedUpdate)
+        }
+    }
+
+
+    /**
+     * [onTypeHasRecord]只有在[forceDelete]为[false]的时候才有意义
+     */
+    fun onClickDelete(typeId: Int, forceDelete: Boolean, onTypeHasRecord: (Int) -> Unit) {
+        viewModelScope.launch {
+            if (forceDelete) {
+                databaseRepo.deleteTypeById(typeId)
+            } else {
+                if (databaseRepo.checkTypeHasRecordOrNot(typeId)) {
+                    onTypeHasRecord(typeId)
+                } else {
+                    databaseRepo.deleteTypeById(typeId)
+                }
+            }
+        }
+    }
+
 }
+
+
+

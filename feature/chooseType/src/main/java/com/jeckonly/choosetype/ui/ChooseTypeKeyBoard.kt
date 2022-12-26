@@ -23,7 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.jeckonly.choosetype.ui.state.KeyboardState
-import com.jeckonly.core_model.ui.ChooseTypeTypeUI
+import com.jeckonly.core_model.ui.TypeUI
 import com.jeckonly.designsystem.Mdf
 import com.jeckonly.designsystem.R
 import com.jeckonly.designsystem.composable.AutoResizeText
@@ -34,7 +34,7 @@ import java.time.LocalDate
 
 @Composable
 fun ChooseTypeKeyBoard(
-    nowChooseType: ChooseTypeTypeUI?,
+    nowChooseType: TypeUI?,
     keyboardState: KeyboardState,
     onCLickDown: () -> Unit,
     modifier: Modifier = Modifier
@@ -311,7 +311,7 @@ fun ChooseTypeKeyBoard(
                     .background(color = MaterialTheme.colorScheme.primaryContainer),
                     onClick = {
                         keyboardState.onEvent(keyboardState.finish.apply {
-                            this.chooseTypeTypeUI = nowChooseType
+                            this.typeUI = nowChooseType
                             this.context = context
                         })
                     }) {

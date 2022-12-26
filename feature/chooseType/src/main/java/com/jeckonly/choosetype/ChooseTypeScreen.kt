@@ -16,17 +16,18 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.rememberPagerState
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.jeckonly.choosetype.ui.ChooseTypeKeyBoard
-import com.jeckonly.choosetype.ui.TabHeader
-import com.jeckonly.choosetype.ui.TypePager
+import com.jeckonly.choosetype.ui.ChooseTypePager
 import com.jeckonly.choosetype.ui.state.ChooseTypeUiState
 import com.jeckonly.choosetype.ui.state.KeyboardState
-import com.jeckonly.core_model.ui.ChooseTypeTypeUI
+import com.jeckonly.core_model.ui.TypeUI
+import com.jeckonly.designsystem.composable.pager.TabHeader
 
 
 private const val HEADER_HEIGHT = 55
 
 @Composable
 fun ChooseTypeRoute(
+    onCLickSetting: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: ChooseTypeViewModel = hiltViewModel()
 ) {
@@ -48,6 +49,7 @@ fun ChooseTypeRoute(
     ChooseTypeScreen(
         chooseTypeUiState = chooseTypeUiState.value,
         keyboardState = viewModel.keyboardState,
+        onCLickSetting = onCLickSetting,
         modifier = modifier
     )
 }
@@ -57,11 +59,12 @@ fun ChooseTypeRoute(
 fun ChooseTypeScreen(
     chooseTypeUiState: ChooseTypeUiState,
     keyboardState: KeyboardState,
+    onCLickSetting: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val pagerState = rememberPagerState(0)
     // 表示当前选择的类型
-    var nowChooseType: ChooseTypeTypeUI? by remember {
+    var nowChooseType: TypeUI? by remember {
         mutableStateOf(null)
     }
     Column(modifier = modifier.fillMaxSize()) {
@@ -71,14 +74,15 @@ fun ChooseTypeScreen(
                 .fillMaxWidth()
                 .height(HEADER_HEIGHT.dp)
         )
-        TypePager(
+        ChooseTypePager(
             chooseTypeUiState = chooseTypeUiState,
             pagerState = pagerState,
-            nowChooseTypeTypeUI = nowChooseType,
+            nowTypeUI = nowChooseType,
             onClick = { chooseTypeTypeUI ->
                 // 点击类型item的回调
                 nowChooseType = chooseTypeTypeUI
             },
+            onCLickSetting = onCLickSetting,
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(if (nowChooseType == null) 1f else 0.5f)

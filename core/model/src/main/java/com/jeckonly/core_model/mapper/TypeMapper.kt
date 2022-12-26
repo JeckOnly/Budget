@@ -1,10 +1,10 @@
 package com.jeckonly.core_model.mapper
 
 import com.jeckonly.core_model.entity.TypeEntity
-import com.jeckonly.core_model.ui.ChooseTypeTypeUI
+import com.jeckonly.core_model.ui.TypeUI
 
-fun TypeEntity.toChooseTypeTypeUI(): ChooseTypeTypeUI {
-    return ChooseTypeTypeUI(
+fun TypeEntity.toChooseTypeTypeUI(): TypeUI {
+    return TypeUI(
         typeId = typeId,
         iconId = this.iconId,
         typeName = this.name,

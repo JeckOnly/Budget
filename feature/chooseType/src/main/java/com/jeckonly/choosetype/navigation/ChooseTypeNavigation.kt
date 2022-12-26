@@ -1,7 +1,8 @@
 package com.jeckonly.choosetype.navigation
 
+import androidx.compose.animation.*
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.compose.composable
+import com.google.accompanist.navigation.animation.composable
 import com.jeckonly.choosetype.ChooseTypeRoute
 import com.jeckonly.navigation.BgtTopLevelNavigationDestination
 
@@ -10,8 +11,17 @@ object ChooseTypeNavigation : BgtTopLevelNavigationDestination {
     override val destination = "choose_type_destination"
 }
 
-fun NavGraphBuilder.chooseTypeGraph() {
-    composable(route = ChooseTypeNavigation.route) {
-        ChooseTypeRoute()
+@OptIn(ExperimentalAnimationApi::class)
+fun NavGraphBuilder.chooseTypeGraph(onCLickSetting: () -> Unit) {
+    composable(
+        route = ChooseTypeNavigation.route,
+        enterTransition = {
+            EnterTransition.None
+        },
+        exitTransition = {
+            ExitTransition.None
+        }
+    ) {
+        ChooseTypeRoute(onCLickSetting = onCLickSetting)
     }
 }

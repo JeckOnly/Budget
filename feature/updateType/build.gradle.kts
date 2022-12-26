@@ -34,12 +34,13 @@ android {
 }
 
 dependencies {
+
     // modules
+    implementation(project(":core:model"))
     implementation(project(":core:designsystem"))
+    implementation(project(":core:data"))
     implementation(project(":core:navigation"))
-    // implementation(project(":feature:example"))
-    implementation(project(":feature:chooseType"))
-    implementation(project(":feature:updateType"))
+    implementation(project(":util"))
 
     // core
     implementation("androidx.core:core-ktx:$core_ktx_version")
@@ -52,9 +53,13 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout-compose:$constraintlayout_compose_version")
     implementation("androidx.navigation:navigation-compose:$navigation_compose_version")// 官方导航库
     implementation("androidx.hilt:hilt-navigation-compose:$androidx_hilt_version")
+    implementation("io.coil-kt:coil-compose:$coil_compose_version")
     // compose-accompanist
     implementation("com.google.accompanist:accompanist-systemuicontroller:$acompanist_version")
+    implementation("com.google.accompanist:accompanist-pager:$acompanist_version")// compose view pager
     implementation("com.google.accompanist:accompanist-navigation-animation:$acompanist_navigation_version")
+    // compose-third
+    implementation("org.burnoutcrew.composereorderable:reorderable:$reorderable_list_version")
 
     // test
     addTestImpl()

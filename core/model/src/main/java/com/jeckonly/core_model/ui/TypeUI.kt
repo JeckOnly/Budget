@@ -2,7 +2,7 @@ package com.jeckonly.core_model.ui
 
 import com.jeckonly.core_model.entity.helper.ExpenseOrIncome
 
-data class ChooseTypeTypeUI(
+data class TypeUI(
     val typeId: Int,
     val iconId: Int,
     val typeName: String,

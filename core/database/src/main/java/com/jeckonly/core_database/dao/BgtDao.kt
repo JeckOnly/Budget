@@ -4,7 +4,9 @@ import androidx.room.*
 import com.jeckonly.core_model.entity.NameNumberIconId
 import com.jeckonly.core_model.entity.RecordEntity
 import com.jeckonly.core_model.entity.TypeEntity
+import com.jeckonly.core_model.entity.delete.TypeDelete
 import com.jeckonly.core_model.entity.helper.ExpenseOrIncome
+import com.jeckonly.core_model.entity.update.TypeOrderUpdate
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -51,7 +53,13 @@ interface BgtDao {
      * 根据id查找类型
      */
     @Query("select * from type_table where type_type_id == :typeId_")
-    fun getTypeById(typeId_: Int): TypeEntity
+    suspend fun getTypeById(typeId_: Int): TypeEntity
+
+    @Update(entity = TypeEntity::class)
+    suspend fun updateTypeOrder(typeOrderUpdates: List<TypeOrderUpdate>)
+
+    @Delete(entity = TypeEntity::class)
+    suspend fun deleteTypeById(typeDelete: TypeDelete)
 
 
     // Record
@@ -97,4 +105,10 @@ interface BgtDao {
             "inner join type_table on record_table.record_type_id == type_table.type_type_id and type_table.expense_or_income == :expenseOrIncome_ " +
             "where year == :year_ and month == :month_ group by type_table.type_name order by number desc")
     suspend fun getTypeAndTotalNumberByYearAndMonth(year_: Int, month_: Int, expenseOrIncome_: ExpenseOrIncome): List<NameNumberIconId>
+
+    /**
+     * 根据名字查找类型
+     */
+    @Query("select count(*) from record_table where record_type_id == :typeId_")
+    suspend fun countTypeByRecordId(typeId_: Int): Int
 }

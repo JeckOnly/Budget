@@ -3,7 +3,7 @@ package com.jeckonly.choosetype.ui.state
 import android.app.Application
 import android.content.Context
 import androidx.compose.runtime.*
-import com.jeckonly.core_model.ui.ChooseTypeTypeUI
+import com.jeckonly.core_model.ui.TypeUI
 import com.jeckonly.designsystem.R
 import com.jeckonly.util.FormatNumberUtil
 import java.text.DecimalFormat
@@ -184,7 +184,7 @@ class KeyboardState(private val app: Application, private val doWhenFinish: (Cho
                     return
                 }
                 if (number1.value != "" && operator == null) {
-                    if (buttonType.chooseTypeTypeUI == null || buttonType.context == null) return
+                    if (buttonType.typeUI == null || buttonType.context == null) return
                     val numberTemp = number1.value.toDouble()
                     if (numberTemp == 0.0) return
 
@@ -207,7 +207,7 @@ class KeyboardState(private val app: Application, private val doWhenFinish: (Cho
                             month = month,
                             dayOfMonth = dayOfMonth,
                             number = numberTemp,
-                            typeId = buttonType.chooseTypeTypeUI!!.typeId,
+                            typeId = buttonType.typeUI!!.typeId,
                             remark = remark.value
                         ),
                         buttonType.context!!
@@ -365,9 +365,9 @@ sealed interface ButtonType {
     class Delete(val iconId: Int) : ButtonType
 
     @Stable
-    class Finish(var chooseTypeTypeUI: ChooseTypeTypeUI? = null, var context: Context? = null) : ButtonType {
+    class Finish(var typeUI: TypeUI? = null, var context: Context? = null) : ButtonType {
         fun cleanState() {
-            chooseTypeTypeUI = null
+            typeUI = null
             context = null
         }
     }

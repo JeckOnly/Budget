@@ -5,10 +5,12 @@ import com.jeckonly.core_database.dao.BgtDao
 import com.jeckonly.core_model.entity.NameNumberIconId
 import com.jeckonly.core_model.entity.RecordEntity
 import com.jeckonly.core_model.entity.TypeEntity
+import com.jeckonly.core_model.entity.delete.TypeDelete
 import com.jeckonly.core_model.entity.helper.ExpenseOrIncome
+import com.jeckonly.core_model.entity.update.TypeOrderUpdate
 import com.jeckonly.core_model.mapper.toChooseTypeTypeUI
-import com.jeckonly.core_model.ui.ChooseTypeTypeUI
 import com.jeckonly.core_model.ui.HomeRecordItemUI
+import com.jeckonly.core_model.ui.TypeUI
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -27,7 +29,7 @@ class DatabaseRepoImpl @Inject constructor(
         }
     }
 
-    override fun getAllExpenseType(): Flow<List<ChooseTypeTypeUI>> {
+    override fun getAllExpenseType(): Flow<List<TypeUI>> {
         return dao.getAllTypeByExpenseOrIncome(ExpenseOrIncome.Expense).map {
             it.map { typeEntity ->
                 typeEntity.toChooseTypeTypeUI()
@@ -35,7 +37,7 @@ class DatabaseRepoImpl @Inject constructor(
         }
     }
 
-    override fun getAllIncomeType(): Flow<List<ChooseTypeTypeUI>> {
+    override fun getAllIncomeType(): Flow<List<TypeUI>> {
         return dao.getAllTypeByExpenseOrIncome(ExpenseOrIncome.Income).map {
             it.map { typeEntity ->
                 typeEntity.toChooseTypeTypeUI()
@@ -93,6 +95,18 @@ class DatabaseRepoImpl @Inject constructor(
         expenseOrIncome: ExpenseOrIncome
     ): List<NameNumberIconId> {
         return dao.getTypeAndTotalNumberByYearAndMonth(year, month, expenseOrIncome)
+    }
+
+    override suspend fun updateTypeOrder(typeOrderUpdates: List<TypeOrderUpdate>) {
+        dao.updateTypeOrder(typeOrderUpdates)
+    }
+
+    override suspend fun checkTypeHasRecordOrNot(typeId: Int): Boolean {
+        return dao.countTypeByRecordId(typeId_ = typeId) > 0
+    }
+
+    override suspend fun deleteTypeById(typeId: Int) {
+        dao.deleteTypeById(TypeDelete(typeId = typeId))
     }
 }
 
