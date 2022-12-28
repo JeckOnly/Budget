@@ -16,7 +16,14 @@ fun NavGraphBuilder.chooseTypeGraph(onCLickSetting: () -> Unit) {
     composable(
         route = ChooseTypeNavigation.route,
         enterTransition = {
-            EnterTransition.None
+            when (initialState.destination.route) {
+                "update_type_route" -> {
+                    slideInVertically {
+                        it
+                    }
+                }
+                else -> EnterTransition.None
+            }
         },
         exitTransition = {
             ExitTransition.None

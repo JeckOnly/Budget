@@ -58,4 +58,13 @@
     <string name="no_chart_data">这个月还没有数据哦</string>
     <string name="warn">警告</string>
     <string name="delete_hint">删除类型将删除所有和这个类型有关的记录，确定删除吗？</string>
+    <string name="edit_type">编辑类型</string>
+    <string name="add_type">添加类型</string>
+    <string name="catering">饮食</string>
+    <string name="life">生活</string>
+    <string name="personal">个人</string>
+    <string name="family">家庭</string>
+    <string name="fitness">健身</string>
+    <string name="save">保存</string>
+    <string name="name">名字</string>
 </resources>

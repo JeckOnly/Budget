@@ -5,6 +5,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.AnimatedNavHost
+import com.jeckonly.addtype.navigation.AddTypeNavigation
+import com.jeckonly.addtype.navigation.addTypeGraph
 import com.jeckonly.choosetype.navigation.ChooseTypeNavigation
 import com.jeckonly.choosetype.navigation.chooseTypeGraph
 import com.jeckonly.updatetype.navigation.UpdateTypeNavigation
@@ -25,6 +27,14 @@ fun AddRecordNavGraph(
         chooseTypeGraph {
             UpdateTypeNavigation.navigate(navController)
         }
-        updateTypeGraph()
+        updateTypeGraph {
+            AddTypeNavigation.navigate(navController, AddTypeNavigation.buildRoute(it))
+        }
+        addTypeGraph(onClickBack = {
+            navController.popBackStack()
+        }, onFinish = {
+            navController.popBackStack()
+        })
+
     }
 }

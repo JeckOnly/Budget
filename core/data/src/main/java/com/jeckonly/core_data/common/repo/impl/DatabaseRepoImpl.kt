@@ -8,6 +8,7 @@ import com.jeckonly.core_model.entity.TypeEntity
 import com.jeckonly.core_model.entity.delete.TypeDelete
 import com.jeckonly.core_model.entity.helper.ExpenseOrIncome
 import com.jeckonly.core_model.entity.update.TypeOrderUpdate
+import com.jeckonly.core_model.entity.update.TypeUpdateNoOrder
 import com.jeckonly.core_model.mapper.toChooseTypeTypeUI
 import com.jeckonly.core_model.ui.HomeRecordItemUI
 import com.jeckonly.core_model.ui.TypeUI
@@ -107,6 +108,22 @@ class DatabaseRepoImpl @Inject constructor(
 
     override suspend fun deleteTypeById(typeId: Int) {
         dao.deleteTypeById(TypeDelete(typeId = typeId))
+    }
+
+    override suspend fun getTypeById(typeId: Int): TypeEntity {
+        return dao.getTypeById(typeId)
+    }
+
+    override suspend fun insertType(vararg typeEntity: TypeEntity) {
+        dao.insertTypes(typeEntity.toList())
+    }
+
+    override suspend fun updateType(typeUpdateNoOrder: TypeUpdateNoOrder) {
+        dao.updateType(typeUpdateNoOrder)
+    }
+
+    override suspend fun getMaxOrder(): Int {
+        return dao.getMaxOrder()
     }
 }
 

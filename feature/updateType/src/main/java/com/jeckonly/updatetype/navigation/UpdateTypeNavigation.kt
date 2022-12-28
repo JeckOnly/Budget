@@ -12,7 +12,9 @@ object UpdateTypeNavigation : BgtTopLevelNavigationDestination {
 }
 
 @OptIn(ExperimentalAnimationApi::class)
-fun NavGraphBuilder.updateTypeGraph() {
+fun NavGraphBuilder.updateTypeGraph(
+    goToAddOrEdit: (Int) -> Unit,
+) {
     composable(
         route = UpdateTypeNavigation.route,
         enterTransition = {
@@ -26,6 +28,6 @@ fun NavGraphBuilder.updateTypeGraph() {
             }
         }
     ) {
-        UpdateTypeRoute()
+        UpdateTypeRoute(goToAddOrEdit)
     }
 }

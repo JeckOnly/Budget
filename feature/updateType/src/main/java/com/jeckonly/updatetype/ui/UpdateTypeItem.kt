@@ -24,7 +24,7 @@ private const val ICON_SIZE = 30
 @Composable
 fun UpdateTypeItem(
     typeUI: TypeUI,
-    onClickEdit: () -> Unit,
+    onClickEdit: (Int) -> Unit,
     onClickDelete: (Int, Boolean, (Int) -> Unit) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -80,7 +80,11 @@ fun UpdateTypeItem(
                 contentDescription = null,
                 modifier = Mdf
                     .padding(start = 5.dp, end = 16.dp)
-                    .size(20.dp),
+                    .size(20.dp)
+                    .noIndicationClickable(onClick = {
+                        onClickEdit(typeUI.typeId)
+                    })
+                ,
                 tint = MaterialTheme.colorScheme.tertiary
             )
         }

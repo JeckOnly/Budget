@@ -43,7 +43,7 @@ interface BgtTopLevelNavigationDestination {
     /**
      * 抽象出来的导航逻辑
      */
-    fun navigate(navController: NavHostController) {
+    fun navigate(navController: NavHostController, route: String = this.route) {
         navController.navigate(route)
     }
 

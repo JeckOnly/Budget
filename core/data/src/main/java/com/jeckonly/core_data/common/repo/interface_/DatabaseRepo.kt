@@ -5,6 +5,7 @@ import com.jeckonly.core_model.entity.RecordEntity
 import com.jeckonly.core_model.entity.TypeEntity
 import com.jeckonly.core_model.entity.helper.ExpenseOrIncome
 import com.jeckonly.core_model.entity.update.TypeOrderUpdate
+import com.jeckonly.core_model.entity.update.TypeUpdateNoOrder
 import com.jeckonly.core_model.ui.HomeRecordItemUI
 import com.jeckonly.core_model.ui.TypeUI
 import kotlinx.coroutines.flow.Flow
@@ -36,4 +37,12 @@ interface DatabaseRepo {
     suspend fun checkTypeHasRecordOrNot(typeId: Int): Boolean
 
     suspend fun deleteTypeById(typeId: Int)
+
+    suspend fun getTypeById(typeId: Int): TypeEntity
+
+    suspend fun insertType(vararg typeEntity: TypeEntity)
+
+    suspend fun updateType(typeUpdateNoOrder: TypeUpdateNoOrder)
+
+    suspend fun getMaxOrder(): Int
 }

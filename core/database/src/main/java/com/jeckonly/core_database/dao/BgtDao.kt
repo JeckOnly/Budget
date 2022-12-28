@@ -7,6 +7,7 @@ import com.jeckonly.core_model.entity.TypeEntity
 import com.jeckonly.core_model.entity.delete.TypeDelete
 import com.jeckonly.core_model.entity.helper.ExpenseOrIncome
 import com.jeckonly.core_model.entity.update.TypeOrderUpdate
+import com.jeckonly.core_model.entity.update.TypeUpdateNoOrder
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -37,6 +38,10 @@ interface BgtDao {
     @Update
     suspend fun updateType(typeEntity: TypeEntity): Int
 
+
+    @Update(entity = TypeEntity::class)
+    suspend fun updateType(typeUpdateNoOrder: TypeUpdateNoOrder): Int
+
     /**
      * @return 所有类型是[expenseOrIncome_]的类型, 且应该显示。
      */
@@ -60,6 +65,9 @@ interface BgtDao {
 
     @Delete(entity = TypeEntity::class)
     suspend fun deleteTypeById(typeDelete: TypeDelete)
+
+    @Query("select max(`order`) from type_table")
+    suspend fun getMaxOrder(): Int
 
 
     // Record

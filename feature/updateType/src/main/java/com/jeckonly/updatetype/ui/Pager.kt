@@ -30,6 +30,7 @@ fun UpdateTypePager(
     updateTypeUiState: UpdateTypeUiState,
     pagerState: PagerState,
     onDragEnd: ((newList: List<TypeUI>, startIndex: Int, endIndex: Int) -> (Unit)),
+    goToAddOrEdit: (Int) -> Unit,
     onClickDelete: (Int, Boolean, (Int) -> Unit) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -50,6 +51,7 @@ fun UpdateTypePager(
                         expenseOrIncome = ExpenseOrIncome.Expense,
                         updateTypeUiState = updateTypeUiState,
                         onDragEnd = onDragEnd,
+                        goToAddOrEdit = goToAddOrEdit,
                         onClickDelete = onClickDelete,
                         modifier = Modifier.fillMaxSize()
                     )
@@ -59,6 +61,7 @@ fun UpdateTypePager(
                         expenseOrIncome = ExpenseOrIncome.Income,
                         updateTypeUiState = updateTypeUiState,
                         onDragEnd = onDragEnd,
+                        goToAddOrEdit = goToAddOrEdit,
                         onClickDelete = onClickDelete,
                         modifier = Modifier.fillMaxSize()
                     )
@@ -73,6 +76,7 @@ fun UpdateTypePage(
     expenseOrIncome: ExpenseOrIncome,
     updateTypeUiState: UpdateTypeUiState,
     onDragEnd: ((newList: List<TypeUI>, startIndex: Int, endIndex: Int) -> (Unit)),
+    goToAddOrEdit: (Int) -> Unit,
     onClickDelete: (Int, Boolean, (Int) -> Unit) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -124,7 +128,7 @@ fun UpdateTypePage(
                     ) {
                         UpdateTypeItem(
                             typeUI = item,
-                            onClickEdit = { },
+                            onClickEdit = goToAddOrEdit,
                             onClickDelete = onClickDelete,
                             modifier = Mdf.fillMaxWidth()
                         )
@@ -132,9 +136,11 @@ fun UpdateTypePage(
                 }
             }
             item {
-                Surface(modifier = Mdf
-                    .fillMaxWidth()
-                    .height(80.dp)) {
+                Surface(
+                    modifier = Mdf
+                        .fillMaxWidth()
+                        .height(80.dp)
+                ) {
 
                 }
             }

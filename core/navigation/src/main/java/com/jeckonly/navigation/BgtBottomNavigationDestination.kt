@@ -3,7 +3,7 @@ package com.jeckonly.navigation
 import androidx.navigation.NavHostController
 
 interface BgtBottomNavigationDestination: BgtTopLevelNavigationDestination {
-    override fun navigate(navController: NavHostController) {
+    override fun navigate(navController: NavHostController, route: String) {
         bottomNavigationDestinationNavigate(navController, route)
     }
 }
