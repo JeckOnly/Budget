@@ -68,4 +68,5 @@
     <string name="save">保存</string>
     <string name="name">名字</string>
     <string name="cant_empty_typeName">名字不能为空</string>
+    <string name="name_existed">名字已经存在</string>
 </resources>

@@ -125,6 +125,10 @@ class DatabaseRepoImpl @Inject constructor(
     override suspend fun getMaxOrder(): Int {
         return dao.getMaxOrder()
     }
+
+    override suspend fun isTypeNameExited(typeName: String): Boolean {
+        return dao.getTypeByName(typeName).isNotEmpty()
+    }
 }
 
 

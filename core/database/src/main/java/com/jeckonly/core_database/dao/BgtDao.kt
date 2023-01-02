@@ -52,7 +52,7 @@ interface BgtDao {
      * 根据名字查找类型
      */
     @Query("select * from type_table where type_name == :typeName_")
-    fun getTypeByName(typeName_: String): TypeEntity
+    suspend fun getTypeByName(typeName_: String): List<TypeEntity>
 
     /**
      * 根据id查找类型

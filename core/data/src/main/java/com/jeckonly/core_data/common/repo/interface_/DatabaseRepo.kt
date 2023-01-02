@@ -45,4 +45,6 @@ interface DatabaseRepo {
     suspend fun updateType(typeUpdateNoOrder: TypeUpdateNoOrder)
 
     suspend fun getMaxOrder(): Int
+
+    suspend fun isTypeNameExited(typeName: String): Boolean
 }

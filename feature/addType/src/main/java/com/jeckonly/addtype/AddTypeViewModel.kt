@@ -78,6 +78,10 @@ class AddTypeViewModel @Inject constructor(
                 Toast.makeText(app, app.getString(R.string.cant_empty_typeName), Toast.LENGTH_SHORT).show()
                 return@launch
             }
+            if (databaseRepo.isTypeNameExited(result.typeName)) {
+                Toast.makeText(app, app.getString(R.string.name_existed), Toast.LENGTH_SHORT).show()
+                return@launch
+            }
             if (_typeId == -1) {
                 // 插入新的
                 val maxOrder = databaseRepo.getMaxOrder()
