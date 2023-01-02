@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.jeckonly.core_model.entity.helper.ExpenseOrIncome
@@ -60,7 +61,8 @@ fun ChooseTypeItem(
             text = typeUI.typeName,
             style = MaterialTheme.typography.bodySmall,
             color = contentColorFor(backgroundColor = MaterialTheme.colorScheme.surface),
-            modifier = Mdf.padding(top = 8.dp)
+            modifier = Mdf.padding(top = 8.dp),
+            textAlign = TextAlign.Center
         )
     }
 }
