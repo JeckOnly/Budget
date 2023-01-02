@@ -2,6 +2,7 @@ package com.jeckonly.addtype
 
 import android.app.Application
 import android.content.Context
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jeckonly.addtype.ui.state.AddTypeKind
@@ -73,6 +74,10 @@ class AddTypeViewModel @Inject constructor(
     fun onSave(afterSave: () -> Unit) {
         viewModelScope.launch {
             val result = _addTypeScreenState.value
+            if (result.typeName.isEmpty()) {
+                Toast.makeText(app, app.getString(R.string.cant_empty_typeName), Toast.LENGTH_SHORT).show()
+                return@launch
+            }
             if (_typeId == -1) {
                 // 插入新的
                 val maxOrder = databaseRepo.getMaxOrder()
@@ -94,6 +99,7 @@ class AddTypeViewModel @Inject constructor(
                     )
                 )
             }
+            // 成功保存
             afterSave()
         }
     }

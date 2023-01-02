@@ -67,4 +67,5 @@
     <string name="fitness">健身</string>
     <string name="save">保存</string>
     <string name="name">名字</string>
+    <string name="cant_empty_typeName">名字不能为空</string>
 </resources>
