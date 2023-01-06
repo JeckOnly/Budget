@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.sp
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.jeckonly.designsystem.Mdf
 import com.jeckonly.designsystem.R
+import com.jeckonly.more.ui.ThemeButton
 
 @Composable
 fun MoreRoute() {
@@ -41,10 +42,10 @@ fun MoreRoute() {
 fun MoreScreen(
     modifier: Modifier = Modifier
 ) {
-    Surface(color = MaterialTheme.colorScheme.surface) {
+    Surface(color = MaterialTheme.colorScheme.surface, modifier = modifier) {
         Column(modifier = Mdf.fillMaxSize()) {
             MoreScreenHeader()
-
+            ThemeButton(modifier = Mdf.padding(10.dp))
         }
     }
 }
