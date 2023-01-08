@@ -9,4 +9,8 @@ interface UserPrefsRepo {
     fun getTypeDatabaseInitState(): Flow<Boolean>
 
     suspend fun updateTypeDatabaseInitStateToFinished()
+
+    fun getThemeNumber(): Flow<Int>
+
+    suspend fun updateThemeNumber(newValue: Int)
 }

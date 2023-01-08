@@ -18,11 +18,11 @@ import com.jeckonly.designsystem.R
 import com.jeckonly.designsystem.noIndicationClickable
 
 @Composable
-fun ThemeButton(modifier: Modifier = Modifier) {
+fun ThemeButton(toChangeThemeScreen: () -> Unit, modifier: Modifier = Modifier) {
     Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
         Surface(
             modifier = Mdf.size(60.dp).noIndicationClickable {
-
+                toChangeThemeScreen()
             },
             shape = RoundedCornerShape(30),
             color = MaterialTheme.colorScheme.secondaryContainer,

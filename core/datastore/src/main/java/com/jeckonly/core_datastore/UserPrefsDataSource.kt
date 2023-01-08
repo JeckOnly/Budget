@@ -28,4 +28,16 @@ class UserPrefsDataSource @Inject constructor(
             preferences.toBuilder().setDatabaseTypeHasInit(hasInit).build()
         }
     }
+
+    fun getThemeNumber(): Flow<Int> {
+        return userPreferences.data.map {
+            it.themeColor
+        }
+    }
+
+    suspend fun updateThemeNumber(newValue: Int) {
+        userPreferences.updateData { preferences ->
+            preferences.toBuilder().setThemeColor(newValue).build()
+        }
+    }
 }

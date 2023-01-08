@@ -20,7 +20,7 @@ import com.jeckonly.chart.ui.state.LeaderBoardItemUI
 import com.jeckonly.core_model.entity.helper.ExpenseOrIncome
 import com.jeckonly.designsystem.Mdf
 import com.jeckonly.designsystem.R
-import com.jeckonly.designsystem.theme.percent1_expense
+import com.jeckonly.designsystem.theme.color.percent1_expense
 import com.jeckonly.util.FormatNumberUtil
 
 @Composable

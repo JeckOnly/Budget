@@ -8,15 +8,22 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import com.jeckonly.app_addrecord.AddRecordViewModel
 import com.jeckonly.designsystem.Mdf
 import com.jeckonly.designsystem.theme.BudgetTheme
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun AddRecordApp() {
+fun AddRecordApp(
+    viewModel: AddRecordViewModel = hiltViewModel()
+) {
 
+    val budgetColorTheme = viewModel.themeFlow.collectAsState()
     BudgetTheme(
+        colorScheme = budgetColorTheme.value,
         wantDynamic = false
     ) {
         Surface(

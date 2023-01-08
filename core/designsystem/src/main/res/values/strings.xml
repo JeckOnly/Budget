@@ -72,4 +72,6 @@
     <string name="more" translatable="false">more</string>
     <string name="more_hint" translatable="false">More function is coming</string>
     <string name="change_theme">change color</string>
+    <string name="theme_setting">Theme Setting</string>
+    <string name="theme_setting_hint">choose a new color for theme</string>
 </resources>

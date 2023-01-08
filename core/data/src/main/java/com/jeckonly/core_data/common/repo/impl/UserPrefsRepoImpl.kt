@@ -22,4 +22,11 @@ class UserPrefsRepoImpl @Inject constructor(
         dataSource.updateTypeDatabaseInitState(true)
     }
 
+    override fun getThemeNumber(): Flow<Int> {
+        return dataSource.getThemeNumber()
+    }
+
+    override suspend fun updateThemeNumber(newValue: Int) {
+        dataSource.updateThemeNumber(newValue)
+    }
 }

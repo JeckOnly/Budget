@@ -41,7 +41,7 @@ fun AddTypeRoute(
     val systemUiController = rememberSystemUiController()
     val systemUiColor = MaterialTheme.colorScheme.secondaryContainer
 
-    DisposableEffect(key1 = systemUiController) {
+    DisposableEffect(key1 = systemUiColor) {
         systemUiController.setStatusBarColor(
             color = systemUiColor,
             darkIcons = true

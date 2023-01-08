@@ -66,6 +66,8 @@ dependencies {
     implementation(project(":feature:home"))
     implementation(project(":feature:chart"))
     implementation(project(":feature:more"))
+    implementation(project(":feature:changeTheme"))
+    implementation(project(":core:data"))
     implementation(project(":util"))
 
     // core

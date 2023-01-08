@@ -15,12 +15,15 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.LocalContext
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.jeckonly.app_addrecord.AddRecordActivity
+import com.jeckonly.budget.MainViewModel
 import com.jeckonly.chart.navigation.ChartDestination
 import com.jeckonly.designsystem.Mdf
 import com.jeckonly.designsystem.composable.navigation.BgtBottomBar
@@ -30,10 +33,14 @@ import com.jeckonly.more.navigation.MoreDestination
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun BgtApp() {
+fun BgtApp(
+    viewModel: MainViewModel = hiltViewModel()
+) {
 
     val activity = LocalContext.current as Activity
+    val budgetColorTheme = viewModel.themeFlow.collectAsState()
     BudgetTheme(
+        colorScheme = budgetColorTheme.value,
         wantDynamic = false
     ) {
         Surface(

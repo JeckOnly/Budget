@@ -36,7 +36,7 @@ fun ChooseTypeRoute(
     val systemUiColor = MaterialTheme.colorScheme.secondaryContainer
     val chooseTypeUiState = viewModel.chooseTypeUiStateFlow.collectAsState()
 
-    DisposableEffect(key1 = systemUiController) {
+    DisposableEffect(key1 = systemUiColor) {
         systemUiController.setStatusBarColor(
             color = systemUiColor,
             darkIcons = true

@@ -38,7 +38,7 @@ fun HomeRoute(
     val systemUiController = rememberSystemUiController()
     val systemUiColor = MaterialTheme.colorScheme.primary
 
-    DisposableEffect(key1 = systemUiController) {
+    DisposableEffect(key1 = systemUiColor) {
         systemUiController.setStatusBarColor(
             color = systemUiColor,
             darkIcons = true

@@ -9,4 +9,8 @@ message UserPreferences {
    */
   bool databaseTypeHasInit = 1;
 
+  /**
+   * 默认值为0，表示主题颜色
+   */
+  int32 themeColor = 2;
 }

@@ -5,6 +5,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.AnimatedNavHost
+import com.jeckonly.changetheme.navigation.ChangeThemeNavigation
+import com.jeckonly.changetheme.navigation.changeThemeGraph
 import com.jeckonly.chart.navigation.chartGraph
 import com.jeckonly.home.navigation.HomeDestination
 import com.jeckonly.home.navigation.homesGraph
@@ -24,6 +26,11 @@ fun BgtNavGraph(
     ) {
         homesGraph()
         chartGraph()
-        moreGraph()
+        moreGraph(
+            toChangeThemeScreen = {
+                ChangeThemeNavigation.navigate(navController)
+            }
+        )
+        changeThemeGraph()
     }
 }

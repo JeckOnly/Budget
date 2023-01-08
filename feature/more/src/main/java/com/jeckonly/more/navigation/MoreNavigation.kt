@@ -1,8 +1,6 @@
 package com.jeckonly.more.navigation
 
-import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.*
 import androidx.navigation.NavGraphBuilder
 import com.google.accompanist.navigation.animation.composable
 import com.jeckonly.more.MoreRoute
@@ -14,19 +12,36 @@ object MoreDestination : BgtBottomNavigationDestination {
 }
 
 @OptIn(ExperimentalAnimationApi::class)
-fun NavGraphBuilder.moreGraph() {
+fun NavGraphBuilder.moreGraph(toChangeThemeScreen: () -> Unit) {
     composable(route = MoreDestination.route,
         enterTransition = {
-            slideInHorizontally {
-                it
+            when (initialState.destination.route) {
+                "home_route", "chart_route" -> {
+                    slideInHorizontally {
+                        it
+                    }
+                }
+                else -> {
+                    slideInVertically {
+                        it
+                    }
+                }
             }
-
         },
         exitTransition = {
-            slideOutHorizontally {
-                it
+            when (targetState.destination.route) {
+                "home_route", "chart_route" -> {
+                    slideOutHorizontally {
+                        it
+                    }
+                }
+                else -> {
+                    slideOutVertically {
+                        it
+                    }
+                }
             }
         }) {
-        MoreRoute()
+        MoreRoute(toChangeThemeScreen = toChangeThemeScreen)
     }
 }
