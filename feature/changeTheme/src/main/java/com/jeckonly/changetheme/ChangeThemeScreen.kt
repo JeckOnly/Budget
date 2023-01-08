@@ -70,6 +70,7 @@ fun ChangeThemeScreen(
                         onClick = onClickItem,
                         modifier = Mdf.fillMaxWidth()
                     )
+                    Spacer(modifier = Mdf.height(10.dp))
                 }
             })
         }

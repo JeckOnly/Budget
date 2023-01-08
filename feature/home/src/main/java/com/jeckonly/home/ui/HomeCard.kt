@@ -26,7 +26,7 @@ import com.jeckonly.designsystem.R
 import com.jeckonly.home.ui.state.HomeRecordCardUI
 import java.time.LocalDate
 
-private const val ICON_SIZE = 30
+private const val ICON_SIZE = 27
 
 @Composable
 fun HomeCardRecordItem(
@@ -62,7 +62,7 @@ fun HomeCardRecordItem(
                         color = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f),
                         shape = CircleShape
                     )
-                    .padding(2.dp)
+                    .padding(4.dp)
                     .constrainAs(iconRefs) {
                         start.linkTo(parent.start, 10.dp)
                         top.linkTo(parent.top, 14.dp)

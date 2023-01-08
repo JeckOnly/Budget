@@ -1,6 +1,8 @@
 package com.jeckonly.changetheme.ui
 
 import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.SpringSpec
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -35,8 +37,8 @@ fun ThemeItem(
     }
     LaunchedEffect(key1 = animateStartHelper, block = {
         if (animateStartHelper > 0) {
-            scaleAnimated.animateTo(0.7f)
-            scaleAnimated.animateTo(1f)
+            scaleAnimated.animateTo(0.8f)
+            scaleAnimated.animateTo(1f, animationSpec = SpringSpec(stiffness = Spring.StiffnessLow, dampingRatio = Spring.DampingRatioHighBouncy))
         }
     })
     Box(modifier = Mdf.scale(scaleAnimated.value)) {
@@ -49,7 +51,7 @@ fun ThemeItem(
             color = MaterialTheme.colorScheme.surface,
             tonalElevation = if (selectedNumber == number) 1.dp else 0.dp,
             border = if (selectedNumber == number) BorderStroke(
-                1.dp,
+                2.dp,
                 MaterialTheme.colorScheme.primary
             ) else BorderStroke(0.dp, Color.Transparent)
         ) {
