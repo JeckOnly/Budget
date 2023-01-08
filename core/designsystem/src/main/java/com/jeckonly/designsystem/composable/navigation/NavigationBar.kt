@@ -46,19 +46,19 @@ fun BgtNavigationBar(
                 horizontalArrangement = Arrangement.SpaceAround,
             ) {
                 BgtNavigationBarItem(
-                    selected = homeDestination.isSelected(currentDestination),
+                    selected = homeDestination.isInHierarchy(currentDestination),
                     onClick = onClickHome,
                     id = R.drawable.home,
                 )
 
                 BgtNavigationBarItem(
-                    selected = chartDestination.isSelected(currentDestination),
+                    selected = chartDestination.isInHierarchy(currentDestination),
                     onClick = onClickChart,
                     id = R.drawable.circle_chart,
                 )
 
                 BgtNavigationBarItem(
-                    selected = moreDestination.isSelected(currentDestination),
+                    selected = moreDestination.isInHierarchy(currentDestination),
                     onClick = onClickMore,
                     id = R.drawable.more,
                 )

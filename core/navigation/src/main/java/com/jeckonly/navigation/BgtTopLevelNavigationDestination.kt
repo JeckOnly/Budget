@@ -16,6 +16,7 @@
 
 package com.jeckonly.navigation
 
+import android.util.Log
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
@@ -50,8 +51,16 @@ interface BgtTopLevelNavigationDestination {
     /**
      * 抽象出来的判断逻辑
      */
-    fun isSelected(currentDestination: NavDestination?): Boolean {
+    fun isInHierarchy(currentDestination: NavDestination?): Boolean {
         return topLevelDestinationIsSelected(currentDestination, route)
+    }
+
+    fun checkCurrentIsMe(currentDestination: NavDestination?): Boolean {
+        val result =  currentDestination?.let {
+            Log.d("BgtTopLevelNavigationDestination", "currentDestinationRoute: ${it.route}, navRoute:${route}")
+            it.route == route
+        } ?: false
+        return result
     }
 }
 
