@@ -49,18 +49,24 @@ fun BgtNavigationBar(
                     selected = homeDestination.isInHierarchy(currentDestination),
                     onClick = onClickHome,
                     id = R.drawable.home,
+                    nameId = R.string.home_bottom,
+                    modifier = Mdf.padding(top = 8.dp)
                 )
 
                 BgtNavigationBarItem(
                     selected = chartDestination.isInHierarchy(currentDestination),
                     onClick = onClickChart,
                     id = R.drawable.circle_chart,
+                    nameId = R.string.chart_bottom,
+                    modifier = Mdf.padding(top = 8.dp)
                 )
 
                 BgtNavigationBarItem(
                     selected = moreDestination.isInHierarchy(currentDestination),
                     onClick = onClickMore,
                     id = R.drawable.more,
+                    nameId = R.string.more_bottom,
+                    modifier = Mdf.padding(top = 8.dp)
                 )
             }
         }

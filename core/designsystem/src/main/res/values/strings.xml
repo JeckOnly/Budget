@@ -90,4 +90,7 @@
     <string name="PurpleHeart">紫色勋章</string>
     <string name="PurpleHeart2">天芥菜</string>
     <string name="VioletEggplant">茄子</string>
+    <string name="home_bottom">主页</string>
+    <string name="chart_bottom">图表</string>
+    <string name="more_bottom">更多</string>
 </resources>
