@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -55,13 +56,14 @@ fun ChangeThemeScreen(
     onClickItem: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
     Surface(color = MaterialTheme.colorScheme.surface, modifier = modifier) {
         Column {
             ChangeThemeHeader()
             LazyColumn(modifier = Mdf
                 .fillMaxWidth()
                 .padding(horizontal = 15.dp, vertical = 15.dp), content = {
-                items(items = BudgetColorTheme.themeItemList, key = { it.number }) {
+                items(items = BudgetColorTheme.getThemeItemList(context), key = { it.number }) {
                     ThemeItem(
                         selectedNumber = selectedNumber,
                         number = it.number,

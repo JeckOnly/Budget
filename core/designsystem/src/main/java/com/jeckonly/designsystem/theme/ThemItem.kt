@@ -1,8 +1,10 @@
 package com.jeckonly.designsystem.theme
 
+import android.content.Context
 import androidx.compose.material3.ColorScheme
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.graphics.Color
+import com.jeckonly.designsystem.R
 import com.jeckonly.designsystem.theme.color.*
 
 @Stable
@@ -79,86 +81,86 @@ data class BudgetColorTheme(
         }
 
         // 主题界面的列表元素
-        val themeItemList = listOf<ThemeItem>(
+        fun getThemeItemList(context: Context) = listOf(
             ThemeItem(
                 number = 0,
                 color = MaroonFlush,
-                colorDescribedText = "Maroon Flush"
+                colorDescribedText = context.getString(R.string.MaroonFlush)
             ),
             ThemeItem(
                 number = 1,
                 color = TallPoppy,
-                colorDescribedText = "Tall Poppy"
+                colorDescribedText = context.getString(R.string.TallPoppy)
             ),
             ThemeItem(
                 number = 2,
                 color = Fire,
-                colorDescribedText = "Fire"
+                colorDescribedText = context.getString(R.string.Fire)
             ),
             ThemeItem(
                 number = 3,
                 color = Brown,
-                colorDescribedText = "Brown"
+                colorDescribedText = context.getString(R.string.Brown)
             ),
             ThemeItem(
                 number = 4,
                 color = Cinnamon,
-                colorDescribedText = "Cinnamon"
+                colorDescribedText = context.getString(R.string.Cinnamon)
             ),
             ThemeItem(
                 number = 5,
                 color = Verdun,
-                colorDescribedText = "Verdun"
+                colorDescribedText = context.getString(R.string.Verdun)
             ),
             ThemeItem(
                 number = 6,
                 color = JapaneseLaurel,
-                colorDescribedText = "Japanese Laurel"
+                colorDescribedText = context.getString(R.string.JapaneseLaurel)
             ),
             ThemeItem(
                 number = 7,
                 color = FunGreen,
-                colorDescribedText = "Fun Green"
+                colorDescribedText = context.getString(R.string.FunGreen)
             ),
             ThemeItem(
                 number = 8,
                 color = TropicalRainForest,
-                colorDescribedText = "Tropical Rain Forest"
+                colorDescribedText = context.getString(R.string.TropicalRainForest)
             ),
             ThemeItem(
                 number = 9,
                 color = Mosque,
-                colorDescribedText = "Mosque"
+                colorDescribedText = context.getString(R.string.Mosque)
             ),
             ThemeItem(
                 number = 10,
                 color = BahamaBlue,
-                colorDescribedText = "Bahama Blue"
+                colorDescribedText = context.getString(R.string.BahamaBlue)
             ),
             ThemeItem(
                 number = 11,
                 color = Endeavour,
-                colorDescribedText = "Endeavour"
+                colorDescribedText = context.getString(R.string.Endeavour)
             ),
             ThemeItem(
                 number = 12,
                 color = RoyalBlue,
-                colorDescribedText = "Royal Blue"
+                colorDescribedText = context.getString(R.string.RoyalBlue)
             ),
             ThemeItem(
                 number = 13,
                 color = PurpleHeart,
-                colorDescribedText = "Purple Heart"
+                colorDescribedText = context.getString(R.string.PurpleHeart)
             ),
             ThemeItem(
                 number = 14,
                 color = PurpleHeart2,
-                colorDescribedText = "Purple Heart 2"
+                colorDescribedText = context.getString(R.string.PurpleHeart2)
             ),
             ThemeItem(
                 number = 15,
                 color = VioletEggplant,
-                colorDescribedText = "Violet Eggplant"
+                colorDescribedText = context.getString(R.string.VioletEggplant)
             ),
         )
     }
