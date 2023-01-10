@@ -1,7 +1,6 @@
 package com.jeckonly.chart.ui.state
 
 import androidx.compose.runtime.Stable
-import androidx.compose.ui.graphics.Color
 import com.jeckonly.core_model.entity.helper.ExpenseOrIncome
 
 @Stable
@@ -13,7 +12,7 @@ data class LeaderBoardItemUI(
      */
     val percent: Double,
     val number: Double,
-    val color: Color,
+    val colorOrder: Int,
     val expenseOrIncome: ExpenseOrIncome
 )
 

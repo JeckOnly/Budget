@@ -7,7 +7,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.jeckonly.chart.ui.state.PieChartSegmentUI
@@ -48,31 +47,31 @@ fun PreviewPieChartArea() {
         listOf(
             PieChartSegmentUI(
                 typeName = "清洁",
-                color = Color.Blue,
+                colorOrder = 1,
                 startDegree = -90.0,
                 sweepDegree = 120.0
             ),
             PieChartSegmentUI(
                 typeName = "清洁",
-                color = Color.Red,
+                colorOrder = 2,
                 startDegree = 30.0,
                 sweepDegree = 90.0
             ),
             PieChartSegmentUI(
                 typeName = "清洁",
-                color = Color.Green,
+                colorOrder = 3,
                 startDegree = 120.0,
                 sweepDegree = 30.0
             ),
             PieChartSegmentUI(
                 typeName = "清洁",
-                color = Color.Black,
+                colorOrder = 4,
                 startDegree = 150.0,
                 sweepDegree = 60.0
             ),
             PieChartSegmentUI(
                 typeName = "清洁",
-                color = Color.Yellow,
+                colorOrder = 5,
                 startDegree = 210.0,
                 sweepDegree = 60.0
             )

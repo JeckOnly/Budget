@@ -110,7 +110,7 @@ class ChartViewModel @Inject constructor(
                 // 取前4个
                 val pieChartSegmentUI = PieChartSegmentUI(
                     typeName = nameNumberIconId.typeName,
-                    color = orderToColor(order, expenseOrIncome),
+                    colorOrder = order,
                     startDegree = startDegreeNow,
                     sweepDegree = percent * 360,
                 )
@@ -126,7 +126,7 @@ class ChartViewModel @Inject constructor(
                         app.getString(R.string.type_others)// 还有2个以上
                     else
                         nameNumberIconId.typeName,// 假如刚刚好5个
-                    color = orderToColor(order, expenseOrIncome),
+                    colorOrder = order,
                     startDegree = startDegreeNow,
                     sweepDegree = END_DEGREE - startDegreeNow,// 使用完剩下的角度
                 )
@@ -138,7 +138,7 @@ class ChartViewModel @Inject constructor(
                     iconId = nameNumberIconId.iconId,
                     percent = percent,
                     number = nameNumberIconId.number,
-                    color = orderToColor(order, expenseOrIncome),
+                    colorOrder = order,
                     expenseOrIncome = expenseOrIncome
                 )
             )
@@ -151,7 +151,7 @@ class ChartViewModel @Inject constructor(
                 iconId = R.drawable.other_item,
                 percent = 1 - theFirstFourTotal / totalNumber,
                 number = totalNumber - theFirstFourTotal,
-                color = orderToColor(5, expenseOrIncome),
+                colorOrder = 5,
                 expenseOrIncome = expenseOrIncome
             )
         }

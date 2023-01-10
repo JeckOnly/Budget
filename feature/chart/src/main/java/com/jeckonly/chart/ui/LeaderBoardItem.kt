@@ -10,6 +10,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -20,14 +22,15 @@ import com.jeckonly.chart.ui.state.LeaderBoardItemUI
 import com.jeckonly.core_model.entity.helper.ExpenseOrIncome
 import com.jeckonly.designsystem.Mdf
 import com.jeckonly.designsystem.R
-import com.jeckonly.designsystem.theme.color.percent1_expense
 import com.jeckonly.util.FormatNumberUtil
+import com.jeckonly.util.material_util.TonalUtil
 
 @Composable
 fun LeaderBoardItem(
     leaderBoardItemUI: LeaderBoardItemUI,
     modifier: Modifier = Modifier
 ) {
+    val primaryColor = MaterialTheme.colorScheme.primary
     val numberText = remember(leaderBoardItemUI) {
         when (leaderBoardItemUI.expenseOrIncome) {
             ExpenseOrIncome.Expense -> {
@@ -52,7 +55,7 @@ fun LeaderBoardItem(
             val (icon, typeName, number, percent, progressBackground) = createRefs()
 
             Surface(
-                color = leaderBoardItemUI.color.copy(alpha = 0.6f),
+                color = Color(TonalUtil.argbToTonalSpecific(primaryColor.toArgb(), leaderBoardItemUI.colorOrder)).copy(alpha = 0.8f),
                 modifier = Mdf.constrainAs(progressBackground) {
                     start.linkTo(parent.start)
                     linkTo(top = parent.top, bottom = parent.bottom)
@@ -66,7 +69,7 @@ fun LeaderBoardItem(
             Surface(
                 shadowElevation = 1.dp,
                 shape = CircleShape,
-                color = leaderBoardItemUI.color,
+                color = Color(TonalUtil.argbToTonalSpecific(primaryColor.toArgb(), leaderBoardItemUI.colorOrder)),
                 modifier = Mdf
                     .constrainAs(icon) {
                         start.linkTo(parent.start, margin = 15.dp)
@@ -133,7 +136,7 @@ fun PreviewLeaderBoardItem() {
             R.drawable.category_e_home_stroke,
             percent = 0.333,
             number = 855.55,
-            color = percent1_expense,
+            colorOrder = 1,
             expenseOrIncome = ExpenseOrIncome.Expense
         ),
         modifier = Mdf
