@@ -17,7 +17,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.animateLottieCompositionAsState
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.jeckonly.designsystem.Mdf
+import com.jeckonly.designsystem.R
 import com.jeckonly.designsystem.noIndicationClickable
 
 @Composable
@@ -41,10 +46,33 @@ fun ThemeItem(
             scaleAnimated.animateTo(1f, animationSpec = SpringSpec(stiffness = Spring.StiffnessLow, dampingRatio = Spring.DampingRatioHighBouncy))
         }
     })
+
+    // 烟花
+    var isPlaying by remember {
+        mutableStateOf(false)
+    }
+
+    val lottieComposition by rememberLottieComposition(
+        spec = LottieCompositionSpec.RawRes(R.raw.fireworks),
+    )
+
+    val lottieAnimationState = animateLottieCompositionAsState (
+        composition = lottieComposition,
+        isPlaying = isPlaying,
+        speed = 1.2f
+    )
+
+    if (lottieAnimationState.progress == 1f) {
+        isPlaying = !isPlaying
+    }
+
     Box(modifier = Mdf.scale(scaleAnimated.value)) {
         Surface(
             modifier = modifier.noIndicationClickable {
                 animateStartHelper++
+                if (!lottieAnimationState.isPlaying) {
+                    isPlaying = !isPlaying
+                }
                 onClick(number)
             },
             shape = RoundedCornerShape(20),
@@ -56,17 +84,25 @@ fun ThemeItem(
             ) else BorderStroke(0.dp, Color.Transparent)
         ) {
             Row(modifier = Mdf.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                RadioButton(
-                    selected = selectedNumber == number, onClick = {
-                        onClick(number)
-                    },
-                    enabled = false,
-                    colors = RadioButtonDefaults.colors(
-                        disabledSelectedColor = MaterialTheme.colorScheme.primary,
-                        disabledUnselectedColor = MaterialTheme.colorScheme.onSurfaceVariant
-                    ),
-                    modifier = Modifier.padding(horizontal = 15.dp, vertical = 10.dp)
-                )
+                Box( contentAlignment = Alignment.Center ) {
+                    RadioButton(
+                        selected = selectedNumber == number, onClick = {
+                            onClick(number)
+                        },
+                        enabled = false,
+                        colors = RadioButtonDefaults.colors(
+                            disabledSelectedColor = MaterialTheme.colorScheme.primary,
+                            disabledUnselectedColor = MaterialTheme.colorScheme.onSurfaceVariant
+                        ),
+                        modifier = Modifier.padding(horizontal = 15.dp, vertical = 10.dp)
+                    )
+                    // 烟花
+                    LottieAnimation(
+                        lottieComposition,
+                        modifier = Mdf.size(70.dp),
+                        progress = { lottieAnimationState.progress }
+                    )
+                }
                 Text(
                     text = text,
                     style = MaterialTheme.typography.bodyMedium,

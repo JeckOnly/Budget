@@ -17,9 +17,6 @@ android {
     }
 
     compileOptions {
-        // Flag to enable support for the new language APIs
-        isCoreLibraryDesugaringEnabled = true
-
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -60,6 +57,9 @@ dependencies {
     // compose-accompanist
     implementation("com.google.accompanist:accompanist-systemuicontroller:$acompanist_version")
     implementation("com.google.accompanist:accompanist-navigation-animation:$acompanist_navigation_version")
+
+    // compose-third
+    implementation("com.airbnb.android:lottie-compose:$lottie_version")
 
     // test
     addTestImpl()
