@@ -23,6 +23,6 @@ class AddRecordViewModel @Inject constructor(
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000),
-        initialValue = BudgetColorTheme.chooseThemeByNumber(0)
+        initialValue = BudgetColorTheme.chooseThemeByNumber(-1)
     )
 }
