@@ -1,8 +1,6 @@
 package com.jeckonly.home.navigation
 
-import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.*
 import androidx.navigation.NavGraphBuilder
 import com.google.accompanist.navigation.animation.composable
 import com.jeckonly.home.HomeRoute
@@ -18,14 +16,32 @@ fun NavGraphBuilder.homesGraph() {
     composable(
         route = HomeDestination.route,
         enterTransition = {
-            slideInHorizontally {
-                -it
+            when (initialState.destination.route) {
+                "chart_route", "more_route" -> {
+                    slideInHorizontally {
+                        -it
+                    }
+                }
+                else -> {
+                    slideInVertically {
+                        it
+                    }
+                }
             }
 
         },
         exitTransition = {
-            slideOutHorizontally {
-                -it
+            when (targetState.destination.route) {
+                "chart_route", "more_route" -> {
+                    slideOutHorizontally {
+                        -it
+                    }
+                }
+                else -> {
+                    slideOutVertically {
+                        it
+                    }
+                }
             }
         }
     ) {

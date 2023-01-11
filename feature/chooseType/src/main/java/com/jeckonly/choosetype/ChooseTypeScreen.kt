@@ -28,6 +28,7 @@ private const val HEADER_HEIGHT = 55
 @Composable
 fun ChooseTypeRoute(
     onCLickSetting: () -> Unit,
+    popBackStack: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: ChooseTypeViewModel = hiltViewModel()
 ) {
@@ -50,6 +51,7 @@ fun ChooseTypeRoute(
         chooseTypeUiState = chooseTypeUiState.value,
         keyboardState = viewModel.keyboardState,
         onCLickSetting = onCLickSetting,
+        popBackStack = popBackStack,
         modifier = modifier
     )
 }
@@ -60,6 +62,7 @@ fun ChooseTypeScreen(
     chooseTypeUiState: ChooseTypeUiState,
     keyboardState: KeyboardState,
     onCLickSetting: () -> Unit,
+    popBackStack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val pagerState = rememberPagerState(0)
@@ -107,6 +110,7 @@ fun ChooseTypeScreen(
                     nowChooseType = null
                     keyboardState.cleanState()
                 },
+                popBackStack = popBackStack,
                 modifier = Modifier
                     .fillMaxSize()
             )

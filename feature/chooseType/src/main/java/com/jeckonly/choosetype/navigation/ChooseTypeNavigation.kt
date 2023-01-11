@@ -12,23 +12,21 @@ object ChooseTypeNavigation : BgtTopLevelNavigationDestination {
 }
 
 @OptIn(ExperimentalAnimationApi::class)
-fun NavGraphBuilder.chooseTypeGraph(onCLickSetting: () -> Unit) {
+fun NavGraphBuilder.chooseTypeGraph(onCLickSetting: () -> Unit, popBackStack: () -> Unit) {
     composable(
         route = ChooseTypeNavigation.route,
         enterTransition = {
-            when (initialState.destination.route) {
-                "update_type_route" -> {
-                    slideInVertically {
-                        it
-                    }
-                }
-                else -> EnterTransition.None
+            slideInVertically {
+                it
             }
+
         },
         exitTransition = {
-            ExitTransition.None
+            slideOutVertically {
+                it
+            }
         }
     ) {
-        ChooseTypeRoute(onCLickSetting = onCLickSetting)
+        ChooseTypeRoute(onCLickSetting = onCLickSetting, popBackStack = popBackStack)
     }
 }

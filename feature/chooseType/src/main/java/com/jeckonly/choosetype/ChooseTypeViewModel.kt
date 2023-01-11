@@ -1,6 +1,5 @@
 package com.jeckonly.choosetype
 
-import android.app.Activity
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -78,11 +77,11 @@ class ChooseTypeViewModel @Inject constructor(
      * keyboard state
      */
     val keyboardState: KeyboardState by lazy {
-        KeyboardState(app = app) { chooseTypeFinishState, context ->
+        KeyboardState(app = app) { chooseTypeFinishState, popBackStack ->
             viewModelScope.launch {
                 databaseRepo.insertRecord(chooseTypeFinishState.toRecordEntity(), onSuccess = {
                     Timber.d("成功插入")
-                    (context as Activity).finishAfterTransition()
+                    popBackStack()
                 }, onFail = {
                     Timber.d("插入失败" + it.message)
                 })

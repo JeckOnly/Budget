@@ -1,7 +1,6 @@
 package com.jeckonly.choosetype.ui.state
 
 import android.app.Application
-import android.content.Context
 import androidx.compose.runtime.*
 import com.jeckonly.core_model.ui.TypeUI
 import com.jeckonly.designsystem.R
@@ -15,7 +14,7 @@ private const val NUMBER_COUNT_BEFORE_POINT = 8
 private const val NUMBER_COUNT_AFTER_POINT = 2
 
 @Stable
-class KeyboardState(private val app: Application, private val doWhenFinish: (ChooseTypeFinishState, Context) -> Unit) {
+class KeyboardState(private val app: Application, private val doWhenFinish: (ChooseTypeFinishState, (() -> Unit)) -> Unit) {
 
 
     private val doneText = app.getString(R.string.done)
@@ -184,7 +183,7 @@ class KeyboardState(private val app: Application, private val doWhenFinish: (Cho
                     return
                 }
                 if (number1.value != "" && operator == null) {
-                    if (buttonType.typeUI == null || buttonType.context == null) return
+                    if (buttonType.typeUI == null || buttonType.popBackStack == null) return
                     val numberTemp = number1.value.toDouble()
                     if (numberTemp == 0.0) return
 
@@ -210,7 +209,7 @@ class KeyboardState(private val app: Application, private val doWhenFinish: (Cho
                             typeId = buttonType.typeUI!!.typeId,
                             remark = remark.value
                         ),
-                        buttonType.context!!
+                        buttonType.popBackStack!!
                     )
                     return
                 }
@@ -365,10 +364,10 @@ sealed interface ButtonType {
     class Delete(val iconId: Int) : ButtonType
 
     @Stable
-    class Finish(var typeUI: TypeUI? = null, var context: Context? = null) : ButtonType {
+    class Finish(var typeUI: TypeUI? = null, var popBackStack: (() -> Unit)? = null) : ButtonType {
         fun cleanState() {
             typeUI = null
-            context = null
+            popBackStack = null
         }
     }
 

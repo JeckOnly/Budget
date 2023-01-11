@@ -1,8 +1,6 @@
 package com.jeckonly.budget.navigation
 
 import android.app.Activity
-import android.app.ActivityOptions
-import android.content.Intent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.slideInVertically
@@ -22,9 +20,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
-import com.jeckonly.app_addrecord.AddRecordActivity
 import com.jeckonly.budget.MainViewModel
 import com.jeckonly.chart.navigation.ChartDestination
+import com.jeckonly.choosetype.navigation.ChooseTypeNavigation
 import com.jeckonly.designsystem.Mdf
 import com.jeckonly.designsystem.composable.navigation.BgtBottomBar
 import com.jeckonly.designsystem.theme.BudgetTheme
@@ -77,11 +75,7 @@ fun BgtApp(
                             }
                         },
                         onClickPlus = {
-                            activity.startActivity(
-                                Intent(activity, AddRecordActivity::class.java),
-                                ActivityOptions.makeSceneTransitionAnimation(activity)
-                                    .toBundle()
-                            )
+                              ChooseTypeNavigation.navigate(navController)
                         },
                         navController = navController,
                         homeDestination = HomeDestination,

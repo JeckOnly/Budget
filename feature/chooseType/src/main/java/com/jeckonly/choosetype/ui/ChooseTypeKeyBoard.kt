@@ -37,6 +37,7 @@ fun ChooseTypeKeyBoard(
     nowChooseType: TypeUI?,
     keyboardState: KeyboardState,
     onCLickDown: () -> Unit,
+    popBackStack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val backgroundColor = MaterialTheme.colorScheme.surface
@@ -312,7 +313,7 @@ fun ChooseTypeKeyBoard(
                     onClick = {
                         keyboardState.onEvent(keyboardState.finish.apply {
                             this.typeUI = nowChooseType
-                            this.context = context
+                            this.popBackStack = popBackStack
                         })
                     }) {
                     Text(

@@ -1,8 +1,6 @@
 package com.jeckonly.chart.navigation
 
-import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.*
 import androidx.navigation.NavGraphBuilder
 import com.google.accompanist.navigation.animation.composable
 import com.jeckonly.chart.ChartRoute
@@ -30,7 +28,9 @@ fun NavGraphBuilder.chartGraph() {
                     }
                 }
                 else -> {
-                    null
+                    slideInVertically {
+                        it
+                    }
                 }
             }
         },
@@ -47,7 +47,9 @@ fun NavGraphBuilder.chartGraph() {
                     }
                 }
                 else -> {
-                    null
+                    slideOutVertically {
+                        it
+                    }
                 }
             }
         }

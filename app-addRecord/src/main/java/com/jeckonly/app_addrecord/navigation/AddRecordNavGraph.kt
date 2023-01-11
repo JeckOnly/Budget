@@ -24,17 +24,17 @@ fun AddRecordNavGraph(
         startDestination = ChooseTypeNavigation.route,
         modifier = modifier
     ) {
-        chooseTypeGraph {
-            UpdateTypeNavigation.navigate(navController)
-        }
-        updateTypeGraph {
-            AddTypeNavigation.navigate(navController, AddTypeNavigation.buildRoute(it))
-        }
-        addTypeGraph(onClickBack = {
-            navController.popBackStack()
-        }, onFinish = {
-            navController.popBackStack()
-        })
+//        chooseTypeGraph {
+//            UpdateTypeNavigation.navigate(navController)
+//        }
+//        updateTypeGraph {
+//            AddTypeNavigation.navigate(navController, AddTypeNavigation.buildRoute(it))
+//        }
+//        addTypeGraph(onClickBack = {
+//            navController.popBackStack()
+//        }, onFinish = {
+//            navController.popBackStack()
+//        })
 
     }
 }

@@ -25,10 +25,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name="com.jeckonly.app_addrecord.AddRecordActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Budget" />
     </application>
 
 </manifest>
