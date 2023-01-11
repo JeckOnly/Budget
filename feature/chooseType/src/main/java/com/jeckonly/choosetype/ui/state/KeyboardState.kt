@@ -20,27 +20,42 @@ class KeyboardState(private val app: Application, private val doWhenFinish: (Cho
     private val doneText = app.getString(R.string.done)
 
     // Button type
-    val numberButton0 = ButtonType.NumberButton("0")
-    val numberButton1 = ButtonType.NumberButton("1")
-    val numberButton2 = ButtonType.NumberButton("2")
-    val numberButton3 = ButtonType.NumberButton("3")
-    val numberButton4 = ButtonType.NumberButton("4")
-    val numberButton5 = ButtonType.NumberButton("5")
-    val numberButton6 = ButtonType.NumberButton("6")
-    val numberButton7 = ButtonType.NumberButton("7")
-    val numberButton8 = ButtonType.NumberButton("8")
-    val numberButton9 = ButtonType.NumberButton("9")
+    private val numberButton0 = ButtonType.NumberButton("0")
+    private val numberButton1 = ButtonType.NumberButton("1")
+    private val numberButton2 = ButtonType.NumberButton("2")
+    private val numberButton3 = ButtonType.NumberButton("3")
+    private val numberButton4 = ButtonType.NumberButton("4")
+    private val numberButton5 = ButtonType.NumberButton("5")
+    private val numberButton6 = ButtonType.NumberButton("6")
+    private val numberButton7 = ButtonType.NumberButton("7")
+    private val numberButton8 = ButtonType.NumberButton("8")
+    private val numberButton9 = ButtonType.NumberButton("9")
 
-    val plus = ButtonType.OperatorButtonType.Plus()
-    val minus = ButtonType.OperatorButtonType.Minus()
+    private val plus = ButtonType.OperatorButtonType.Plus()
+    private val minus = ButtonType.OperatorButtonType.Minus()
+    private val point = ButtonType.Point()
+    private val delete = ButtonType.Delete(R.drawable.keyboard_delete)
+    private val finish = ButtonType.Finish()
+    private val dateButtonType = ButtonType.DateButtonType(R.drawable.calendar, app.getString(R.string.today))
 
-    val point = ButtonType.Point()
+    fun numberButton0() = numberButton0
+    fun numberButton1() = numberButton1
+    fun numberButton2() = numberButton2
+    fun numberButton3() = numberButton3
+    fun numberButton4() = numberButton4
+    fun numberButton5() = numberButton5
+    fun numberButton6() = numberButton6
+    fun numberButton7() = numberButton7
+    fun numberButton8() = numberButton8
+    fun numberButton9() = numberButton9
 
-    val delete = ButtonType.Delete(R.drawable.keyboard_delete)
+    fun plus() = plus
+    fun minus() = minus
+    fun point() = point
+    fun delete() = delete
+    fun finish(typeUI: TypeUI?, popBackStack: (() -> Unit)) = finish.buildFinish(typeUI, popBackStack)
+    fun dateButtonType() = dateButtonType
 
-    val finish = ButtonType.Finish()
-
-    val dateButtonType = ButtonType.DateButtonType(R.drawable.calendar, app.getString(R.string.today))
 
     /**
      * 操作数1
@@ -183,7 +198,7 @@ class KeyboardState(private val app: Application, private val doWhenFinish: (Cho
                     return
                 }
                 if (number1.value != "" && operator == null) {
-                    if (buttonType.typeUI == null || buttonType.popBackStack == null) return
+                    if (buttonType.getTypeUI() == null || buttonType.getPopBackStack() == null) return
                     val numberTemp = number1.value.toDouble()
                     if (numberTemp == 0.0) return
 
@@ -206,10 +221,10 @@ class KeyboardState(private val app: Application, private val doWhenFinish: (Cho
                             month = month,
                             dayOfMonth = dayOfMonth,
                             number = numberTemp,
-                            typeId = buttonType.typeUI!!.typeId,
+                            typeId = buttonType.getTypeUI()!!.typeId,
                             remark = remark.value
                         ),
-                        buttonType.popBackStack!!
+                        buttonType.getPopBackStack()!!
                     )
                     return
                 }
@@ -364,11 +379,19 @@ sealed interface ButtonType {
     class Delete(val iconId: Int) : ButtonType
 
     @Stable
-    class Finish(var typeUI: TypeUI? = null, var popBackStack: (() -> Unit)? = null) : ButtonType {
+    class Finish(private var typeUI: TypeUI?  = null , private var popBackStack: (() -> Unit)? = null) : ButtonType {
         fun cleanState() {
             typeUI = null
             popBackStack = null
         }
+        fun buildFinish(typeUI: TypeUI?, popBackStack: (() -> Unit)): Finish {
+            return this.apply {
+                this.typeUI = typeUI
+                this.popBackStack = popBackStack
+            }
+        }
+        fun getTypeUI() = typeUI
+        fun getPopBackStack() = popBackStack
     }
 
     @Stable

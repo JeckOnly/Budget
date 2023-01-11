@@ -76,7 +76,7 @@ class ChooseTypeViewModel @Inject constructor(
     /**
      * keyboard state
      */
-    val keyboardState: KeyboardState by lazy {
+    val keyboardState: KeyboardState =
         KeyboardState(app = app) { chooseTypeFinishState, popBackStack ->
             viewModelScope.launch {
                 databaseRepo.insertRecord(chooseTypeFinishState.toRecordEntity(), onSuccess = {
@@ -87,7 +87,7 @@ class ChooseTypeViewModel @Inject constructor(
                 })
             }
         }
-    }
+
 
     init {
         viewModelScope.launch {

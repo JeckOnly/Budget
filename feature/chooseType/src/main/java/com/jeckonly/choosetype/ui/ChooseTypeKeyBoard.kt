@@ -126,7 +126,7 @@ fun ChooseTypeKeyBoard(
                 KeyboardBox(modifier = Mdf
                     .weight(0.25f)
                     .fillMaxHeight(), onClick = {
-                    keyboardState.onEvent(keyboardState.numberButton7)
+                    keyboardState.onEvent(keyboardState.numberButton7())
                 }) {
                     Text(
                         text = "7", style = MaterialTheme.typography.bodyLarge,
@@ -136,7 +136,7 @@ fun ChooseTypeKeyBoard(
                 KeyboardBox(modifier = Mdf
                     .weight(0.25f)
                     .fillMaxHeight(), onClick = {
-                    keyboardState.onEvent(keyboardState.numberButton8)
+                    keyboardState.onEvent(keyboardState.numberButton8())
                 }) {
                     Text(
                         text = "8", style = MaterialTheme.typography.bodyLarge,
@@ -146,7 +146,7 @@ fun ChooseTypeKeyBoard(
                 KeyboardBox(modifier = Mdf
                     .weight(0.25f)
                     .fillMaxHeight(),
-                    onClick = { keyboardState.onEvent(keyboardState.numberButton9) }) {
+                    onClick = { keyboardState.onEvent(keyboardState.numberButton9()) }) {
                     Text(
                         text = "9", style = MaterialTheme.typography.bodyLarge,
                         color = contentColor,
@@ -163,13 +163,13 @@ fun ChooseTypeKeyBoard(
                     if (keyboardState.calendarString == "") {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(
-                                painter = painterResource(id = keyboardState.dateButtonType.iconId),
+                                painter = painterResource(id = keyboardState.dateButtonType().iconId),
                                 contentDescription = null,
                                 modifier = Mdf.size(20.dp),
                                 tint = contentColor
                             )
                             Text(
-                                text = keyboardState.dateButtonType.text,
+                                text = keyboardState.dateButtonType().text,
                                 style = MaterialTheme.typography.bodyLarge,
                                 color = contentColor,
                                 modifier = Mdf.padding(start = 10.dp)
@@ -193,7 +193,7 @@ fun ChooseTypeKeyBoard(
                 KeyboardBox(modifier = Mdf
                     .weight(0.25f)
                     .fillMaxHeight(), onClick = {
-                    keyboardState.onEvent(keyboardState.numberButton4)
+                    keyboardState.onEvent(keyboardState.numberButton4())
                 }) {
                     Text(
                         text = "4", style = MaterialTheme.typography.bodyLarge,
@@ -203,7 +203,7 @@ fun ChooseTypeKeyBoard(
                 KeyboardBox(modifier = Mdf
                     .weight(0.25f)
                     .fillMaxHeight(),
-                    onClick = { keyboardState.onEvent(keyboardState.numberButton5) }) {
+                    onClick = { keyboardState.onEvent(keyboardState.numberButton5()) }) {
                     Text(
                         text = "5", style = MaterialTheme.typography.bodyLarge,
                         color = contentColor,
@@ -212,7 +212,7 @@ fun ChooseTypeKeyBoard(
                 KeyboardBox(modifier = Mdf
                     .weight(0.25f)
                     .fillMaxHeight(),
-                    onClick = { keyboardState.onEvent(keyboardState.numberButton6) }) {
+                    onClick = { keyboardState.onEvent(keyboardState.numberButton6()) }) {
                     Text(
                         text = "6", style = MaterialTheme.typography.bodyLarge,
                         color = contentColor,
@@ -221,7 +221,7 @@ fun ChooseTypeKeyBoard(
                 KeyboardBox(modifier = Mdf
                     .weight(0.25f)
                     .fillMaxHeight(),
-                    onClick = { keyboardState.onEvent(keyboardState.plus) }) {
+                    onClick = { keyboardState.onEvent(keyboardState.plus()) }) {
                     Text(
                         text = "+",
                         style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
@@ -237,7 +237,7 @@ fun ChooseTypeKeyBoard(
                 KeyboardBox(modifier = Mdf
                     .weight(0.25f)
                     .fillMaxHeight(),
-                    onClick = { keyboardState.onEvent(keyboardState.numberButton1) }) {
+                    onClick = { keyboardState.onEvent(keyboardState.numberButton1()) }) {
                     Text(
                         text = "1", style = MaterialTheme.typography.bodyLarge,
                         color = contentColor,
@@ -246,7 +246,7 @@ fun ChooseTypeKeyBoard(
                 KeyboardBox(modifier = Mdf
                     .weight(0.25f)
                     .fillMaxHeight(),
-                    onClick = { keyboardState.onEvent(keyboardState.numberButton2) }) {
+                    onClick = { keyboardState.onEvent(keyboardState.numberButton2()) }) {
                     Text(
                         text = "2", style = MaterialTheme.typography.bodyLarge,
                         color = contentColor,
@@ -255,7 +255,7 @@ fun ChooseTypeKeyBoard(
                 KeyboardBox(modifier = Mdf
                     .weight(0.25f)
                     .fillMaxHeight(),
-                    onClick = { keyboardState.onEvent(keyboardState.numberButton3) }) {
+                    onClick = { keyboardState.onEvent(keyboardState.numberButton3()) }) {
                     Text(
                         text = "3", style = MaterialTheme.typography.bodyLarge,
                         color = contentColor,
@@ -264,7 +264,7 @@ fun ChooseTypeKeyBoard(
                 KeyboardBox(modifier = Mdf
                     .weight(0.25f)
                     .fillMaxHeight(),
-                    onClick = { keyboardState.onEvent(keyboardState.minus) }) {
+                    onClick = { keyboardState.onEvent(keyboardState.minus()) }) {
                     Text(
                         text = "-",
                         style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
@@ -280,7 +280,7 @@ fun ChooseTypeKeyBoard(
                 KeyboardBox(modifier = Mdf
                     .weight(0.25f)
                     .fillMaxHeight(),
-                    onClick = { keyboardState.onEvent(keyboardState.point) }) {
+                    onClick = { keyboardState.onEvent(keyboardState.point()) }) {
                     Text(
                         text = ".", style = MaterialTheme.typography.bodyLarge,
                         color = contentColor,
@@ -289,7 +289,7 @@ fun ChooseTypeKeyBoard(
                 KeyboardBox(modifier = Mdf
                     .weight(0.25f)
                     .fillMaxHeight(),
-                    onClick = { keyboardState.onEvent(keyboardState.numberButton0) }) {
+                    onClick = { keyboardState.onEvent(keyboardState.numberButton0()) }) {
                     Text(
                         text = "0", style = MaterialTheme.typography.bodyLarge,
                         color = contentColor,
@@ -298,7 +298,7 @@ fun ChooseTypeKeyBoard(
                 KeyboardBox(modifier = Mdf
                     .weight(0.25f)
                     .fillMaxHeight(),
-                    onClick = { keyboardState.onEvent(keyboardState.delete) }) {
+                    onClick = { keyboardState.onEvent(keyboardState.delete()) }) {
                     Icon(
                         painter = painterResource(id = R.drawable.keyboard_delete),
                         contentDescription = null,
@@ -311,10 +311,7 @@ fun ChooseTypeKeyBoard(
                     .fillMaxHeight()
                     .background(color = MaterialTheme.colorScheme.primaryContainer),
                     onClick = {
-                        keyboardState.onEvent(keyboardState.finish.apply {
-                            this.typeUI = nowChooseType
-                            this.popBackStack = popBackStack
-                        })
+                        keyboardState.onEvent(keyboardState.finish(nowChooseType, popBackStack))
                     }) {
                     Text(
                         text = keyboardState.finishButtonText.value,
