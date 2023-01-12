@@ -54,7 +54,7 @@ fun ChartRoute(
     DisposableEffect(key1 = lifecycleOwner, effect = {
         val observer = LifecycleEventObserver { _, event ->
             if (event == Lifecycle.Event.ON_RESUME) {
-                viewModel.onActivityResume()
+                viewModel.onScreenResume()
             }
         }
 

@@ -202,7 +202,7 @@ class ChartViewModel @Inject constructor(
         expandOthers = true
     }
 
-    fun onActivityResume() {
+    fun onScreenResume() {
         if (onResumeCount > 0) {
             // 不是第一次进入，而是在其他activity回来
             _localDate.update {

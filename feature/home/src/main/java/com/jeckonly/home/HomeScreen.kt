@@ -28,6 +28,7 @@ import com.jeckonly.home.ui.HomeCard
 import com.jeckonly.home.ui.HomeHeader
 import com.jeckonly.home.ui.state.HomeHeaderUI
 import com.jeckonly.home.ui.state.HomeRecordCardUI
+import timber.log.Timber
 
 @Composable
 fun HomeRoute(
@@ -54,8 +55,9 @@ fun HomeRoute(
     val lifecycleOwner = LocalLifecycleOwner.current
     DisposableEffect(key1 = lifecycleOwner, effect = {
         val observer = LifecycleEventObserver { _, event ->
+            Timber.d("event: ${event.name}")
             if (event == Lifecycle.Event.ON_RESUME) {
-                viewModel.onActivityResume()
+                viewModel.onScreenResume()
             }
         }
 
