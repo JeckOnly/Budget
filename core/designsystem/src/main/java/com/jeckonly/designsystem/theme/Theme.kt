@@ -8,10 +8,6 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
-/**
- * build form [https://m3.material.io/theme-builder#/custom]
- */
-
 
 
 @Composable

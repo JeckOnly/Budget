@@ -63,7 +63,7 @@ data class BudgetColorTheme(
                     BudgetColorTheme(LightColorEndeavour, DarkColorsEndeavour)
                 }
                 12 -> {
-                    BudgetColorTheme(LightColorRoyalBlue, LightColorRoyalBlue)
+                    BudgetColorTheme(LightColorRoyalBlue, DarkColorsRoyalBlue)
                 }
                 13 -> {
                     BudgetColorTheme(LightColorPurpleHeart, DarkColorsPurpleHeart)
