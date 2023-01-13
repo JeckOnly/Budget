@@ -12,7 +12,9 @@ object HomeDestination : BgtBottomNavigationDestination {
 }
 
 @OptIn(ExperimentalAnimationApi::class)
-fun NavGraphBuilder.homesGraph() {
+fun NavGraphBuilder.homesGraph(
+    goToRecordDetail: (Int) -> Unit,
+) {
     composable(
         route = HomeDestination.route,
         enterTransition = {
@@ -45,6 +47,6 @@ fun NavGraphBuilder.homesGraph() {
             }
         }
     ) {
-        HomeRoute()
+        HomeRoute(goToRecordDetail = goToRecordDetail)
     }
 }

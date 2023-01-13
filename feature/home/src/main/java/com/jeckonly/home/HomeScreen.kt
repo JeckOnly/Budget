@@ -32,6 +32,7 @@ import timber.log.Timber
 
 @Composable
 fun HomeRoute(
+    goToRecordDetail: (Int) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
@@ -73,7 +74,8 @@ fun HomeRoute(
         records,
         homeHeaderUI,
         viewModel::addLocalDateByMonth,
-        viewModel::minusLocalDateByMonth
+        viewModel::minusLocalDateByMonth,
+        goToRecordDetail = goToRecordDetail
     )
 }
 
@@ -83,6 +85,7 @@ fun HomeScreen(
     homeHeaderUI: HomeHeaderUI,
     addMonth: () -> Unit,
     minusMonth: () -> Unit,
+    goToRecordDetail: (Int) -> Unit,
 ) {
     Column(modifier = Mdf.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
         HomeScreenHeader(
@@ -100,7 +103,7 @@ fun HomeScreen(
                 .clip(RoundedCornerShape(10.dp)),
             content = {
                 items(count = records.size) { index: Int ->
-                    HomeCard(homeRecordCardUI = records[index], modifier = Mdf.fillMaxWidth())
+                    HomeCard(homeRecordCardUI = records[index], goToRecordDetail = goToRecordDetail ,modifier = Mdf.fillMaxWidth())
                     Spacer(modifier = Modifier.height(20.dp))
                     if (index == records.size - 1) {
                         Spacer(modifier = Mdf.height(60.dp))

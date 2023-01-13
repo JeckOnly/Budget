@@ -115,8 +115,14 @@ interface BgtDao {
     suspend fun getTypeAndTotalNumberByYearAndMonth(year_: Int, month_: Int, expenseOrIncome_: ExpenseOrIncome): List<NameNumberIconId>
 
     /**
-     * 根据名字查找类型
+     * 根据类型id查找记录数量
      */
     @Query("select count(*) from record_table where record_type_id == :typeId_")
     suspend fun countTypeByRecordId(typeId_: Int): Int
+
+    /**
+     * 根据id查找记录
+     */
+    @Query("select * from record_table where record_id == :recordId_")
+    suspend fun getRecordById(recordId_: Int): RecordEntity
 }

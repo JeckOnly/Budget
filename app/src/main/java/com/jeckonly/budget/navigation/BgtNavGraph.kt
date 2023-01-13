@@ -14,6 +14,8 @@ import com.jeckonly.choosetype.navigation.chooseTypeGraph
 import com.jeckonly.home.navigation.HomeDestination
 import com.jeckonly.home.navigation.homesGraph
 import com.jeckonly.more.navigation.moreGraph
+import com.jeckonly.recorddetail.navigation.RecordDetailNavigation
+import com.jeckonly.recorddetail.navigation.recordDetailGraph
 import com.jeckonly.updatetype.navigation.UpdateTypeNavigation
 import com.jeckonly.updatetype.navigation.updateTypeGraph
 
@@ -29,13 +31,13 @@ fun BgtNavGraph(
         startDestination = HomeDestination.route,
         modifier = modifier
     ) {
-        homesGraph()
+        homesGraph {
+            RecordDetailNavigation.navigate(navController, RecordDetailNavigation.buildRoute(it))
+        }
         chartGraph()
-        moreGraph(
-            toChangeThemeScreen = {
-                ChangeThemeNavigation.navigate(navController)
-            }
-        )
+        moreGraph {
+            ChangeThemeNavigation.navigate(navController)
+        }
         changeThemeGraph()
         chooseTypeGraph (
             onCLickSetting = { UpdateTypeNavigation.navigate(navController) },
@@ -49,5 +51,8 @@ fun BgtNavGraph(
         }, onFinish = {
             navController.popBackStack()
         })
+        recordDetailGraph {
+            navController.popBackStack()
+        }
     }
 }

@@ -7,6 +7,7 @@ import com.jeckonly.core_model.entity.helper.ExpenseOrIncome
 import com.jeckonly.core_model.entity.update.TypeOrderUpdate
 import com.jeckonly.core_model.entity.update.TypeUpdateNoOrder
 import com.jeckonly.core_model.ui.HomeRecordItemUI
+import com.jeckonly.core_model.ui.RecordDetailUI
 import com.jeckonly.core_model.ui.TypeUI
 import kotlinx.coroutines.flow.Flow
 
@@ -47,4 +48,6 @@ interface DatabaseRepo {
     suspend fun getMaxOrder(): Int
 
     suspend fun isTypeNameExited(typeName: String): Boolean
+
+    suspend fun getRecordDetailUIById(id: Int): RecordDetailUI
 }

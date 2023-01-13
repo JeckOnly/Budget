@@ -1,6 +1,5 @@
 package com.jeckonly.budget.navigation
 
-import android.app.Activity
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.slideInVertically
@@ -15,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -35,7 +33,6 @@ fun BgtApp(
     viewModel: MainViewModel = hiltViewModel()
 ) {
 
-    val activity = LocalContext.current as Activity
     val budgetColorTheme = viewModel.themeFlow.collectAsState()
     BudgetTheme(
         colorScheme = budgetColorTheme.value,

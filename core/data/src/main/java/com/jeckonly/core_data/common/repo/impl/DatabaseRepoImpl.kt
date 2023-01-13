@@ -11,6 +11,7 @@ import com.jeckonly.core_model.entity.update.TypeOrderUpdate
 import com.jeckonly.core_model.entity.update.TypeUpdateNoOrder
 import com.jeckonly.core_model.mapper.toChooseTypeTypeUI
 import com.jeckonly.core_model.ui.HomeRecordItemUI
+import com.jeckonly.core_model.ui.RecordDetailUI
 import com.jeckonly.core_model.ui.TypeUI
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -70,6 +71,7 @@ class DatabaseRepoImpl @Inject constructor(
         return getAllRecordByYearAndMonth(year, month).map {
             val type = dao.getTypeById(it.typeId)
             HomeRecordItemUI(
+                recordId = it.recordId,
                 year = it.year,
                 month = it.month,
                 dayOfMonth = it.dayOfMonth,
@@ -128,6 +130,21 @@ class DatabaseRepoImpl @Inject constructor(
 
     override suspend fun isTypeNameExited(typeName: String): Boolean {
         return dao.getTypeByName(typeName).isNotEmpty()
+    }
+
+    override suspend fun getRecordDetailUIById(id: Int): RecordDetailUI {
+        val recordEntity =  dao.getRecordById(id)
+        val type = dao.getTypeById(recordEntity.typeId)
+        return RecordDetailUI(
+            year = recordEntity.year,
+            month = recordEntity.month,
+            dayOfMonth = recordEntity.dayOfMonth,
+            number = recordEntity.number,
+            expenseOrIncome = type.expenseOrIncome,
+            iconId = type.iconId,
+            typeName = type.name,
+            remark = recordEntity.remark
+        )
     }
 }
 

@@ -12,7 +12,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -110,10 +109,13 @@ fun HomeCardRecordItem(
 }
 
 @Composable
-fun HomeCard(homeRecordCardUI: HomeRecordCardUI, modifier: Modifier = Modifier) {
+fun HomeCard(
+    homeRecordCardUI: HomeRecordCardUI,
+    goToRecordDetail: (Int) -> Unit,
+    modifier: Modifier = Modifier
+) {
     val backgroundColor = MaterialTheme.colorScheme.surface
     val contentColor = contentColorFor(backgroundColor = backgroundColor)
-    val context = LocalContext.current
     Surface(
         color = backgroundColor,
         shape = RoundedCornerShape(10.dp),
@@ -152,7 +154,7 @@ fun HomeCard(homeRecordCardUI: HomeRecordCardUI, modifier: Modifier = Modifier) 
                     homeRecordItemUI = homeRecordItemUI,
                     modifier = Mdf.fillMaxWidth(),
                     onClick = {
-
+                        goToRecordDetail(it.recordId)
                     }
                 )
             }
@@ -172,7 +174,8 @@ fun PreviewHomeCardRecordItem() {
             expenseOrIncome = ExpenseOrIncome.Expense,
             iconId = R.drawable.category_e_traffic_stroke,
             typeName = "交通",
-            remark = ""
+            remark = "",
+            recordId = 0
         ),
         modifier = Mdf.fillMaxWidth(),
         onClick = {
@@ -197,7 +200,8 @@ fun PreviewHomeCard() {
                     expenseOrIncome = ExpenseOrIncome.Expense,
                     iconId = R.drawable.category_e_traffic_stroke,
                     typeName = "交通",
-                    remark = ""
+                    remark = "",
+                    recordId = 0
                 ),
                 HomeRecordItemUI(
                     year = 2000,
@@ -207,7 +211,8 @@ fun PreviewHomeCard() {
                     expenseOrIncome = ExpenseOrIncome.Expense,
                     iconId = R.drawable.category_e_traffic_stroke,
                     typeName = "交通",
-                    remark = ""
+                    remark = "",
+                    recordId = 0
                 ),
                 HomeRecordItemUI(
                     year = 2000,
@@ -217,10 +222,13 @@ fun PreviewHomeCard() {
                     expenseOrIncome = ExpenseOrIncome.Expense,
                     iconId = R.drawable.category_e_traffic_stroke,
                     typeName = "交通",
-                    remark = ""
+                    remark = "",
+                    recordId = 0
                 ),
+                )
+        ),
+        {
 
-            )
-        )
+        }
     )
 }
