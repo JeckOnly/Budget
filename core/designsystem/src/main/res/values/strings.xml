@@ -93,4 +93,7 @@
     <string name="home_bottom">主页</string>
     <string name="chart_bottom">图表</string>
     <string name="more_bottom">更多</string>
+    <string name="type">类型</string>
+    <string name="amount">金额</string>
+    <string name="date">日期</string>
 </resources>

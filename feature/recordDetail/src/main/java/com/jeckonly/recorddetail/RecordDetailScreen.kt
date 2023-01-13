@@ -1,13 +1,23 @@
 package com.jeckonly.recorddetail
 
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.jeckonly.designsystem.Mdf
+import com.jeckonly.designsystem.noIndicationClickable
 import com.jeckonly.recorddetail.ui.state.RecordDetailUIState
 
 
@@ -42,14 +52,138 @@ fun RecordDetailRoute(
 
     RecordDetailScreen(
         recordDetailUIState.value,
-        modifier = modifier
+        popBackStack = popBackStack,
+        modifier = modifier.fillMaxSize()
     )
 }
 
 @Composable
 fun RecordDetailScreen(
     recordDetailUIState: RecordDetailUIState,
+    popBackStack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    Surface(modifier = modifier) {
+        Column(modifier = Mdf.fillMaxSize()) {
+            Box(
+                modifier = Mdf
+                    .fillMaxWidth()
+                    .background(color = MaterialTheme.colorScheme.primary)
+            ) {
+                Icon(
+                    painter = painterResource(id = com.jeckonly.designsystem.R.drawable.arrow_left),
+                    contentDescription = null,
+                    modifier = Mdf
+                        .align(
+                            Alignment.TopStart
+                        )
+                        .padding(horizontal = 15.dp, vertical = 15.dp)
+                        .size(25.dp)
+                        .noIndicationClickable {
+                            popBackStack()
+                        }
+                )
+                Column(
+                    Mdf
+                        .align(Alignment.Center), horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Box(
+                        modifier = Mdf
+                            .padding(top = 10.dp)
+                            .background(
+                                color = MaterialTheme.colorScheme.surface,
+                                shape = CircleShape
+                            )
+                            .padding(6.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            painter = painterResource(id = recordDetailUIState.iconId),
+                            contentDescription = null,
+                            modifier = Mdf
+                                .size(35.dp),
+                            tint = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
+                    Text(
+                        text = recordDetailUIState.typeName,
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onPrimary,
+                        maxLines = 1,
+                        modifier = Mdf.padding(top = 10.dp, bottom = 10.dp)
+                    )
+                }
+            }
 
+            // items
+            RecordDetailItem(
+                title = stringResource(id = com.jeckonly.designsystem.R.string.type),
+                content = recordDetailUIState.expenseOrIncome
+            )
+            RecordDetailItem(
+                title = stringResource(id = com.jeckonly.designsystem.R.string.amount),
+                content = recordDetailUIState.showNumber
+            )
+            RecordDetailItem(
+                title = stringResource(id = com.jeckonly.designsystem.R.string.date),
+                content = recordDetailUIState.showDate
+            )
+            RecordDetailItem(
+                title = stringResource(id = com.jeckonly.designsystem.R.string.remark),
+                content = recordDetailUIState.remark
+            )
+        }
+    }
+}
+
+@Composable
+fun RecordDetailItem(title: String, content: String) {
+    Box(modifier = Mdf.fillMaxWidth()) {
+        Row(modifier = Mdf.fillMaxWidth()) {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.outline,
+                maxLines = 1,
+                modifier = Mdf.padding(start = 20.dp, top = 20.dp, bottom = 20.dp, end = 15.dp)
+            )
+            Text(
+                text = content,
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurface,
+                modifier = Mdf
+                    .padding(top = 20.dp, bottom = 20.dp, end = 8.dp)
+                    .weight(1f)
+            )
+        }
+        Divider(
+            modifier = Mdf
+                .padding(start = 20.dp)
+                .align(Alignment.BottomCenter)
+                .fillMaxWidth(), thickness = 0.5.dp, color = MaterialTheme.colorScheme.outline
+        )
+    }
+}
+
+
+@Preview(showBackground = true, backgroundColor = 0xffffff, showSystemUi = true)
+@Composable
+fun PreviewRecordDetailScreen() {
+    RecordDetailScreen(
+        recordDetailUIState = RecordDetailUIState(
+            iconId = com.jeckonly.designsystem.R.drawable.category_e_beauty_stroke,
+            typeName = "衣服"
+        ),
+        {},
+        modifier = Mdf.fillMaxSize()
+    )
+}
+
+@Preview(showBackground = true, backgroundColor = 0xffffff, showSystemUi = true)
+@Composable
+fun PreviewRecordDetailItem() {
+    RecordDetailItem(
+        title = "uiuiui",
+        content = "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"
+    )
 }
