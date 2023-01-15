@@ -5,6 +5,7 @@ import com.jeckonly.core_database.dao.BgtDao
 import com.jeckonly.core_model.entity.NameNumberIconId
 import com.jeckonly.core_model.entity.RecordEntity
 import com.jeckonly.core_model.entity.TypeEntity
+import com.jeckonly.core_model.entity.delete.RecordDelete
 import com.jeckonly.core_model.entity.delete.TypeDelete
 import com.jeckonly.core_model.entity.helper.ExpenseOrIncome
 import com.jeckonly.core_model.entity.update.TypeOrderUpdate
@@ -145,6 +146,10 @@ class DatabaseRepoImpl @Inject constructor(
             typeName = type.name,
             remark = recordEntity.remark
         )
+    }
+
+    override suspend fun deleteRecordById(id: Int) {
+        dao.deleteRecordById(RecordDelete(recordId = id))
     }
 }
 

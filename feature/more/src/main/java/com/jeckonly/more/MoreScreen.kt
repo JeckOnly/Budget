@@ -49,7 +49,7 @@ fun MoreScreen(
     Surface(color = MaterialTheme.colorScheme.surface, modifier = modifier) {
         Column(modifier = Mdf.fillMaxSize()) {
             MoreScreenHeader()
-            ThemeButton(toChangeThemeScreen = toChangeThemeScreen, modifier = Mdf.padding(10.dp))
+            ThemeButton(toChangeThemeScreen = toChangeThemeScreen, modifier = Mdf.padding(20.dp))
         }
     }
 }

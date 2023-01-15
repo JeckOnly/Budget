@@ -1,6 +1,5 @@
 package com.jeckonly.updatetype.ui
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -95,7 +94,7 @@ fun UpdateTypeItem(
         )
     }
 
-    AnimatedVisibility(visible = showDeleteDialog) {
+    if (showDeleteDialog)  {
         AlertDialog(
             onDismissRequest = {
                 showDeleteDialog = false
@@ -139,7 +138,7 @@ fun UpdateTypeItem(
             },
             text = {
                 Text(
-                    text = stringResource(id = R.string.delete_hint),
+                    text = stringResource(id = R.string.delete_type_hint),
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )

@@ -1,13 +1,12 @@
 package com.jeckonly.recorddetail
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -17,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.jeckonly.designsystem.Mdf
+import com.jeckonly.designsystem.R
 import com.jeckonly.designsystem.noIndicationClickable
 import com.jeckonly.recorddetail.ui.state.RecordDetailUIState
 
@@ -53,6 +53,11 @@ fun RecordDetailRoute(
     RecordDetailScreen(
         recordDetailUIState.value,
         popBackStack = popBackStack,
+        onDelete = {
+            viewModel.onDelete(recordId) {
+                popBackStack()
+            }
+        },
         modifier = modifier.fillMaxSize()
     )
 }
@@ -61,9 +66,14 @@ fun RecordDetailRoute(
 fun RecordDetailScreen(
     recordDetailUIState: RecordDetailUIState,
     popBackStack: () -> Unit,
+    onDelete: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Surface(modifier = modifier) {
+    var showDeleteDialog by remember {
+        mutableStateOf(false)
+    }
+
+    Box(modifier = modifier) {
         Column(modifier = Mdf.fillMaxSize()) {
             Box(
                 modifier = Mdf
@@ -133,6 +143,95 @@ fun RecordDetailScreen(
                 content = recordDetailUIState.remark
             )
         }
+        Row(
+            modifier = Mdf
+                .align(Alignment.BottomCenter)
+                .fillMaxWidth()
+        ) {
+            Box(
+                modifier = Mdf
+                    .weight(1f)
+                    .background(color = MaterialTheme.colorScheme.primaryContainer),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = stringResource(id = com.jeckonly.designsystem.R.string.edit),
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer,
+                    modifier = Mdf
+                        .padding(vertical = 20.dp)
+                )
+            }
+            Box(
+                modifier = Mdf
+                    .weight(1f)
+                    .background(color = MaterialTheme.colorScheme.errorContainer)
+                    .clickable {
+                        showDeleteDialog = true
+                    }, contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = stringResource(id = com.jeckonly.designsystem.R.string.delete),
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onErrorContainer,
+                    modifier = Mdf
+                        .padding(vertical = 20.dp)
+                )
+            }
+        }
+    }
+
+    if (showDeleteDialog) {
+        AlertDialog(
+            onDismissRequest = {
+                showDeleteDialog = false
+            },
+            confirmButton = {
+                Text(
+                    text = stringResource(id = R.string.sure),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Mdf.noIndicationClickable {
+                        showDeleteDialog = false
+                        onDelete()
+                    }
+                )
+            },
+            dismissButton = {
+                Text(
+                    text = stringResource(id = R.string.cancel),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Mdf.noIndicationClickable {
+                        showDeleteDialog = false
+                    }
+                )
+            },
+            icon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.warning),
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.error,
+                    modifier = Mdf.size(30.dp)
+                )
+            },
+            title = {
+                Text(
+                    text = stringResource(id = R.string.warn),
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            },
+            text = {
+                Text(
+                    text = stringResource(id = R.string.delete_record_hint),
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            },
+            shape = RoundedCornerShape(10.dp),
+            containerColor = MaterialTheme.colorScheme.surface,
+        )
     }
 }
 
@@ -174,6 +273,7 @@ fun PreviewRecordDetailScreen() {
             iconId = com.jeckonly.designsystem.R.drawable.category_e_beauty_stroke,
             typeName = "衣服"
         ),
+        {},
         {},
         modifier = Mdf.fillMaxSize()
     )

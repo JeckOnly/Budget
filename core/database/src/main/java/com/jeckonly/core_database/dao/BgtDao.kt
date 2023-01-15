@@ -4,6 +4,7 @@ import androidx.room.*
 import com.jeckonly.core_model.entity.NameNumberIconId
 import com.jeckonly.core_model.entity.RecordEntity
 import com.jeckonly.core_model.entity.TypeEntity
+import com.jeckonly.core_model.entity.delete.RecordDelete
 import com.jeckonly.core_model.entity.delete.TypeDelete
 import com.jeckonly.core_model.entity.helper.ExpenseOrIncome
 import com.jeckonly.core_model.entity.update.TypeOrderUpdate
@@ -85,6 +86,12 @@ interface BgtDao {
      */
     @Delete
     suspend fun deleteRecord(recordEntity: RecordEntity): Int
+
+    /**
+     * @return 返回成功删除的行数
+     */
+    @Delete(entity = RecordEntity::class)
+    suspend fun deleteRecordById(recordDelete: RecordDelete)
 
     /**
      * @return 返回成功更新的行数

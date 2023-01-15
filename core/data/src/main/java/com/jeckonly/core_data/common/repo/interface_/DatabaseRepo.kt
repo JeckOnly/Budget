@@ -50,4 +50,6 @@ interface DatabaseRepo {
     suspend fun isTypeNameExited(typeName: String): Boolean
 
     suspend fun getRecordDetailUIById(id: Int): RecordDetailUI
+
+    suspend fun deleteRecordById(id: Int)
 }
