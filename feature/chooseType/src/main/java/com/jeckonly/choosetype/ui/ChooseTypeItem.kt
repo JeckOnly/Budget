@@ -40,14 +40,13 @@ fun ChooseTypeItem(
         if (typeUI != nowTypeUI)
             MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.5f)
         else
-            MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)
+            MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
 
-    val iconTint = contentColorFor(
-        backgroundColor = if (typeUI != nowTypeUI)
-            MaterialTheme.colorScheme.secondaryContainer
+    val iconTint = if (typeUI != nowTypeUI)
+            MaterialTheme.colorScheme.onSecondaryContainer
         else
-            MaterialTheme.colorScheme.primaryContainer
-    )
+            MaterialTheme.colorScheme.onSecondaryContainer
+
 
     Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
         TypeIcon(
