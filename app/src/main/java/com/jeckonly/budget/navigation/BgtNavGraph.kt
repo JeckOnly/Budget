@@ -10,6 +10,7 @@ import com.jeckonly.addtype.navigation.addTypeGraph
 import com.jeckonly.changetheme.navigation.ChangeThemeNavigation
 import com.jeckonly.changetheme.navigation.changeThemeGraph
 import com.jeckonly.chart.navigation.chartGraph
+import com.jeckonly.choosetype.navigation.ChooseTypeNavigation
 import com.jeckonly.choosetype.navigation.chooseTypeGraph
 import com.jeckonly.home.navigation.HomeDestination
 import com.jeckonly.home.navigation.homesGraph
@@ -39,7 +40,7 @@ fun BgtNavGraph(
             ChangeThemeNavigation.navigate(navController)
         }
         changeThemeGraph()
-        chooseTypeGraph (
+        chooseTypeGraph(
             onCLickSetting = { UpdateTypeNavigation.navigate(navController) },
             popBackStack = { navController.popBackStack() }
         )
@@ -51,8 +52,11 @@ fun BgtNavGraph(
         }, onFinish = {
             navController.popBackStack()
         })
-        recordDetailGraph {
-            navController.popBackStack()
-        }
+        recordDetailGraph(
+            toEditRecord = {
+                ChooseTypeNavigation.navigate(navController, ChooseTypeNavigation.buildRoute(it))
+            },
+            popBackStack = { navController.popBackStack() }
+        )
     }
 }

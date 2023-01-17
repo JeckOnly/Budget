@@ -20,5 +20,17 @@ data class ChooseTypeFinishState(
             remark = this.remark
         )
     }
+
+    fun toRecordEntity(recordId: Int): RecordEntity {
+        return RecordEntity(
+            recordId = recordId,
+            year = this.year,
+            month = this.month,
+            dayOfMonth = this.dayOfMonth,
+            number = this.number,
+            typeId = typeId,
+            remark = this.remark
+        )
+    }
 }
 

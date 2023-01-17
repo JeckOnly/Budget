@@ -1,21 +1,22 @@
 package com.jeckonly.choosetype
 
 import android.app.Application
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.jeckonly.choosetype.navigation.ChooseTypeNavigation
 import com.jeckonly.choosetype.ui.state.ChooseTypeUiState
 import com.jeckonly.choosetype.ui.state.KeyboardState
+import com.jeckonly.choosetype.ui.state.KeyboardStateInit
 import com.jeckonly.core_data.common.repo.interface_.DatabaseRepo
 import com.jeckonly.core_data.common.repo.interface_.UserPrefsRepo
 import com.jeckonly.core_model.ui.TypeUI
 import com.jeckonly.designsystem.init.getInitTypeEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.time.LocalDate
 import javax.inject.Inject
 
 @HiltViewModel
@@ -55,18 +56,39 @@ class ChooseTypeViewModel @Inject constructor(
             initialValue = emptyList()
         )
 
+    private val editOrRecordIdFlow: MutableStateFlow<Int> = MutableStateFlow(-1)
 
     /**
      * 界面的UI state
      */
     val chooseTypeUiStateFlow: StateFlow<ChooseTypeUiState> = combine(
-        databaseInitStateFlow, expenseTypeFlow, incomeTypeFlow
-    ) { hasInit, expenseTypeUIList, incomeTypeUIList ->
-        ChooseTypeUiState(
-            isLoading = !hasInit,
-            expenseTypeList = expenseTypeUIList.sortedBy { it.order },
-            incomeTypeList = incomeTypeUIList.sortedBy { it.order }
-        )
+        editOrRecordIdFlow, databaseInitStateFlow, expenseTypeFlow, incomeTypeFlow
+    ) { editOrRecordId, hasInit, expenseTypeUIList, incomeTypeUIList ->
+        Timber.d("editOrRecordId: $editOrRecordId, expenseTypeUIListSize: ${expenseTypeUIList.size}, incomeTypeUIListSize: ${incomeTypeUIList.size}")
+        if (editOrRecordId == ChooseTypeNavigation.EDIT) {
+            ChooseTypeUiState(
+                isLoading = !hasInit,
+                expenseTypeList = expenseTypeUIList.sortedBy { it.order },
+                incomeTypeList = incomeTypeUIList.sortedBy { it.order }
+            )
+        } else {
+            val recordDetailUI = databaseRepo.getRecordDetailUIById(editOrRecordId)
+            val typeUI = databaseRepo.getTypeUIById(databaseRepo.getTypeIdByRecordId(editOrRecordId))
+            keyboardState.init(
+                KeyboardStateInit(
+                    number = recordDetailUI.number,
+                    remark = recordDetailUI.remark,
+                    localDate = LocalDate.of(recordDetailUI.year, recordDetailUI.month, recordDetailUI.dayOfMonth)
+                )
+            )
+            ChooseTypeUiState(
+                isLoading = !hasInit,
+                nowChooseType = mutableStateOf(typeUI),
+                canEnterSetting = mutableStateOf(false),
+                expenseTypeList = expenseTypeUIList.sortedBy { it.order },
+                incomeTypeList = incomeTypeUIList.sortedBy { it.order }
+            )
+        }
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000),
@@ -79,12 +101,13 @@ class ChooseTypeViewModel @Inject constructor(
     val keyboardState: KeyboardState =
         KeyboardState(app = app) { chooseTypeFinishState, popBackStack ->
             viewModelScope.launch {
-                databaseRepo.insertRecord(chooseTypeFinishState.toRecordEntity(), onSuccess = {
-                    Timber.d("成功插入")
+                if (editOrRecordIdFlow.value == -1) {
+                    databaseRepo.insertRecord(chooseTypeFinishState.toRecordEntity())
                     popBackStack()
-                }, onFail = {
-                    Timber.d("插入失败" + it.message)
-                })
+                } else {
+                    databaseRepo.updateRecord(chooseTypeFinishState.toRecordEntity(recordId = editOrRecordIdFlow.value))
+                    popBackStack()
+                }
             }
         }
 
@@ -98,6 +121,12 @@ class ChooseTypeViewModel @Inject constructor(
                     // Do nothing
                 })
             }
+        }
+    }
+
+    fun initEditOrRecordId(editOrRecordId: Int) {
+        editOrRecordIdFlow.update {
+            editOrRecordId
         }
     }
 }

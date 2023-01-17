@@ -19,6 +19,7 @@ object RecordDetailNavigation : BgtTopLevelNavigationDestination {
 
 @OptIn(ExperimentalAnimationApi::class)
 fun NavGraphBuilder.recordDetailGraph(
+    toEditRecord: (Int) -> Unit,
     popBackStack: () -> Unit,
 ) {
     composable(
@@ -38,6 +39,6 @@ fun NavGraphBuilder.recordDetailGraph(
         }
     ) { backStackEntry ->
         val recordId = backStackEntry.arguments?.getInt("recordId")
-        RecordDetailRoute(recordId = recordId!!, popBackStack = popBackStack)
+        RecordDetailRoute(recordId = recordId!!,toEditRecord = toEditRecord ,popBackStack = popBackStack)
     }
 }

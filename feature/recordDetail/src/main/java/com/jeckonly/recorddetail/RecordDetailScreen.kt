@@ -26,6 +26,7 @@ private const val HEADER_HEIGHT = 55
 @Composable
 fun RecordDetailRoute(
     recordId: Int,
+    toEditRecord: (Int) -> Unit,
     popBackStack: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: RecordDetailViewModel = hiltViewModel()
@@ -51,8 +52,10 @@ fun RecordDetailRoute(
     val recordDetailUIState = viewModel.recordDetailUIStateFlow.collectAsState()
 
     RecordDetailScreen(
+        recordId = recordId,
         recordDetailUIState.value,
         popBackStack = popBackStack,
+        toEditRecord = toEditRecord,
         onDelete = {
             viewModel.onDelete(recordId) {
                 popBackStack()
@@ -64,7 +67,9 @@ fun RecordDetailRoute(
 
 @Composable
 fun RecordDetailScreen(
+    recordId: Int,
     recordDetailUIState: RecordDetailUIState,
+    toEditRecord: (Int) -> Unit,
     popBackStack: () -> Unit,
     onDelete: () -> Unit,
     modifier: Modifier = Modifier
@@ -151,13 +156,17 @@ fun RecordDetailScreen(
             Box(
                 modifier = Mdf
                     .weight(1f)
-                    .background(color = MaterialTheme.colorScheme.primaryContainer),
+                    .background(color = MaterialTheme.colorScheme.primary)
+                    .clickable {
+                         toEditRecord(recordId)
+                    }
+                ,
                 contentAlignment = Alignment.Center
             ) {
                 Text(
                     text = stringResource(id = com.jeckonly.designsystem.R.string.edit),
                     style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer,
+                    color = MaterialTheme.colorScheme.onPrimary,
                     modifier = Mdf
                         .padding(vertical = 20.dp)
                 )
@@ -165,7 +174,7 @@ fun RecordDetailScreen(
             Box(
                 modifier = Mdf
                     .weight(1f)
-                    .background(color = MaterialTheme.colorScheme.errorContainer)
+                    .background(color = MaterialTheme.colorScheme.error)
                     .clickable {
                         showDeleteDialog = true
                     }, contentAlignment = Alignment.Center
@@ -173,7 +182,7 @@ fun RecordDetailScreen(
                 Text(
                     text = stringResource(id = com.jeckonly.designsystem.R.string.delete),
                     style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onErrorContainer,
+                    color = MaterialTheme.colorScheme.onError,
                     modifier = Mdf
                         .padding(vertical = 20.dp)
                 )
@@ -269,10 +278,12 @@ fun RecordDetailItem(title: String, content: String) {
 @Composable
 fun PreviewRecordDetailScreen() {
     RecordDetailScreen(
+        1,
         recordDetailUIState = RecordDetailUIState(
             iconId = com.jeckonly.designsystem.R.drawable.category_e_beauty_stroke,
             typeName = "衣服"
         ),
+        {},
         {},
         {},
         modifier = Mdf.fillMaxSize()

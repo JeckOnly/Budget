@@ -19,7 +19,9 @@ interface DatabaseRepo {
 
     fun getAllIncomeType(): Flow<List<TypeUI>>
 
-    suspend fun insertRecord(recordEntity: RecordEntity, onSuccess: suspend () -> Unit, onFail: suspend(Exception) -> Unit)
+    suspend fun insertRecord(recordEntity: RecordEntity)
+
+    suspend fun updateRecord(recordEntity: RecordEntity)
 
     suspend fun getAllRecordByYearAndMonth(year: Int, month: Int): List<RecordEntity>
 
@@ -41,11 +43,15 @@ interface DatabaseRepo {
 
     suspend fun getTypeById(typeId: Int): TypeEntity
 
+    suspend fun getTypeUIById(typeId: Int): TypeUI
+
+    suspend fun getTypeIdByRecordId(recordId: Int): Int
+
     suspend fun insertType(vararg typeEntity: TypeEntity)
 
     suspend fun updateType(typeUpdateNoOrder: TypeUpdateNoOrder)
 
-    suspend fun getMaxOrder(): Int
+    suspend fun getMaxOrder(): Int?
 
     suspend fun isTypeNameExited(typeName: String): Boolean
 

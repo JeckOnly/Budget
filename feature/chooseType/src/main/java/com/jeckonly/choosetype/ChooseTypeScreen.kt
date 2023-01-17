@@ -19,19 +19,22 @@ import com.jeckonly.choosetype.ui.ChooseTypeKeyBoard
 import com.jeckonly.choosetype.ui.ChooseTypePager
 import com.jeckonly.choosetype.ui.state.ChooseTypeUiState
 import com.jeckonly.choosetype.ui.state.KeyboardState
-import com.jeckonly.core_model.ui.TypeUI
 import com.jeckonly.designsystem.composable.pager.TabHeader
+import timber.log.Timber
 
 
 private const val HEADER_HEIGHT = 55
 
 @Composable
 fun ChooseTypeRoute(
+    isEditOrRecordId: Int,
     onCLickSetting: () -> Unit,
     popBackStack: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: ChooseTypeViewModel = hiltViewModel()
 ) {
+    Timber.d(isEditOrRecordId.toString())
+
     // Remember a SystemUiController
     val systemUiController = rememberSystemUiController()
     val systemUiColor = MaterialTheme.colorScheme.secondaryContainer
@@ -46,6 +49,10 @@ fun ChooseTypeRoute(
 
         }
     }
+
+    LaunchedEffect(key1 = Unit, block = {
+        viewModel.initEditOrRecordId(editOrRecordId = isEditOrRecordId)
+    })
 
     ChooseTypeScreen(
         chooseTypeUiState = chooseTypeUiState.value,
@@ -66,10 +73,7 @@ fun ChooseTypeScreen(
     modifier: Modifier = Modifier
 ) {
     val pagerState = rememberPagerState(0)
-    // 表示当前选择的类型
-    var nowChooseType: TypeUI? by remember {
-        mutableStateOf(null)
-    }
+    val nowChooseTypeState = chooseTypeUiState.nowChooseType
     Column(modifier = modifier.fillMaxSize()) {
         TabHeader(
             pagerState = pagerState,
@@ -80,18 +84,18 @@ fun ChooseTypeScreen(
         ChooseTypePager(
             chooseTypeUiState = chooseTypeUiState,
             pagerState = pagerState,
-            nowTypeUI = nowChooseType,
+            nowTypeUI = nowChooseTypeState.value,
             onClick = { chooseTypeTypeUI ->
                 // 点击类型item的回调
-                nowChooseType = chooseTypeTypeUI
+                nowChooseTypeState.value = chooseTypeTypeUI
             },
             onCLickSetting = onCLickSetting,
             modifier = Modifier
                 .fillMaxWidth()
-                .weight(if (nowChooseType == null) 1f else 0.5f)
+                .weight(if (nowChooseTypeState.value == null) 1f else 0.5f)
         )
         AnimatedVisibility(
-            visible = nowChooseType != null,
+            visible = nowChooseTypeState.value != null,
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(0.5f)
@@ -104,11 +108,10 @@ fun ChooseTypeScreen(
             }
         ) {
             ChooseTypeKeyBoard(
-                nowChooseType = nowChooseType,
+                nowChooseType = nowChooseTypeState.value,
                 keyboardState = keyboardState,
                 onCLickDown = {
-                    nowChooseType = null
-                    keyboardState.cleanState()
+                    nowChooseTypeState.value = null
                 },
                 popBackStack = popBackStack,
                 modifier = Modifier

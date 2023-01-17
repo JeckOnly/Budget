@@ -68,7 +68,7 @@ interface BgtDao {
     suspend fun deleteTypeById(typeDelete: TypeDelete)
 
     @Query("select max(`order`) from type_table")
-    suspend fun getMaxOrder(): Int
+    suspend fun getMaxOrder(): Int?
 
 
     // Record

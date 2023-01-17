@@ -16,14 +16,19 @@ import com.jeckonly.core_model.ui.RecordDetailUI
 import com.jeckonly.core_model.ui.TypeUI
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class DatabaseRepoImpl @Inject constructor(
     private val dao: BgtDao
-): DatabaseRepo {
-    override suspend fun initTypeInDatabase(list: List<TypeEntity>, onSuccess: suspend () -> Unit, onFail: suspend () -> Unit) {
+) : DatabaseRepo {
+    override suspend fun initTypeInDatabase(
+        list: List<TypeEntity>,
+        onSuccess: suspend () -> Unit,
+        onFail: suspend () -> Unit
+    ) {
         try {
             dao.insertTypes(list)
             onSuccess()
@@ -49,19 +54,16 @@ class DatabaseRepoImpl @Inject constructor(
     }
 
     override suspend fun insertRecord(
-        recordEntity: RecordEntity,
-        onSuccess: suspend () -> Unit,
-        onFail: suspend (Exception) -> Unit
+        recordEntity: RecordEntity
     ) {
-        try {
-            dao.insertRecord(recordEntity)
-            onSuccess()
-        } catch (e: Exception) {
-            onFail(e)
-        }
+        dao.insertRecord(recordEntity)
     }
 
-    override suspend fun getAllRecordByYearAndMonth(year: Int, month: Int): List<RecordEntity>{
+    override suspend fun updateRecord(recordEntity: RecordEntity) {
+        dao.updateRecord(recordEntity)
+    }
+
+    override suspend fun getAllRecordByYearAndMonth(year: Int, month: Int): List<RecordEntity> {
         return dao.getAllRecordByYearAndMonth(year, month)
     }
 
@@ -90,7 +92,11 @@ class DatabaseRepoImpl @Inject constructor(
         month: Int,
         expenseOrIncome: ExpenseOrIncome
     ): Double {
-        return dao.getTotalNumberByYearAndMonth(year_ = year, month_ = month, expenseOrIncome_ = expenseOrIncome)?:0.00
+        return dao.getTotalNumberByYearAndMonth(
+            year_ = year,
+            month_ = month,
+            expenseOrIncome_ = expenseOrIncome
+        ) ?: 0.00
     }
 
     override suspend fun getTypeAndTotalNumberByYearAndMonthAndExpenseOrIncome(
@@ -117,6 +123,16 @@ class DatabaseRepoImpl @Inject constructor(
         return dao.getTypeById(typeId)
     }
 
+    override suspend fun getTypeUIById(typeId: Int): TypeUI {
+        return getTypeById(typeId).toChooseTypeTypeUI()
+    }
+
+    override suspend fun getTypeIdByRecordId(recordId: Int): Int {
+        val recordEntity = dao.getRecordById(recordId)
+        val typeEntity = dao.getTypeById(recordEntity.typeId)
+        return typeEntity.typeId
+    }
+
     override suspend fun insertType(vararg typeEntity: TypeEntity) {
         dao.insertTypes(typeEntity.toList())
     }
@@ -125,7 +141,7 @@ class DatabaseRepoImpl @Inject constructor(
         dao.updateType(typeUpdateNoOrder)
     }
 
-    override suspend fun getMaxOrder(): Int {
+    override suspend fun getMaxOrder(): Int? {
         return dao.getMaxOrder()
     }
 
@@ -134,7 +150,8 @@ class DatabaseRepoImpl @Inject constructor(
     }
 
     override suspend fun getRecordDetailUIById(id: Int): RecordDetailUI {
-        val recordEntity =  dao.getRecordById(id)
+        val recordEntity: RecordEntity = dao.getRecordById(id)
+        Timber.d(recordEntity.toString())
         val type = dao.getTypeById(recordEntity.typeId)
         return RecordDetailUI(
             year = recordEntity.year,

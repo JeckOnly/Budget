@@ -9,6 +9,7 @@ import com.jeckonly.core_model.entity.helper.ExpenseOrIncome
 import com.jeckonly.recorddetail.ui.state.RecordDetailUIState
 import com.jeckonly.util.FormatNumberUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -21,7 +22,15 @@ class RecordDetailViewModel @Inject constructor(
     private val databaseRepo: DatabaseRepo
 ) : ViewModel() {
 
-    private val recordIdFlow: MutableStateFlow<Int> = MutableStateFlow(-1)
+//    private val recordIdFlow: MutableStateFlow<Int> = MutableStateFlow(-1)
+
+    // NOTE StateFlow会用equals()判断值是否相同，相同就不emit，为了达到重组就刷新的效果，改为share flow。
+    private val recordIdFlow: MutableSharedFlow<Int> = MutableSharedFlow<Int>(
+        replay = 1,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST
+    ).apply {
+        tryEmit(-1)
+    }
 
     val recordDetailUIStateFlow: StateFlow<RecordDetailUIState> = recordIdFlow.map {
         // 非法值
@@ -49,9 +58,10 @@ class RecordDetailViewModel @Inject constructor(
 
     fun initViewModel(recordId: Int) {
         Timber.d("recordId: $recordId")
-        recordIdFlow.update {
-            recordId
-        }
+//        recordIdFlow.update {
+//            recordId
+//        }
+        recordIdFlow.tryEmit(recordId)
     }
 
     fun onDelete(recordId: Int, callback: () -> Unit) {

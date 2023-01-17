@@ -72,7 +72,7 @@ fun BgtApp(
                             }
                         },
                         onClickPlus = {
-                              ChooseTypeNavigation.navigate(navController)
+                              ChooseTypeNavigation.navigate(navController, ChooseTypeNavigation.buildRoute(ChooseTypeNavigation.EDIT))
                         },
                         navController = navController,
                         homeDestination = HomeDestination,

@@ -1,18 +1,15 @@
 package com.jeckonly.updatetype.ui
 
 import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -35,16 +32,7 @@ fun UpdateTypePager(
     modifier: Modifier = Modifier
 ) {
     HorizontalPager(count = 2, modifier = modifier, state = pagerState) { page ->
-        if (updateTypeUiState.isLoading) {
-            Box(
-                modifier = Mdf
-                    .fillMaxSize()
-                    .background(color = MaterialTheme.colorScheme.surface),
-                contentAlignment = Alignment.Center
-            ) {
-                CircularProgressIndicator(color = MaterialTheme.colorScheme.tertiary)
-            }
-        } else {
+        if (!updateTypeUiState.isLoading) {
             when (page) {
                 0 -> {
                     UpdateTypePage(
@@ -67,6 +55,7 @@ fun UpdateTypePager(
                     )
                 }
             }
+
         }
     }
 }

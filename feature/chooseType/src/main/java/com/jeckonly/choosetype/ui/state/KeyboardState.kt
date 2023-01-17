@@ -56,7 +56,7 @@ class KeyboardState(private val app: Application, private val doWhenFinish: (Cho
     fun finish(typeUI: TypeUI?, popBackStack: (() -> Unit)) = finish.buildFinish(typeUI, popBackStack)
     fun dateButtonType() = dateButtonType
 
-
+    // state ---------------------------------------------------------------------------------------------------
     /**
      * 操作数1
      */
@@ -115,9 +115,11 @@ class KeyboardState(private val app: Application, private val doWhenFinish: (Cho
      * 日历Button应展示的字符串
      */
     val calendarString: String by derivedStateOf {
-        if (chooseLocalDate == null) ""
-        else if (chooseLocalDate == LocalDate.now()) ""
-        else "${chooseLocalDate!!.year}/${chooseLocalDate!!.monthValue}/${chooseLocalDate!!.dayOfMonth}"
+        when (chooseLocalDate) {
+            null -> ""
+            LocalDate.now() -> ""
+            else -> "${chooseLocalDate!!.year}/${chooseLocalDate!!.monthValue}/${chooseLocalDate!!.dayOfMonth}"
+        }
     }
 
     fun onEvent(buttonType: ButtonType) {
@@ -343,6 +345,14 @@ class KeyboardState(private val app: Application, private val doWhenFinish: (Cho
         }
     }
 
+    fun init(keyboardStateInit: KeyboardStateInit) {
+        number1.value = FormatNumberUtil.format(keyboardStateInit.number)
+        hasAddPoint1 = checkDoubleHasDecimal(keyboardStateInit.number)
+        remark.value = keyboardStateInit.remark
+        chooseLocalDate = keyboardStateInit.localDate
+    }
+
+    @Deprecated("没有必要，从导航图的栈中弹出之后ViewModel也消除，重新进入又是一个新的实例")
     fun cleanState() {
         number1.value = ""
         operator = null
