@@ -13,8 +13,8 @@ android {
         applicationId = "com.jeckonly.budget"
         minSdk = 23
         targetSdk = 33
-        versionCode = 2
-        versionName = "v1.1.0"
+        versionCode = 1
+        versionName = "v1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
