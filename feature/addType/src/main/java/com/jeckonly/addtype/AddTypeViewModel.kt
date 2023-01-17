@@ -84,7 +84,7 @@ class AddTypeViewModel @Inject constructor(
             }
             if (_typeId == -1) {
                 // 插入新的
-                val maxOrder = databaseRepo.getMaxOrder()
+                val maxOrder: Int = databaseRepo.getMaxOrder()?:0
                 databaseRepo.insertType(
                     TypeEntity(
                         name = result.typeName,
