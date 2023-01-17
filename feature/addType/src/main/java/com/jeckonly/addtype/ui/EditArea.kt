@@ -140,7 +140,7 @@ fun EditArea(
 
             // 右边的按钮
             Surface(
-                color = MaterialTheme.colorScheme.tertiaryContainer,
+                color = MaterialTheme.colorScheme.primaryContainer,
                 modifier = Mdf
                     .fillMaxWidth(0.3f)
                     .noIndicationClickable(onClick = onSave)
@@ -154,7 +154,7 @@ fun EditArea(
                 Box(modifier = Mdf.fillMaxWidth(), contentAlignment = Alignment.Center) {
                     Text(
                         text = stringResource(id = R.string.save),
-                        color = MaterialTheme.colorScheme.onTertiaryContainer,
+                        color = MaterialTheme.colorScheme.onPrimaryContainer,
                         style = MaterialTheme.typography.bodyLarge
                     )
                 }
