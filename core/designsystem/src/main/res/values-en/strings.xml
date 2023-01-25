@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Budget</string>
+    <string name="snack">snack</string>
+    <string name="fruit">fruit</string>
+    <string name="shopping">shopping</string>
+    <string name="daily_use">daily use</string>
+    <string name="transportation">transportation</string>
+    <string name="vegetable">vegetable</string>
+    <string name="sport">sports</string>
+    <string name="contract">communication</string>
+    <string name="clothes">apparel</string>
+    <string name="cosmetic">cosmetic</string>
+    <string name="housing">housing</string>
+    <string name="at_home">at home</string>
+    <string name="kids">child</string>
+    <string name="elder">elder</string>
+    <string name="social">social contact</string>
+    <string name="trip">travel</string>
+    <string name="alcohol">alcohol</string>
+    <string name="digital">digital</string>
+    <string name="car">car</string>
+    <string name="healing">medical</string>
+    <string name="books">books</string>
+    <string name="learn">learn</string>
+    <string name="gift_money">gift money</string>
+    <string name="gift">gift</string>
+    <string name="office">office</string>
+    <string name="lottery">lottery</string>
+    <string name="express">express delivery</string>
+    <string name="repair">repair</string>
+    <string name="entertainment">entertainment</string>
+    <string name="relatives">relatives</string>
+    <string name="pet">pet</string>
+    <string name="donate">donate</string>
+    <string name="setting">set up</string>
+    <string name="salary">salary</string>
+    <string name="part_time">part time</string>
+    <string name="money_gift_2">ceremony</string>
+    <string name="other">other</string>
+    <string name="money_management">financial management</string>
+    <string name="expense">Expense</string>
+    <string name="income">Income</string>
+    <string name="balance">Balance</string>
+    <string name="today">Nowaday</string>
+    <string name="done">Finish</string>
+    <string name="remark">Remark</string>
+    <string name="click_write_remark">Click to write a note</string>
+    <string name="cancel">Cancel</string>
+    <string name="sure">Sure</string>
+    <string name="choose_date">Select Date</string>
+    <string name="overview" translatable="false">OVERVIEW</string>
+    <string name="overview_hint" translatable="false">Here is a list of your transactions</string>
+    <string name="distribution" translatable="false">DISTRIBUTION</string>
+    <string name="distribution_hint" translatable="false">Here is your financial report</string>
+    <string name="type_others">other</string>
+    <string name="no_chart_data">There is no data for this month</string>
+    <string name="warn">warn</string>
+    <string name="delete_type_hint">Deleting a type will delete all records related to this type, are you sure to delete?</string>
+    <string name="edit_type">edit type</string>
+    <string name="add_type">add type</string>
+    <string name="catering">diet</string>
+    <string name="life">Life</string>
+    <string name="personal">personal</string>
+    <string name="family">family</string>
+    <string name="fitness">fitness</string>
+    <string name="save">save</string>
+    <string name="name">name</string>
+    <string name="cant_empty_typeName">name cannot be empty</string>
+    <string name="name_existed">name already exists</string>
+    <string name="more" translatable="false">more</string>
+    <string name="more_hint" translatable="false">More function is coming</string>
+    <string name="change_theme">theme</string>
+    <string name="theme_setting_hint" translatable="false">choose a new color for theme</string>
+    <string name="theme_setting" translatable="false">Theme Setting</string>
+    <string name="MaroonFlush">Maroon flush</string>
+    <string name="TallPoppy">Tall poppy</string>
+    <string name="Fire">Flame</string>
+    <string name="Brown">Brown</string>
+    <string name="Cinnamon">Cinnamon</string>
+    <string name="Verdun">Verdun</string>
+    <string name="JapaneseLaurel">Japanese laurel</string>
+    <string name="FunGreen">Fun green</string>
+    <string name="TropicalRainForest">Rainforest</string>
+    <string name="Mosque">Mosque</string>
+    <string name="BahamaBlue">Bahama Blue</string>
+    <string name="Endeavour">Effort</string>
+    <string name="RoyalBlue">Prince</string>
+    <string name="PurpleHeart">Purple medal</string>
+    <string name="PurpleHeart2">Heliotrope</string>
+    <string name="VioletEggplant">Eggplant</string>
+    <string name="home_bottom">Home</string>
+    <string name="chart_bottom">Chart</string>
+    <string name="more_bottom">More</string>
+    <string name="type">Types</string>
+    <string name="amount">amount</string>
+    <string name="date">date</string>
+    <string name="edit">edit</string>
+    <string name="delete">delete</string>
+    <string name="delete_record_hint">Deleted records cannot be recovered, are you sure to delete?</string>
+    <string name="repast">food</string>
+</resources>
