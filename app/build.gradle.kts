@@ -49,6 +49,10 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = compose_version
     }
+    defaultConfig {
+
+        resConfigs("en", "zh")
+    }
 }
 
 // Allow references to generated code
@@ -76,6 +80,8 @@ dependencies {
     // core
     implementation("androidx.core:core-ktx:$core_ktx_version")
     implementation("androidx.core:core-splashscreen:$core_splashscreen_version")// Android12兼容splash screen
+
+    implementation("androidx.appcompat:appcompat:$androidx_appcompat_version")
 
     // compose
     addComposeBasic()

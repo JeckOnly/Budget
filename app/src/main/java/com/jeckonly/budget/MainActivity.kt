@@ -3,15 +3,15 @@ package com.jeckonly.budget
 import android.os.Bundle
 import android.transition.Fade
 import android.view.Window
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import com.jeckonly.budget.navigation.BgtApp
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         // 兼容Android12的启动屏
         installSplashScreen()
