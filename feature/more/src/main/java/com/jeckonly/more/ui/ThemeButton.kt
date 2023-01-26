@@ -46,3 +46,33 @@ fun ThemeButton(toChangeThemeScreen: () -> Unit, modifier: Modifier = Modifier) 
         )
     }
 }
+
+@Composable
+fun LangButton(toChangeLangScreen: () -> Unit, modifier: Modifier = Modifier) {
+    Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
+        Surface(
+            modifier = Mdf.size(60.dp).noIndicationClickable {
+                toChangeLangScreen()
+            },
+            shape = RoundedCornerShape(30),
+            color = MaterialTheme.colorScheme.secondaryContainer,
+        ) {
+            Box(contentAlignment = Alignment.Center) {
+                Image(
+                    painter = painterResource(id = R.drawable.multi_language),
+                    contentDescription = null,
+                    modifier = Mdf
+                        .padding(10.dp)
+                        .size(30.dp)
+                )
+            }
+        }
+        Spacer(modifier = Mdf.height(10.dp))
+        Text(
+            text = stringResource(id = R.string.lang),
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurface,
+            textAlign = TextAlign.Center,
+        )
+    }
+}

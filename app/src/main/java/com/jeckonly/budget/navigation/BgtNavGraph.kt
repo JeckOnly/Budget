@@ -7,6 +7,8 @@ import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.jeckonly.addtype.navigation.AddTypeNavigation
 import com.jeckonly.addtype.navigation.addTypeGraph
+import com.jeckonly.changelang.navigation.ChangeLangNavigation
+import com.jeckonly.changelang.navigation.changeLangGraph
 import com.jeckonly.changetheme.navigation.ChangeThemeNavigation
 import com.jeckonly.changetheme.navigation.changeThemeGraph
 import com.jeckonly.chart.navigation.chartGraph
@@ -36,10 +38,12 @@ fun BgtNavGraph(
             RecordDetailNavigation.navigate(navController, RecordDetailNavigation.buildRoute(it))
         }
         chartGraph()
-        moreGraph {
-            ChangeThemeNavigation.navigate(navController)
-        }
+        moreGraph(
+            toChangeThemeScreen = { ChangeThemeNavigation.navigate(navController) },
+            toChangeLangScreen = { ChangeLangNavigation.navigate(navController) }
+        )
         changeThemeGraph()
+        changeLangGraph()
         chooseTypeGraph(
             onCLickSetting = { UpdateTypeNavigation.navigate(navController) },
             popBackStack = { navController.popBackStack() }

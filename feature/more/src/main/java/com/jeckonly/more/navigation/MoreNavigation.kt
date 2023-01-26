@@ -12,7 +12,7 @@ object MoreDestination : BgtBottomNavigationDestination {
 }
 
 @OptIn(ExperimentalAnimationApi::class)
-fun NavGraphBuilder.moreGraph(toChangeThemeScreen: () -> Unit) {
+fun NavGraphBuilder.moreGraph(toChangeThemeScreen: () -> Unit, toChangeLangScreen: () -> Unit) {
     composable(route = MoreDestination.route,
         enterTransition = {
             when (initialState.destination.route) {
@@ -42,6 +42,6 @@ fun NavGraphBuilder.moreGraph(toChangeThemeScreen: () -> Unit) {
                 }
             }
         }) {
-        MoreRoute(toChangeThemeScreen = toChangeThemeScreen)
+        MoreRoute(toChangeThemeScreen = toChangeThemeScreen, toChangeLangScreen = toChangeLangScreen)
     }
 }

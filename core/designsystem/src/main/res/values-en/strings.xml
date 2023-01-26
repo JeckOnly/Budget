@@ -68,11 +68,11 @@
     <string name="name">name</string>
     <string name="cant_empty_typeName">name cannot be empty</string>
     <string name="name_existed">name already exists</string>
-    <string name="more" translatable="false">more</string>
-    <string name="more_hint" translatable="false">More function is coming</string>
-    <string name="change_theme">theme</string>
-    <string name="theme_setting_hint" translatable="false">choose a new color for theme</string>
-    <string name="theme_setting" translatable="false">Theme Setting</string>
+    <string name="more" >more</string>
+    <string name="more_hint" >More function is coming</string>
+    <string name="change_theme">Theme</string>
+    <string name="theme_setting_hint">choose a new color for theme</string>
+    <string name="theme_setting" >Theme Setting</string>
     <string name="MaroonFlush">Maroon flush</string>
     <string name="TallPoppy">Tall poppy</string>
     <string name="Fire">Flame</string>
@@ -99,4 +99,7 @@
     <string name="delete">delete</string>
     <string name="delete_record_hint">Deleted records cannot be recovered, are you sure to delete?</string>
     <string name="repast">food</string>
+    <string name="lang">Language</string>
+    <string name="change_lang">Language Setting</string>
+    <string name="change_lang_hint">Choose a language you want</string>
 </resources>

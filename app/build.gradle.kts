@@ -74,6 +74,7 @@ dependencies {
     implementation(project(":feature:updateType"))
     implementation(project(":feature:addType"))
     implementation(project(":feature:recordDetail"))
+    implementation(project(":feature:changeLang"))
     implementation(project(":core:data"))
     implementation(project(":util"))
 

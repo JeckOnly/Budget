@@ -1,4 +1,4 @@
-package com.jeckonly.more
+package com.jeckonly.changelang
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -7,27 +7,26 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.jeckonly.designsystem.Mdf
 import com.jeckonly.designsystem.R
-import com.jeckonly.more.ui.LangButton
-import com.jeckonly.more.ui.ThemeButton
 
 @Composable
-fun MoreRoute(
-    toChangeThemeScreen: () -> Unit,
-    toChangeLangScreen: () -> Unit
+fun ChangeLangRoute(
+    modifier: Modifier = Modifier,
 ) {
     // Remember a SystemUiController
     val systemUiController = rememberSystemUiController()
     val systemUiColor = MaterialTheme.colorScheme.primary
+    val viewModel: ChangeLangViewModel = hiltViewModel()
 
     DisposableEffect(key1 = systemUiColor) {
         systemUiController.setStatusBarColor(
@@ -38,35 +37,26 @@ fun MoreRoute(
 
         }
     }
-    MoreScreen(
-        toChangeThemeScreen = toChangeThemeScreen,
-        toChangeLangScreen = toChangeLangScreen,
+
+    ChangeLangScreen(
         modifier = Mdf.fillMaxSize()
     )
 }
 
 @Composable
-fun MoreScreen(
-    toChangeThemeScreen: () -> Unit,
-    toChangeLangScreen: () -> Unit,
+fun ChangeLangScreen(
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
     Surface(color = MaterialTheme.colorScheme.surface, modifier = modifier) {
-        Column(modifier = Mdf.fillMaxSize()) {
-            MoreScreenHeader()
-            Row(verticalAlignment = Alignment.CenterVertically){
-                ThemeButton(
-                    toChangeThemeScreen = toChangeThemeScreen,
-                    modifier = Mdf.padding(20.dp)
-                )
-                LangButton(toChangeLangScreen = toChangeLangScreen)
-            }
+        Column {
+            ChangeLangHeader()
         }
     }
 }
 
 @Composable
-private fun MoreScreenHeader() {
+private fun ChangeLangHeader() {
     Box(
         modifier = Mdf
             .fillMaxWidth()
@@ -74,14 +64,14 @@ private fun MoreScreenHeader() {
     ) {
         Column(modifier = Mdf.padding(10.dp)) {
             Text(
-                text = stringResource(id = R.string.more),
+                text = stringResource(id = R.string.change_lang),
                 fontWeight = FontWeight.ExtraBold,
                 fontSize = 19.sp,
                 color = MaterialTheme.colorScheme.onPrimary
             )
             Spacer(modifier = Mdf.height(10.dp))
             Text(
-                text = stringResource(id = R.string.more_hint),
+                text = stringResource(id = R.string.change_lang_hint),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onPrimary,
                 textAlign = TextAlign.Center,
@@ -89,3 +79,5 @@ private fun MoreScreenHeader() {
         }
     }
 }
+
+
