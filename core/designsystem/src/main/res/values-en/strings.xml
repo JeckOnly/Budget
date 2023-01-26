@@ -102,4 +102,7 @@
     <string name="lang">Language</string>
     <string name="change_lang">Language Setting</string>
     <string name="change_lang_hint">Choose a language you want</string>
+    <string name="chinese">中文</string>
+    <string name="english">English</string>
+    <string name="language">English</string>
 </resources>

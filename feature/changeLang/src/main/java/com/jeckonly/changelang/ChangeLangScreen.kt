@@ -1,7 +1,10 @@
 package com.jeckonly.changelang
 
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -14,8 +17,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.core.os.LocaleListCompat
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.jeckonly.changelang.ui.LangItem
 import com.jeckonly.designsystem.Mdf
 import com.jeckonly.designsystem.R
 
@@ -26,7 +30,6 @@ fun ChangeLangRoute(
     // Remember a SystemUiController
     val systemUiController = rememberSystemUiController()
     val systemUiColor = MaterialTheme.colorScheme.primary
-    val viewModel: ChangeLangViewModel = hiltViewModel()
 
     DisposableEffect(key1 = systemUiColor) {
         systemUiController.setStatusBarColor(
@@ -48,9 +51,34 @@ fun ChangeLangScreen(
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
+    val localeOptions = mapOf(
+        R.string.chinese to "zh",
+        R.string.english to "en",
+    ).mapKeys { stringResource(it.key) }
+
     Surface(color = MaterialTheme.colorScheme.surface, modifier = modifier) {
         Column {
             ChangeLangHeader()
+            LazyColumn(modifier = Mdf
+                .fillMaxWidth()
+                .padding(horizontal = 15.dp, vertical = 15.dp), content = {
+                items(items =  localeOptions.keys.toList()) { selectionLocale ->
+                    LangItem(
+                        selectedLang = stringResource(id = R.string.language),
+                        langCode = localeOptions[selectionLocale]!!,
+                        langText = selectionLocale,
+                        onClick = {
+                            AppCompatDelegate.setApplicationLocales(
+                                LocaleListCompat.forLanguageTags(
+                                    localeOptions[selectionLocale]
+                                )
+                            )
+                        },
+                        modifier = Mdf.fillMaxWidth()
+                    )
+                    Spacer(modifier = Mdf.height(10.dp))
+                }
+            })
         }
     }
 }

@@ -45,6 +45,8 @@ dependencies {
     // core
     implementation("androidx.core:core-ktx:$core_ktx_version")
 
+    implementation("androidx.appcompat:appcompat:$androidx_appcompat_version")
+
     // compose
     addComposeBasic()
     // compose-extension
