@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jeckonly.choosetype.navigation.ChooseTypeNavigation
+import com.jeckonly.choosetype.ui.state.ChooseTypeFinishState
 import com.jeckonly.choosetype.ui.state.ChooseTypeUiState
 import com.jeckonly.choosetype.ui.state.KeyboardState
 import com.jeckonly.choosetype.ui.state.KeyboardStateInit
@@ -99,16 +100,8 @@ class ChooseTypeViewModel @Inject constructor(
      * keyboard state
      */
     val keyboardState: KeyboardState =
-        KeyboardState(app = app) { chooseTypeFinishState, popBackStack ->
-            viewModelScope.launch {
-                if (editOrRecordIdFlow.value == -1) {
-                    databaseRepo.insertRecord(chooseTypeFinishState.toRecordEntity())
-                    popBackStack()
-                } else {
-                    databaseRepo.updateRecord(chooseTypeFinishState.toRecordEntity(recordId = editOrRecordIdFlow.value))
-                    popBackStack()
-                }
-            }
+        KeyboardState { chooseTypeFinishState, popBackStack ->
+           doWhenFinished(chooseTypeFinishState, popBackStack)
         }
 
 
@@ -127,6 +120,18 @@ class ChooseTypeViewModel @Inject constructor(
     fun initEditOrRecordId(editOrRecordId: Int) {
         editOrRecordIdFlow.update {
             editOrRecordId
+        }
+    }
+
+    private fun doWhenFinished(chooseTypeFinishState: ChooseTypeFinishState, popBackStack: (() -> Unit)) {
+        viewModelScope.launch {
+            if (editOrRecordIdFlow.value == -1) {
+                databaseRepo.insertRecord(chooseTypeFinishState.toRecordEntity())
+                popBackStack()
+            } else {
+                databaseRepo.updateRecord(chooseTypeFinishState.toRecordEntity(recordId = editOrRecordIdFlow.value))
+                popBackStack()
+            }
         }
     }
 }

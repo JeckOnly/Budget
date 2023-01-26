@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -163,13 +164,13 @@ fun ChooseTypeKeyBoard(
                     if (keyboardState.calendarString == "") {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(
-                                painter = painterResource(id = keyboardState.dateButtonType().iconId),
+                                painter = painterResource(id = R.drawable.calendar),
                                 contentDescription = null,
                                 modifier = Mdf.size(20.dp),
                                 tint = contentColor
                             )
                             Text(
-                                text = keyboardState.dateButtonType().text,
+                                text = stringResource(id = R.string.today),
                                 style = MaterialTheme.typography.bodyLarge,
                                 color = contentColor,
                                 modifier = Mdf.padding(start = 10.dp)
@@ -314,7 +315,7 @@ fun ChooseTypeKeyBoard(
                         keyboardState.onEvent(keyboardState.finish(nowChooseType, popBackStack))
                     }) {
                     Text(
-                        text = keyboardState.finishButtonText.value,
+                        text = if (keyboardState.canShowDoneText.value) stringResource(id = R.string.done) else "=",
                         style = MaterialTheme.typography.bodyLarge,
                         color = contentColorFor(backgroundColor = MaterialTheme.colorScheme.primaryContainer),
                     )

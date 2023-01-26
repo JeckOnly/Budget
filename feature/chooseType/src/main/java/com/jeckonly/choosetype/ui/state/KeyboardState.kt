@@ -1,6 +1,5 @@
 package com.jeckonly.choosetype.ui.state
 
-import android.app.Application
 import androidx.compose.runtime.*
 import com.jeckonly.core_model.ui.TypeUI
 import com.jeckonly.designsystem.R
@@ -14,10 +13,8 @@ private const val NUMBER_COUNT_BEFORE_POINT = 8
 private const val NUMBER_COUNT_AFTER_POINT = 2
 
 @Stable
-class KeyboardState(private val app: Application, private val doWhenFinish: (ChooseTypeFinishState, (() -> Unit)) -> Unit) {
+class KeyboardState(private val doWhenFinish: (ChooseTypeFinishState, (() -> Unit)) -> Unit) {
 
-
-    private val doneText = app.getString(R.string.done)
 
     // Button type
     private val numberButton0 = ButtonType.NumberButton("0")
@@ -36,7 +33,6 @@ class KeyboardState(private val app: Application, private val doWhenFinish: (Cho
     private val point = ButtonType.Point()
     private val delete = ButtonType.Delete(R.drawable.keyboard_delete)
     private val finish = ButtonType.Finish()
-    private val dateButtonType = ButtonType.DateButtonType(R.drawable.calendar, app.getString(R.string.today))
 
     fun numberButton0() = numberButton0
     fun numberButton1() = numberButton1
@@ -54,7 +50,6 @@ class KeyboardState(private val app: Application, private val doWhenFinish: (Cho
     fun point() = point
     fun delete() = delete
     fun finish(typeUI: TypeUI?, popBackStack: (() -> Unit)) = finish.buildFinish(typeUI, popBackStack)
-    fun dateButtonType() = dateButtonType
 
     // state ---------------------------------------------------------------------------------------------------
     /**
@@ -83,18 +78,18 @@ class KeyboardState(private val app: Application, private val doWhenFinish: (Cho
     private var hasAddPoint2: Boolean = false
 
     /**
-     * 完成按钮上显示的字符串
+     * 是否可以显示完成字符串了（中间运算已结束）
      */
-    val finishButtonText: MutableState<String> = mutableStateOf(doneText)
+    val canShowDoneText: MutableState<Boolean> = mutableStateOf(true)
 
     /**
      * 展示的字符串
      */
     val showText: String by derivedStateOf {
         if (number1.value != "" && operator != null && number2.value != "") {
-            finishButtonText.value = "="
+            canShowDoneText.value = false
         } else {
-            finishButtonText.value = doneText
+            canShowDoneText.value = true
         }
         val temp: String = number1.value + (operator?.text ?: "") + number2.value
         if (temp != "") temp else "0"
@@ -252,9 +247,6 @@ class KeyboardState(private val app: Application, private val doWhenFinish: (Cho
                     operator = null
                 }
             }
-            is ButtonType.DateButtonType -> {
-                // 不会进入这里
-            }
         }
     }
 
@@ -403,9 +395,6 @@ sealed interface ButtonType {
         fun getTypeUI() = typeUI
         fun getPopBackStack() = popBackStack
     }
-
-    @Stable
-    class DateButtonType(val iconId: Int, val text: String) : ButtonType
 
     sealed class OperatorButtonType(val text: String) : ButtonType {
 
