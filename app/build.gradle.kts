@@ -51,7 +51,7 @@ android {
     }
     defaultConfig {
 
-        resConfigs("en", "zh")
+        resConfigs("en", "zh", "ja")
     }
 }
 

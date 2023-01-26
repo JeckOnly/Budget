@@ -104,5 +104,6 @@
     <string name="change_lang_hint">Choose a language you want</string>
     <string name="chinese">中文</string>
     <string name="english">English</string>
+    <string name="japanese">日本語です</string>
     <string name="language">English</string>
 </resources>

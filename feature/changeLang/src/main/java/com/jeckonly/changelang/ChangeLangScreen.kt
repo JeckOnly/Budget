@@ -54,6 +54,7 @@ fun ChangeLangScreen(
     val localeOptions = mapOf(
         R.string.chinese to "zh",
         R.string.english to "en",
+        R.string.japanese to "ja",
     ).mapKeys { stringResource(it.key) }
 
     Surface(color = MaterialTheme.colorScheme.surface, modifier = modifier) {

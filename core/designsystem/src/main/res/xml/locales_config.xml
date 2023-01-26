@@ -3,4 +3,5 @@
     <!-- Add your required languages -->
     <locale android:name="zh" />
     <locale android:name="en" />
+    <locale android:name="ja" />
 </locale-config>
