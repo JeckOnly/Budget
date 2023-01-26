@@ -105,5 +105,6 @@
     <string name="chinese">中文</string>
     <string name="english">English</string>
     <string name="japanese">日本語です</string>
+    <string name="korean">한국어</string>
     <string name="language">中文</string>
 </resources>
