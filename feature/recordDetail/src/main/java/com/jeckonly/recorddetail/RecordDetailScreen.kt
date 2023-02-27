@@ -15,6 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.jeckonly.core_model.entity.helper.ExpenseOrIncome
 import com.jeckonly.designsystem.Mdf
 import com.jeckonly.designsystem.R
 import com.jeckonly.designsystem.noIndicationClickable
@@ -133,7 +134,9 @@ fun RecordDetailScreen(
             // items
             RecordDetailItem(
                 title = stringResource(id = com.jeckonly.designsystem.R.string.type),
-                content = recordDetailUIState.expenseOrIncome
+                content = if (recordDetailUIState.expenseOrIncome is ExpenseOrIncome.Expense) stringResource(
+                    id = R.string.expense
+                ) else stringResource(id = R.string.income)
             )
             RecordDetailItem(
                 title = stringResource(id = com.jeckonly.designsystem.R.string.amount),
@@ -158,7 +161,7 @@ fun RecordDetailScreen(
                     .weight(1f)
                     .background(color = MaterialTheme.colorScheme.primary)
                     .clickable {
-                         toEditRecord(recordId)
+                        toEditRecord(recordId)
                     }
                 ,
                 contentAlignment = Alignment.Center

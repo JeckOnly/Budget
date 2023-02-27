@@ -1,6 +1,7 @@
 package com.jeckonly.recorddetail.ui.state
 
 import androidx.compose.runtime.Stable
+import com.jeckonly.core_model.entity.helper.ExpenseOrIncome
 import com.jeckonly.designsystem.R
 import java.time.LocalDate
 import java.time.format.TextStyle
@@ -10,7 +11,7 @@ import java.util.*
 data class RecordDetailUIState(
     val iconId: Int = R.drawable.warning,
     val typeName: String = "",
-    val expenseOrIncome: String = "",
+    val expenseOrIncome: ExpenseOrIncome = ExpenseOrIncome.Expense,
     val showNumber: String = "",
     val showDate: String = "",
     val remark: String = ""

@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jeckonly.core_data.common.repo.interface_.DatabaseRepo
 import com.jeckonly.core_data.common.repo.interface_.UserPrefsRepo
-import com.jeckonly.core_model.entity.helper.ExpenseOrIncome
 import com.jeckonly.recorddetail.ui.state.RecordDetailUIState
 import com.jeckonly.util.FormatNumberUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -40,9 +39,7 @@ class RecordDetailViewModel @Inject constructor(
         val result = RecordDetailUIState(
             iconId = recordDetailUI.iconId,
             typeName = recordDetailUI.typeName,
-            expenseOrIncome = if (recordDetailUI.expenseOrIncome is ExpenseOrIncome.Expense) app.getString(
-                com.jeckonly.designsystem.R.string.expense) else app.getString(
-                com.jeckonly.designsystem.R.string.income),
+            expenseOrIncome = recordDetailUI.expenseOrIncome,
             showNumber = FormatNumberUtil.format(recordDetailUI.number),
             showDate = RecordDetailUIState.makeShowDate(recordDetailUI.year, recordDetailUI.month, recordDetailUI.dayOfMonth),
             remark = recordDetailUI.remark
