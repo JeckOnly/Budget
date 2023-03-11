@@ -39,6 +39,6 @@ fun NavGraphBuilder.recordDetailGraph(
         }
     ) { backStackEntry ->
         val recordId = backStackEntry.arguments?.getInt("recordId")
-        RecordDetailRoute(recordId = recordId!!,toEditRecord = toEditRecord ,popBackStack = popBackStack)
+        RecordDetailRoute(recordId = recordId ?: -1,toEditRecord = toEditRecord ,popBackStack = popBackStack)
     }
 }

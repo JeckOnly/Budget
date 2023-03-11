@@ -33,6 +33,6 @@ object TonalUtil {
             oldArgb = argb
             tonalPalette = TonalPalette.fromInt(oldArgb)
         }
-        return tonalPalette!!.tone(orderToTonalPercent(order))
+        return tonalPalette?.tone(orderToTonalPercent(order)) ?: argb
     }
 }

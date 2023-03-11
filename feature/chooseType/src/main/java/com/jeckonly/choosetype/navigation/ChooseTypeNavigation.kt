@@ -12,7 +12,7 @@ object ChooseTypeNavigation : BgtTopLevelNavigationDestination {
     override val route = "choose_type_route/{isEditOrNewAdd}"
     override val destination = "choose_type_destination"
 
-    const val EDIT = -1
+    const val EDIT = -1// 添加新纪录，而不是编辑旧纪录
 
     fun buildRoute(isEditOrNewAdd: Int): String {
         return "choose_type_route/${isEditOrNewAdd}"
@@ -39,6 +39,6 @@ fun NavGraphBuilder.chooseTypeGraph(onCLickSetting: () -> Unit, popBackStack: ()
         }
     ) { backStackEntry ->
         val isEditOrRecordId = backStackEntry.arguments?.getInt("isEditOrNewAdd")
-        ChooseTypeRoute(isEditOrRecordId = isEditOrRecordId!!, onCLickSetting = onCLickSetting, popBackStack = popBackStack)
+        ChooseTypeRoute(isEditOrRecordId = isEditOrRecordId ?: ChooseTypeNavigation.EDIT, onCLickSetting = onCLickSetting, popBackStack = popBackStack)
     }
 }

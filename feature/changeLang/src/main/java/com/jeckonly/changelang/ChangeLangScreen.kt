@@ -67,7 +67,6 @@ fun ChangeLangScreen(
                 items(items =  localeOptions.keys.toList()) { selectionLocale ->
                     LangItem(
                         selectedLang = stringResource(id = R.string.language),
-                        langCode = localeOptions[selectionLocale]!!,
                         langText = selectionLocale,
                         onClick = {
                             AppCompatDelegate.setApplicationLocales(

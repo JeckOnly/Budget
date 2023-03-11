@@ -16,15 +16,14 @@ import com.jeckonly.designsystem.noIndicationClickable
 @Composable
 fun LangItem(
     selectedLang: String,
-    langCode: String,
     langText: String,
-    onClick: (String) -> Unit,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
 
     Surface(
         modifier = modifier.noIndicationClickable {
-            onClick(langCode)
+            onClick()
         },
         shape = RoundedCornerShape(20),
         color = MaterialTheme.colorScheme.surface,

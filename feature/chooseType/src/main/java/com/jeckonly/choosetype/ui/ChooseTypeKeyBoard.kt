@@ -312,7 +312,9 @@ fun ChooseTypeKeyBoard(
                     .fillMaxHeight()
                     .background(color = MaterialTheme.colorScheme.primaryContainer),
                     onClick = {
-                        keyboardState.onEvent(keyboardState.finish(nowChooseType, popBackStack))
+                        nowChooseType?.let {
+                            keyboardState.onEvent(keyboardState.finish(nowChooseType, popBackStack))
+                        }
                     }) {
                     Text(
                         text = if (keyboardState.canShowDoneText.value) stringResource(id = R.string.done) else "=",

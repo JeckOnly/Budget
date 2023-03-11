@@ -32,7 +32,6 @@ class KeyboardState(private val doWhenFinish: (ChooseTypeFinishState, (() -> Uni
     private val minus = ButtonType.OperatorButtonType.Minus()
     private val point = ButtonType.Point()
     private val delete = ButtonType.Delete(R.drawable.keyboard_delete)
-    private val finish = ButtonType.Finish()
 
     fun numberButton0() = numberButton0
     fun numberButton1() = numberButton1
@@ -49,7 +48,7 @@ class KeyboardState(private val doWhenFinish: (ChooseTypeFinishState, (() -> Uni
     fun minus() = minus
     fun point() = point
     fun delete() = delete
-    fun finish(typeUI: TypeUI?, popBackStack: (() -> Unit)) = finish.buildFinish(typeUI, popBackStack)
+    fun finish(typeUI: TypeUI, popBackStack: (() -> Unit)) = ButtonType.Finish(typeUI, popBackStack)
 
     // state ---------------------------------------------------------------------------------------------------
     /**
@@ -86,11 +85,7 @@ class KeyboardState(private val doWhenFinish: (ChooseTypeFinishState, (() -> Uni
      * 展示的字符串
      */
     val showText: String by derivedStateOf {
-        if (number1.value != "" && operator != null && number2.value != "") {
-            canShowDoneText.value = false
-        } else {
-            canShowDoneText.value = true
-        }
+        canShowDoneText.value = !(number1.value != "" && operator != null && number2.value != "")
         val temp: String = number1.value + (operator?.text ?: "") + number2.value
         if (temp != "") temp else "0"
     }
@@ -110,10 +105,12 @@ class KeyboardState(private val doWhenFinish: (ChooseTypeFinishState, (() -> Uni
      * 日历Button应展示的字符串
      */
     val calendarString: String by derivedStateOf {
-        when (chooseLocalDate) {
+        when (val date = chooseLocalDate) {
             null -> ""
             LocalDate.now() -> ""
-            else -> "${chooseLocalDate!!.year}/${chooseLocalDate!!.monthValue}/${chooseLocalDate!!.dayOfMonth}"
+            else ->
+                "${date.year}/${date.monthValue}/${date.dayOfMonth}"
+
         }
     }
 
@@ -195,7 +192,6 @@ class KeyboardState(private val doWhenFinish: (ChooseTypeFinishState, (() -> Uni
                     return
                 }
                 if (number1.value != "" && operator == null) {
-                    if (buttonType.getTypeUI() == null || buttonType.getPopBackStack() == null) return
                     val numberTemp = number1.value.toDouble()
                     if (numberTemp == 0.0) return
 
@@ -208,9 +204,10 @@ class KeyboardState(private val doWhenFinish: (ChooseTypeFinishState, (() -> Uni
                         month = localDateNow.monthValue
                         dayOfMonth = localDateNow.dayOfMonth
                     } else {
-                        year = chooseLocalDate!!.year
-                        month = chooseLocalDate!!.monthValue
-                        dayOfMonth = chooseLocalDate!!.dayOfMonth
+                        val temp = chooseLocalDate as LocalDate
+                        year = temp.year
+                        month = temp.monthValue
+                        dayOfMonth = temp.dayOfMonth
                     }
                     doWhenFinish(
                         ChooseTypeFinishState(
@@ -218,10 +215,10 @@ class KeyboardState(private val doWhenFinish: (ChooseTypeFinishState, (() -> Uni
                             month = month,
                             dayOfMonth = dayOfMonth,
                             number = numberTemp,
-                            typeId = buttonType.getTypeUI()!!.typeId,
+                            typeId = buttonType.typeUI.typeId,
                             remark = remark.value
                         ),
-                        buttonType.getPopBackStack()!!
+                        buttonType.popBackStack
                     )
                     return
                 }
@@ -353,7 +350,6 @@ class KeyboardState(private val doWhenFinish: (ChooseTypeFinishState, (() -> Uni
         hasAddPoint2 = false
         remark.value = ""
         chooseLocalDate = null
-        finish.cleanState()
     }
 }
 
@@ -381,20 +377,7 @@ sealed interface ButtonType {
     class Delete(val iconId: Int) : ButtonType
 
     @Stable
-    class Finish(private var typeUI: TypeUI?  = null , private var popBackStack: (() -> Unit)? = null) : ButtonType {
-        fun cleanState() {
-            typeUI = null
-            popBackStack = null
-        }
-        fun buildFinish(typeUI: TypeUI?, popBackStack: (() -> Unit)): Finish {
-            return this.apply {
-                this.typeUI = typeUI
-                this.popBackStack = popBackStack
-            }
-        }
-        fun getTypeUI() = typeUI
-        fun getPopBackStack() = popBackStack
-    }
+    data class Finish(val typeUI: TypeUI, val popBackStack: () -> Unit): ButtonType
 
     sealed class OperatorButtonType(val text: String) : ButtonType {
 
