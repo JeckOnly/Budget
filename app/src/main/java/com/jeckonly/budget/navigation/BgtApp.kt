@@ -18,7 +18,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
-import com.jeckonly.budget.MainViewModel
+import com.jeckonly.changetheme.ChangeThemeViewModel
 import com.jeckonly.chart.navigation.ChartDestination
 import com.jeckonly.choosetype.navigation.ChooseTypeNavigation
 import com.jeckonly.designsystem.Mdf
@@ -30,7 +30,7 @@ import com.jeckonly.more.navigation.MoreDestination
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun BgtApp(
-    viewModel: MainViewModel = hiltViewModel()
+    viewModel: ChangeThemeViewModel = hiltViewModel()
 ) {
 
     val budgetColorTheme = viewModel.themeFlow.collectAsState()
