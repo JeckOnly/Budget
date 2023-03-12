@@ -56,9 +56,10 @@ A budgeting app that records income and expenses。
 采用多模块设计，解耦合。架构设计学习自 Google NowInAndroid 项目。[NowInAndroid Architecture](https://github.com/android/nowinandroid/blob/main/docs/ModularizationLearningJourney.md)
 
 <div style="display:flex;justify-content:space-between;">
-    <img src="https://i.pinimg.com/originals/6b/db/f9/6bdbf9e14df1dbfa04d64b86783cd8b0.png" width="70%" />
+    <img src="https://i.pinimg.com/originals/6b/db/f9/6bdbf9e14df1dbfa04d64b86783cd8b0.png" width="60%" />
     <img src="https://i.pinimg.com/originals/70/47/bf/7047bf13e29254b1d3e5e33a9ef3641b.png" width="30%" />
 </div>
+
 
 
 
