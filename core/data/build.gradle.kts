@@ -34,7 +34,7 @@ dependencies {
 
     // modules
     implementation(project(":core:model"))
-    implementation(project(":core:remote"))
+//    implementation(project(":core:remote"))
     implementation(project(":core:database"))
     implementation(project(":core:datastore"))
 
