@@ -15,7 +15,7 @@ A budgeting app that records income and expenses。
     <img src="img/QQ截图20230312120318.png" width="33%" />
 </div>
 
-
+---
 
 <div style="display:flex;justify-content:space-between;">
     <img src="img/QQ截图20230312120343.png" width="33%" />
@@ -23,7 +23,7 @@ A budgeting app that records income and expenses。
     <img src="img/QQ截图20230312120429.png" width="33%" />
 </div>
 
-
+---
 
 <div style="display:flex;justify-content:space-between;">
     <img src="img/QQ截图20230312121846.png" width="33%" />
@@ -49,6 +49,9 @@ A budgeting app that records income and expenses。
 
 
 > 还有其它主题色，在右边 [release](https://github.com/JeckOnly/Budget/releases) 栏下载 apk ，可以尽情玩耍该应用
+
+<center class="half" style="display:flex;justify-content:space-between;">
+    <img src="img/QQ截图20230312122234.png" width="33%"  /><img src="img/QQ截图20230312122234.png" width="33%" /><img src="img/QQ截图20230312122234.png" width="33%" /> </center>
 
 # Multi Module
 
