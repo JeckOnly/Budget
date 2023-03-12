@@ -15,7 +15,7 @@ A budgeting app that records income and expenses。
     <img src="img/QQ截图20230312120318.png" width="33%" />
 </div>
 
----
+
 
 <div style="display:flex;justify-content:space-between;">
     <img src="img/QQ截图20230312120343.png" width="33%" />
@@ -23,7 +23,7 @@ A budgeting app that records income and expenses。
     <img src="img/QQ截图20230312120429.png" width="33%" />
 </div>
 
----
+
 
 <div style="display:flex;justify-content:space-between;">
     <img src="img/QQ截图20230312121846.png" width="33%" />
