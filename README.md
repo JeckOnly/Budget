@@ -12,39 +12,39 @@ A budgeting app that records income and expenses。
 <div style="display:flex;justify-content:space-between;">
     <img src="img/QQ截图20230312120131.png" width="30%" />
     <img src="img/QQ截图20230312120218.png" width="30%" />
-    <img src="img/QQ截图20230312120318.png" width="33%" />
+    <img src="img/QQ截图20230312120318.png" width="30%" />
 </div>
 
 
 ---
 
 <div style="display:flex;justify-content:space-between;">
-    <img src="img/QQ截图20230312120343.png" width="33%" />
-    <img src="img/4SVF95T({5GWNU6T8Q4]SO7.png" width="33%" />
-    <img src="img/QQ截图20230312120429.png" width="33%" />
+    <img src="img/QQ截图20230312120343.png" width="30%" />
+    <img src="img/4SVF95T({5GWNU6T8Q4]SO7.png" width="30%" />
+    <img src="img/QQ截图20230312120429.png" width="30%" />
 </div>
 
 ---
 
 <div style="display:flex;justify-content:space-between;">
-    <img src="img/QQ截图20230312121846.png" width="33%" />
-    <img src="img/QQ截图20230312122021.png" width="33%" />
-    <img src="img/QQ截图20230312122051.png" width="33%" />
+    <img src="img/QQ截图20230312121846.png" width="30%" />
+    <img src="img/QQ截图20230312122021.png" width="30%" />
+    <img src="img/QQ截图20230312122051.png" width="30%" />
 </div>
 
 ---
 
 <div style="display:flex;justify-content:space-between;">
-    <img src="img/QQ截图20230312122108.png" width="33%" />
-    <img src="img/QQ截图20230312122137.png" width="33%" />
-    <img src="img/QQ截图20230312122206.png" width="33%" />
+    <img src="img/QQ截图20230312122108.png" width="30%" />
+    <img src="img/QQ截图20230312122137.png" width="30%" />
+    <img src="img/QQ截图20230312122206.png" width="30%" />
 </div>
 
 ---
 
 <div style="display:flex;justify-content:left;">
-    <img src="img/QQ截图20230312122234.png" width="33%" />
-    <img src="img/QQ截图20230312122256.png" width="33%" />
+    <img src="img/QQ截图20230312122234.png" width="30%" />
+    <img src="img/QQ截图20230312122256.png" width="30%" />
 </div>
 
 
